@@ -14,9 +14,28 @@ public class BoulderController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
+    Vector2 GetSurfaceNormal() {
+        int layerMask = ~LayerMask.GetMask("IgnoreSurfaceNormal");
+
+        // Debug.DrawRay(transform.position, Vector3.down * 100, Color.yellow);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, 100, layerMask);
+
+        // Does the ray intersect any objects excluding the player layer
+        if (hit.collider != null)
+        {
+            Debug.Log(hit.collider.gameObject.name);
+            Debug.DrawRay(transform.position, Vector3.down * 100, Color.red);
+            return hit.normal;
+        } else {
+            return Vector2.up;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 20, Color.green);
+
         float push1 = Input.GetAxis("Push1");
         float push2 = Input.GetAxis("Push2");
         float push3 = Input.GetAxis("Push3");
@@ -24,12 +43,16 @@ public class BoulderController : MonoBehaviour
         float push5 = Input.GetAxis("Push5");
 
         float push_amount = push1 + push2 + push3 + push4 + push5;
-        Debug.Log("Push amount: " + push_amount.ToString());
+        // Debug.Log("Push amount: " + push_amount.ToString());
+
+        Vector2 surfaceNormal = GetSurfaceNormal();
+        float surfaceAngle = Vector2.Angle(Vector2.up, surfaceNormal);
+        Debug.Log("Surface Angle: " + surfaceAngle.ToString());
 
         if (push_amount > 0) {
             rb.angularVelocity = speed * push_amount * -1; // Invert to go in correct direction
         } else {
-            rb.angularVelocity = rollback_speed;
+            rb.angularVelocity = rollback_speed * surfaceAngle;
         }
 
     }
