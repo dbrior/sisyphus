@@ -5,6 +5,7 @@ using UnityEngine;
 public class BoulderController : MonoBehaviour
 {
     public float speed;
+    public float rollback_speed;
 
     private Rigidbody2D rb;
     // Start is called before the first frame update
@@ -25,6 +26,11 @@ public class BoulderController : MonoBehaviour
         float push_amount = push1 + push2 + push3 + push4 + push5;
         Debug.Log("Push amount: " + push_amount.ToString());
 
-        rb.angularVelocity = speed * push_amount * -1; // Invert to go in correct direction
+        if (push_amount > 0) {
+            rb.angularVelocity = speed * push_amount * -1; // Invert to go in correct direction
+        } else {
+            rb.angularVelocity = rollback_speed;
+        }
+
     }
 }
