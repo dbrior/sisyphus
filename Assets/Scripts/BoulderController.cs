@@ -6,6 +6,7 @@ public class BoulderController : MonoBehaviour
 {
     public float speed;
     public float rollback_speed;
+    private PhysicsMaterial2D boulder_material;
     public ScoreScript score_tracker;
 
     private Rigidbody2D rb;
@@ -16,6 +17,7 @@ public class BoulderController : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         raycast_direction = Vector2.down;
+        boulder_material = rb.sharedMaterial;
     }
 
     Vector2 GetSurfaceNormal() {
@@ -51,14 +53,14 @@ public class BoulderController : MonoBehaviour
 
         Vector2 surfaceNormal = GetSurfaceNormal();
         raycast_direction = surfaceNormal * -1;
-        Debug.DrawRay(transform.position, surfaceNormal*-100, Color.red);
-        rb.AddForce(surfaceNormal*-10);
+        Debug.DrawRay(transform.position, surfaceNormal*-100, Color.yellow);
 
         float surfaceAngle = Vector2.Angle(Vector2.up, surfaceNormal);
         Debug.Log("Surface Angle: " + surfaceAngle.ToString());
 
         if (push_amount > 0) {
             rb.angularVelocity = speed * push_amount * -1; // Invert to go in correct direction
+            rb.AddForce(surfaceNormal*-10);
         } else {
             rb.angularVelocity = rollback_speed * surfaceAngle;
         }
