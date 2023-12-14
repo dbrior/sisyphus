@@ -8,7 +8,7 @@ public class ScoreScript : MonoBehaviour
     public Transform boulder;
     public TextMeshProUGUI tmp;
 
-    private float score;
+    public float score;
     // Start is called before the first frame update
     void Start()
     {

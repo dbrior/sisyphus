@@ -16,9 +16,9 @@ public class BoulderCam : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>(); // Get the Camera component
-        cam.orthographicSize = 3.0f;
-        x_offset = -0.25f;
-        y_offset = 0.55f;
+        // cam.orthographicSize = 3.0f;
+        // x_offset = -0.3f;
+        // y_offset = 0.55f;
     }
 
     void Update()
