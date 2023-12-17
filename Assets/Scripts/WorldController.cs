@@ -5,6 +5,9 @@ using TMPro;
 
 public class WorldController : MonoBehaviour
 {
+    public SpriteRenderer pushingSprite;
+    public SpriteRenderer idleSprite;
+    public Animator boulderAnimator;
     public TextMeshProUGUI scoreText;
     public Transform platformA;
     public Transform platformB;
@@ -39,6 +42,17 @@ public class WorldController : MonoBehaviour
     {
         float clickRate = CalculateClickRate();
         // Debug.Log("Click rate: " + clickRate + " clicks per second");
+
+        if (clickRate > 0) {
+            pushingSprite.sortingOrder = 5;
+            idleSprite.sortingOrder = -1;
+            boulderAnimator.speed = 1;
+        } else {
+            idleSprite.sortingOrder = 5;
+            pushingSprite.sortingOrder = -1;
+            boulderAnimator.speed = 0;
+            boulderAnimator.playbackTime = 0;
+        }
 
         Vector2 currPlatformAPosition = platformA.localPosition;
         Vector2 newPlatformAPosition = new Vector2(platformA.localPosition.x - (clickRate * moveSpeed), platformA.localPosition.y);
