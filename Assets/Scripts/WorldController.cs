@@ -5,23 +5,40 @@ using TMPro;
 
 public class WorldController : MonoBehaviour
 {
-    public SpriteRenderer pushingSprite;
-    public SpriteRenderer idleSprite;
+    public GameObject pushingSprite;
+    public GameObject idleSprite;
     public Animator boulderAnimator;
+    public float maxAnimationSpeed = 2f;
+    public float minAnimationSpeed = 0.25f;
+    public float maxClickRateTarget = 30.0f;
     public TextMeshProUGUI scoreText;
     public Transform platformA;
     public Transform platformB;
+    public float maxTerrainScoreTarget = 10000.0f;
+    public float maxTerrainAngle = 70.0f;
+    public float minTerrainAngle = 10.0f;
     public float moveSpeed = 0.25f;
     public float TimeWindow = 2f; // 2 seconds
 
     private float currScore = 0.0f;
     private List<float> inputTimestamps = new List<float>();
+    private SpriteRenderer pushingSpriteRenderer;
+    private Animator pushingSpriteAnimator;
+    private SpriteRenderer idleSpriteRenderer;
 
     private float GetTerrainAngle(float score) {
-        if (score > 999) {
-            return 70.0f;
+        if (score > maxTerrainScoreTarget) {
+            return maxTerrainAngle;
         } else {
-            return ((score/10000.0f)*60.0f) + 10.0f;
+            return ((score/maxTerrainScoreTarget)*(maxTerrainAngle - minTerrainAngle)) + minTerrainAngle;
+        }
+    }
+
+    private float GetAnimationSpeed(float clickRate) {
+        if (clickRate > maxClickRateTarget) {
+            return maxAnimationSpeed;
+        } else {
+            return ((clickRate/maxClickRateTarget)*(maxAnimationSpeed - minAnimationSpeed)) + minAnimationSpeed;
         }
     }
 
@@ -42,22 +59,28 @@ public class WorldController : MonoBehaviour
     
     void Start()
     {
-        
+        pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();
+        pushingSpriteAnimator = pushingSprite.GetComponent<Animator>(); 
+
+        idleSpriteRenderer = idleSprite.GetComponent<SpriteRenderer>(); 
     }
 
     // Update is called once per frame
     void Update()
     {
         float clickRate = CalculateClickRate();
-        // Debug.Log("Click rate: " + clickRate + " clicks per second");
+        Debug.Log("Click rate: " + clickRate + " clicks per second");
+
+        float animationSpeed = GetAnimationSpeed(clickRate);
 
         if (clickRate > 0) {
-            pushingSprite.sortingOrder = 5;
-            idleSprite.sortingOrder = -1;
-            boulderAnimator.speed = 1;
+            pushingSpriteRenderer.sortingOrder = 5;
+            pushingSpriteAnimator.speed = animationSpeed;
+            idleSpriteRenderer.sortingOrder = -1;
+            boulderAnimator.speed = animationSpeed;
         } else {
-            idleSprite.sortingOrder = 5;
-            pushingSprite.sortingOrder = -1;
+            idleSpriteRenderer.sortingOrder = 5;
+            pushingSpriteRenderer.sortingOrder = -1;
             boulderAnimator.speed = 0;
             boulderAnimator.playbackTime = 0;
         }

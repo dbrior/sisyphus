@@ -1042,12 +1042,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edeb16f69bc46c438f4761cbe6c705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushingSprite: {fileID: 24032349}
-  idleSprite: {fileID: 60925237}
+  pushingSprite: {fileID: 24032346}
+  idleSprite: {fileID: 60925234}
   boulderAnimator: {fileID: 937977151}
+  maxAnimationSpeed: 2
+  minAnimationSpeed: 0.25
+  maxClickRateTarget: 30
   scoreText: {fileID: 532977745}
   platformA: {fileID: 1543748117}
   platformB: {fileID: 2092049527}
+  maxTerrainScoreTarget: 10000
+  maxTerrainAngle: 70
+  minTerrainAngle: 10
   moveSpeed: 0.25
   TimeWindow: 2
 --- !u!1 &1543748116
