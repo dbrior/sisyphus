@@ -9,7 +9,7 @@ public class WorldController : MonoBehaviour
     public Transform platformA;
     public Transform platformB;
     public float moveSpeed = 0.25f;
-    public const float TimeWindow = 30f; // 30 seconds
+    public float TimeWindow = 2f; // 2 seconds
 
     private float currScore = 0.0f;
     private List<float> inputTimestamps = new List<float>();
@@ -38,7 +38,7 @@ public class WorldController : MonoBehaviour
     void Update()
     {
         float clickRate = CalculateClickRate();
-        Debug.Log("Click rate: " + clickRate + " clicks per second");
+        // Debug.Log("Click rate: " + clickRate + " clicks per second");
 
         Vector2 currPlatformAPosition = platformA.localPosition;
         Vector2 newPlatformAPosition = new Vector2(platformA.localPosition.x - (clickRate * moveSpeed), platformA.localPosition.y);
