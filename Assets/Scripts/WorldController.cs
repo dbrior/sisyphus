@@ -17,6 +17,14 @@ public class WorldController : MonoBehaviour
     private float currScore = 0.0f;
     private List<float> inputTimestamps = new List<float>();
 
+    private float GetTerrainAngle(float score) {
+        if (score > 999) {
+            return 70.0f;
+        } else {
+            return ((score/10000.0f)*60.0f) + 10.0f;
+        }
+    }
+
     private float CalculateClickRate()
     {
         // Check for mouse clicks, keyboard presses, or screen taps
@@ -65,5 +73,7 @@ public class WorldController : MonoBehaviour
 
         currScore += Mathf.Abs(currPlatformAPosition.x - newPlatformAPosition.x) / 100.0f;
         scoreText.text = "Score: " + Mathf.Round(currScore).ToString();
+
+        transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, GetTerrainAngle(currScore));
     }
 }
