@@ -74,8 +74,6 @@ public class WorldController : MonoBehaviour
         currScore += Mathf.Abs(currPlatformAPosition.x - newPlatformAPosition.x) / 100.0f;
         scoreText.text = "Score: " + Mathf.Round(currScore).ToString();
 
-        Debug.Log(GetTerrainAngle(currScore));
-
         transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, GetTerrainAngle(currScore));
     }
 }
