@@ -31,7 +31,10 @@ public class WorldController : MonoBehaviour
     public float minHeight, maxHeight;
     public float spawnX;
     public float spawnInterval;
+    public float deltaForSpawn = 3.0f;
+    public float absoluteRandomDeltaRange = 1.0f;
 
+    private float currAccumulatedDelta = 0.0f;
     private float nextSpawnTime;
     private float currScore = 0.0f;
     private List<float> inputTimestamps = new List<float>();
@@ -54,8 +57,11 @@ public class WorldController : MonoBehaviour
     // Cloud spawning
     private bool ShouldSpawnCloud()
     {
-        // TODO: Spawn clouds based on distance travelled
-        return Time.time >= nextSpawnTime;
+        if (currAccumulatedDelta >= deltaForSpawn + Random.Range(-absoluteRandomDeltaRange, absoluteRandomDeltaRange)) {
+            currAccumulatedDelta = 0.0f;
+            return true;
+        }
+        return false;
     }
     void SpawnCloud()
     {
@@ -124,7 +130,9 @@ public class WorldController : MonoBehaviour
         platformA.localPosition = Vector2.Lerp(currPlatformAPosition, newPlatformAPosition, Time.deltaTime);
         platformB.localPosition = Vector2.Lerp(currPlatformBPosition, newPlatformBPosition, Time.deltaTime);
 
-        currScore += Mathf.Abs(currPlatformAPosition.x - newPlatformAPosition.x) / 100.0f;
+        float delta = Mathf.Abs(currPlatformAPosition.x - newPlatformAPosition.x); 
+        currScore += delta / 100.0f;
+        currAccumulatedDelta += delta / 100.0f;
         scoreText.text = "Score: " + Mathf.Round(currScore).ToString();
     }
     
