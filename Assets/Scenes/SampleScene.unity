@@ -1054,7 +1054,7 @@ MonoBehaviour:
   platformB: {fileID: 2092049527}
   maxTerrainScoreTarget: 1000
   maxTerrainAngle: 70
-  minTerrainAngle: 0
+  minTerrainAngle: 5
   deltaScoreRatio: 250
   moveSpeed: 0.25
   minRollbackSpeed: 0.1
