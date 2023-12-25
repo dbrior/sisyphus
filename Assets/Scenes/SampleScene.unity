@@ -1049,6 +1049,7 @@ MonoBehaviour:
   minAnimationSpeed: 0.25
   maxClickRateTarget: 30
   scoreText: {fileID: 532977745}
+  delta: 0
   platformA: {fileID: 1543748117}
   platformB: {fileID: 2092049527}
   maxTerrainScoreTarget: 1000
@@ -1063,11 +1064,11 @@ MonoBehaviour:
   - {fileID: 209355659682367036, guid: 398e9b3852b89684bb8e512fa5065cef, type: 3}
   minScale: 1
   maxScale: 3.5
-  minHeight: 2.5
-  maxHeight: 4
-  spawnX: 5
+  minHeight: 2.25
+  maxHeight: 3.25
+  spawnX: 2.5
   spawnInterval: 2
-  deltaForSpawn: 9
+  deltaForSpawn: 7
   lifespan: 9
   absoluteRandomDeltaRange: 6
 --- !u!1 &1543748116

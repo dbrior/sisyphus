@@ -16,6 +16,7 @@ public class WorldController : MonoBehaviour
     [Header("UI:")]
     public TextMeshProUGUI scoreText;
     [Header("Platforms:")]
+    public float delta = 0.0f;
     public Transform platformA;
     public Transform platformB;
     [Header("Terrain Angle:")]
@@ -27,13 +28,12 @@ public class WorldController : MonoBehaviour
     public float TimeWindow = 2f; // 2 seconds
     [Header("Cloud Spawning:")]
     public List<GameObject> cloudPrefabs;
-    private List<Cloud> spawnedClouds = new List<Cloud>();
     public float minScale, maxScale;
     public float minHeight, maxHeight;
     public float spawnX;
     public float spawnInterval;
     public float deltaForSpawn = 9.0f;
-    public float lifespan = 9.0f;
+    public float lifespan = 30.0f;
     public float absoluteRandomDeltaRange = 6.0f;
 
     private float currAccumulatedDelta = 0.0f;
@@ -56,7 +56,7 @@ public class WorldController : MonoBehaviour
         transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, GetTerrainAngle(currScore));
     }
 
-    // Cloud spawning
+    // Clouds
     private bool ShouldSpawnCloud()
     {
         if (currAccumulatedDelta >= deltaForSpawn + Random.Range(-absoluteRandomDeltaRange, absoluteRandomDeltaRange)) {
@@ -76,10 +76,10 @@ public class WorldController : MonoBehaviour
         Cloud cloud = Instantiate(cloudPrefab).GetComponent<Cloud>();
         cloud.spawnTimestamp = Time.time;
         cloud.lifespan = lifespan;
-        cloud.transform.SetParent(platformA.position.x > platformB.position.x ? platformA : platformB, false);
+        cloud.transform.SetParent(transform);
         cloud.transform.localScale = new Vector3(scale, scale, 1);
         cloud.transform.eulerAngles = new Vector3(0,0,0);
-        cloud.transform.position = new Vector3(spawnX, height);
+        cloud.transform.localPosition = new Vector3(spawnX, height);
     }
 
     // Getting click rate
@@ -132,7 +132,7 @@ public class WorldController : MonoBehaviour
         platformA.localPosition = Vector2.Lerp(currPlatformAPosition, newPlatformAPosition, Time.deltaTime);
         platformB.localPosition = Vector2.Lerp(currPlatformBPosition, newPlatformBPosition, Time.deltaTime);
 
-        float delta = Mathf.Abs(currPlatformAPosition.x - newPlatformAPosition.x);
+        delta = Mathf.Abs(currPlatformAPosition.x - newPlatformAPosition.x);
 
         return delta;
     }
@@ -143,9 +143,10 @@ public class WorldController : MonoBehaviour
         scoreText.text = "Score: " + Mathf.Round(currScore).ToString();
     }
 
-    void UpdateDistanceAndScore(float clickRate) {
+    float UpdateDistanceAndScore(float clickRate) {
         float distanceDelta = MovePlatforms(clickRate);
         UpdateScore(distanceDelta);
+        return distanceDelta;
     }
     
     void Start()
@@ -161,11 +162,12 @@ public class WorldController : MonoBehaviour
         // The core function calls set the foundation that controls the game
         float clickRate = CalculateClickRate();                                 // clickRate determines the speed of the game
         Debug.Log("Click rate: " + clickRate + " clicks per second");               
-        UpdateDistanceAndScore(clickRate);                                      // current distance from start yields score (1:1)
+        float distanceDelta = UpdateDistanceAndScore(clickRate);                // current distance from start yields score (1:1)
+                                                                                // some fetures might need a raw distance delta
 
         // Below rely on either clickRate or score
-        SetSpriteAnimationSpeed(clickRate);             // some animations adapt to the speed of the game
-        SetTerrainAngle(currScore);                     // Make sure this occurs after and score adjustments
+        SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
+        SetTerrainAngle(currScore);                     // Steepness changes accoding to score
 
         // TODO: These functions have todo's
         if(ShouldSpawnCloud()) {
