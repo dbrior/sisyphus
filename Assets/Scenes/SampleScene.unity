@@ -1066,7 +1066,7 @@ MonoBehaviour:
   maxScale: 3.5
   minHeight: 2.25
   maxHeight: 3.25
-  spawnX: 2.5
+  spawnX: 5
   spawnInterval: 2
   deltaForSpawn: 7
   lifespan: 9
