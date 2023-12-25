@@ -27,12 +27,14 @@ public class WorldController : MonoBehaviour
     public float TimeWindow = 2f; // 2 seconds
     [Header("Cloud Spawning:")]
     public List<GameObject> cloudPrefabs;
+    private List<Cloud> spawnedClouds = new List<Cloud>();
     public float minScale, maxScale;
     public float minHeight, maxHeight;
     public float spawnX;
     public float spawnInterval;
-    public float deltaForSpawn = 3.0f;
-    public float absoluteRandomDeltaRange = 1.0f;
+    public float deltaForSpawn = 9.0f;
+    public float lifespan = 9.0f;
+    public float absoluteRandomDeltaRange = 6.0f;
 
     private float currAccumulatedDelta = 0.0f;
     private float nextSpawnTime;
@@ -71,13 +73,13 @@ public class WorldController : MonoBehaviour
         float scale = Random.Range(minScale, maxScale);
         float height = Random.Range(minHeight, maxHeight);
 
-        GameObject cloud = Instantiate(cloudPrefab);
+        Cloud cloud = Instantiate(cloudPrefab).GetComponent<Cloud>();
+        cloud.spawnTimestamp = Time.time;
+        cloud.lifespan = lifespan;
         cloud.transform.SetParent(platformA.position.x > platformB.position.x ? platformA : platformB, false);
         cloud.transform.localScale = new Vector3(scale, scale, 1);
-        cloud.transform.eulerAngles = new Vector3(0,0,0); // TODO: Fix, have all clouds face up constantly
+        cloud.transform.eulerAngles = new Vector3(0,0,0);
         cloud.transform.position = new Vector3(spawnX, height);
-
-        nextSpawnTime = Time.time + spawnInterval;
     }
 
     // Getting click rate
@@ -120,7 +122,7 @@ public class WorldController : MonoBehaviour
     }
 
     // Moving platforms & adjust score accordingly
-    private void MovePlatforms(float clickRate) {
+    private float MovePlatforms(float clickRate) {
         Vector2 currPlatformAPosition = platformA.localPosition;
         Vector2 newPlatformAPosition = new Vector2(platformA.localPosition.x - (clickRate * moveSpeed), platformA.localPosition.y);
 
@@ -130,10 +132,20 @@ public class WorldController : MonoBehaviour
         platformA.localPosition = Vector2.Lerp(currPlatformAPosition, newPlatformAPosition, Time.deltaTime);
         platformB.localPosition = Vector2.Lerp(currPlatformBPosition, newPlatformBPosition, Time.deltaTime);
 
-        float delta = Mathf.Abs(currPlatformAPosition.x - newPlatformAPosition.x); 
-        currScore += delta / 100.0f;
-        currAccumulatedDelta += delta / 100.0f;
+        float delta = Mathf.Abs(currPlatformAPosition.x - newPlatformAPosition.x);
+
+        return delta;
+    }
+
+    void UpdateScore(float distanceDelta) {
+        currScore += distanceDelta / 100.0f;
+        currAccumulatedDelta += distanceDelta / 100.0f;
         scoreText.text = "Score: " + Mathf.Round(currScore).ToString();
+    }
+
+    void UpdateDistanceAndScore(float clickRate) {
+        float distanceDelta = MovePlatforms(clickRate);
+        UpdateScore(distanceDelta);
     }
     
     void Start()
@@ -146,14 +158,14 @@ public class WorldController : MonoBehaviour
 
     void Update()
     {
-        float clickRate = CalculateClickRate();
-        Debug.Log("Click rate: " + clickRate + " clicks per second");
+        // The core function calls set the foundation that controls the game
+        float clickRate = CalculateClickRate();                                 // clickRate determines the speed of the game
+        Debug.Log("Click rate: " + clickRate + " clicks per second");               
+        UpdateDistanceAndScore(clickRate);                                      // current distance from start yields score (1:1)
 
-        SetSpriteAnimationSpeed(clickRate);
-
-        MovePlatforms(clickRate); // Adjusts score based on platform movement
-
-        SetTerrainAngle(currScore); // Make sure this occurs after and score adjustments
+        // Below rely on either clickRate or score
+        SetSpriteAnimationSpeed(clickRate);             // some animations adapt to the speed of the game
+        SetTerrainAngle(currScore);                     // Make sure this occurs after and score adjustments
 
         // TODO: These functions have todo's
         if(ShouldSpawnCloud()) {

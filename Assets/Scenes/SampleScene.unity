@@ -1067,6 +1067,9 @@ MonoBehaviour:
   maxHeight: 4
   spawnX: 5
   spawnInterval: 2
+  deltaForSpawn: 9
+  lifespan: 9
+  absoluteRandomDeltaRange: 6
 --- !u!1 &1543748116
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8724296170379689353}
   - component: {fileID: 7920604514906737185}
+  - component: {fileID: 7300318918238447687}
   m_Layer: 0
   m_Name: clumbo_cloud
   m_TagString: Untagged
@@ -84,3 +85,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7300318918238447687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870258094562550003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9de097c5084b84abcebac7c0a3430a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnTimestamp: 0
+  lifespan: 0
