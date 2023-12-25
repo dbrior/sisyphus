@@ -24,7 +24,10 @@ public class WorldController : MonoBehaviour
     public float maxTerrainAngle = 70.0f;
     public float minTerrainAngle = 10.0f;
     [Header("Click-Rate/Movement:")]
+    public float deltaScoreRatio = 100.0f;
     public float moveSpeed = 0.25f;
+    public float minRollbackSpeed = 0.1f;
+    public float maxRollbackSpeed = 3.0f;
     public float TimeWindow = 2f; // 2 seconds
     [Header("Cloud Spawning:")]
     public List<GameObject> cloudPrefabs;
@@ -59,7 +62,7 @@ public class WorldController : MonoBehaviour
     // Clouds
     private bool ShouldSpawnCloud()
     {
-        if (currAccumulatedDelta >= deltaForSpawn + Random.Range(-absoluteRandomDeltaRange, absoluteRandomDeltaRange)) {
+        if (Mathf.Abs(currAccumulatedDelta) >= deltaForSpawn + Random.Range(-absoluteRandomDeltaRange, absoluteRandomDeltaRange)) {
             currAccumulatedDelta = 0.0f;
             return true;
         }
@@ -79,7 +82,7 @@ public class WorldController : MonoBehaviour
         cloud.transform.SetParent(transform);
         cloud.transform.localScale = new Vector3(scale, scale, 1);
         cloud.transform.eulerAngles = new Vector3(0,0,0);
-        cloud.transform.localPosition = new Vector3(spawnX, height);
+        cloud.transform.localPosition = new Vector3(spawnX * Mathf.Sign(delta), height);
     }
 
     // Getting click rate
@@ -124,22 +127,34 @@ public class WorldController : MonoBehaviour
     // Moving platforms & adjust score accordingly
     private float MovePlatforms(float clickRate) {
         Vector2 currPlatformAPosition = platformA.localPosition;
-        Vector2 newPlatformAPosition = new Vector2(platformA.localPosition.x - (clickRate * moveSpeed), platformA.localPosition.y);
-
         Vector2 currPlatformBPosition = platformB.localPosition;
-        Vector2 newPlatformBPosition = new Vector2(platformB.localPosition.x - (clickRate * moveSpeed), platformB.localPosition.y);
+
+        Vector2 newPlatformAPosition;
+        Vector2 newPlatformBPosition;
+
+        if (clickRate > 0) {
+            newPlatformAPosition = new Vector2(platformA.localPosition.x - (clickRate * moveSpeed), platformA.localPosition.y);
+            newPlatformBPosition = new Vector2(platformB.localPosition.x - (clickRate * moveSpeed), platformB.localPosition.y);
+        } else if (clickRate == 0 && Mathf.Round(currScore) > 0) {
+            float rollbackAmount = ((GetTerrainAngle(currScore)/maxTerrainAngle)*(maxRollbackSpeed - minRollbackSpeed)) + minRollbackSpeed;
+            newPlatformAPosition = new Vector2(platformA.localPosition.x + rollbackAmount, platformA.localPosition.y);
+            newPlatformBPosition = new Vector2(platformB.localPosition.x + rollbackAmount, platformB.localPosition.y);
+        } else {
+            newPlatformAPosition = platformA.localPosition;
+            newPlatformBPosition = platformB.localPosition;
+        }
 
         platformA.localPosition = Vector2.Lerp(currPlatformAPosition, newPlatformAPosition, Time.deltaTime);
         platformB.localPosition = Vector2.Lerp(currPlatformBPosition, newPlatformBPosition, Time.deltaTime);
 
-        delta = Mathf.Abs(currPlatformAPosition.x - newPlatformAPosition.x);
+        delta = currPlatformAPosition.x - newPlatformAPosition.x;
 
         return delta;
     }
 
     void UpdateScore(float distanceDelta) {
-        currScore += distanceDelta / 100.0f;
-        currAccumulatedDelta += distanceDelta / 100.0f;
+        currScore += distanceDelta / deltaScoreRatio;
+        currAccumulatedDelta += distanceDelta / deltaScoreRatio;
         scoreText.text = "Score: " + Mathf.Round(currScore).ToString();
     }
 

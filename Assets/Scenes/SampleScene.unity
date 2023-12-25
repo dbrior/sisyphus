@@ -1054,8 +1054,11 @@ MonoBehaviour:
   platformB: {fileID: 2092049527}
   maxTerrainScoreTarget: 1000
   maxTerrainAngle: 70
-  minTerrainAngle: 10
+  minTerrainAngle: 0
+  deltaScoreRatio: 250
   moveSpeed: 0.25
+  minRollbackSpeed: 0.1
+  maxRollbackSpeed: 3
   TimeWindow: 2
   cloudPrefabs:
   - {fileID: 7870258094562550003, guid: 2c86eaca1eee11e40bd32f23538acd73, type: 3}
@@ -1068,7 +1071,7 @@ MonoBehaviour:
   maxHeight: 3.25
   spawnX: 5
   spawnInterval: 2
-  deltaForSpawn: 7
+  deltaForSpawn: 25
   lifespan: 9
   absoluteRandomDeltaRange: 6
 --- !u!1 &1543748116
