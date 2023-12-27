@@ -226,9 +226,8 @@ public class WorldController : MonoBehaviour
         if(ShouldSpawnCloud()) {
             SpawnCloud();
         }
-        if(ShouldSpawnBird()) {
-            Debug.Log("Spawn Bird");
-            SpawnBird();
-        }
+        // if(ShouldSpawnBird()) {
+        //     SpawnBird();
+        // }
     }
 }
