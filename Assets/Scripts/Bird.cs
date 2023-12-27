@@ -9,12 +9,13 @@ public class Bird : MonoBehaviour
     public float lifespan;
 
     // Bobbing
-    private float amplitude = 1.5f;
+    private float amplitude = 4.0f;
     private float frequency = 0.75f;
     private float phase;
 
     // Speed
     private float baseSpeed = 5.0f;
+    private float baseUphillSpeed = 0.01f;
 
     void OnBecameInvisible () {
         if (spawnTimestamp >= Time.time - lifespan) {
@@ -28,9 +29,11 @@ public class Bird : MonoBehaviour
 
     void Update () {
         Vector2 newPosition = new Vector2(
-            transform.localPosition.x + (amplitude * Mathf.Sin(frequency * Time.time + phase)),
+            transform.localPosition.x + (amplitude * Mathf.Sin(frequency * Time.time + phase)) + baseUphillSpeed,
+            // transform.localPosition.x + baseUphillSpeed,
             transform.localPosition.y - baseSpeed
         );
+        Debug.DrawRay(transform.position, transform.right*20, Color.red);
         transform.localPosition = Vector2.Lerp(transform.localPosition, newPosition, Time.deltaTime);
     }
 }
