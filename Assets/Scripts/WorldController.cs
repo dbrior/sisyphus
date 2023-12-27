@@ -6,6 +6,7 @@ using TMPro;
 public class WorldController : MonoBehaviour
 {
     [Header("Sprites:")]
+    public GameObject background;
     public GameObject pushingSprite;
     public GameObject idleSprite;
     public Animator boulderAnimator;
@@ -24,8 +25,10 @@ public class WorldController : MonoBehaviour
     public float maxTerrainAngle = 70.0f;
     public float minTerrainAngle = 10.0f;
     [Header("Click-Rate/Movement:")]
+    public float maxClickRate = 20.0f;
     public float deltaScoreRatio = 100.0f;
     public float moveSpeed = 0.25f;
+    public float backgroundMoveFactor = 0.01f;
     public float minRollbackSpeed = 0.1f;
     public float maxRollbackSpeed = 3.0f;
     public float TimeWindow = 2f; // 2 seconds
@@ -39,6 +42,7 @@ public class WorldController : MonoBehaviour
     public float lifespan = 30.0f;
     public float absoluteRandomDeltaRange = 6.0f;
 
+    private float clickRate = 0.0f;
     private float currAccumulatedDelta = 0.0f;
     private float nextSpawnTime;
     private float currScore = 0.0f;
@@ -151,6 +155,11 @@ public class WorldController : MonoBehaviour
 
         return delta;
     }
+    private void MoveBackground(float distanceDelta) {
+        Vector2 newBackgroundPosition = new Vector2(background.transform.localPosition.x - (distanceDelta * backgroundMoveFactor), background.transform.localPosition.y);
+        background.transform.localPosition = Vector2.Lerp(background.transform.localPosition, newBackgroundPosition, Time.deltaTime);
+        background.transform.eulerAngles = new Vector3(0,0,0);
+    }
 
     void UpdateScore(float distanceDelta) {
         currScore += distanceDelta / deltaScoreRatio;
@@ -160,6 +169,7 @@ public class WorldController : MonoBehaviour
 
     float UpdateDistanceAndScore(float clickRate) {
         float distanceDelta = MovePlatforms(clickRate);
+        MoveBackground(distanceDelta);
         UpdateScore(distanceDelta);
         return distanceDelta;
     }
@@ -172,13 +182,15 @@ public class WorldController : MonoBehaviour
         idleSpriteRenderer = idleSprite.GetComponent<SpriteRenderer>(); 
     }
 
-    void Update()
+    void Update() 
     {
-        // The core function calls set the foundation that controls the game
-        float clickRate = CalculateClickRate();                                 // clickRate determines the speed of the game
+        clickRate = Mathf.Min(maxClickRate, CalculateClickRate());     // clickRate determines the speed of the game
         Debug.Log("Click rate: " + clickRate + " clicks per second");               
-        float distanceDelta = UpdateDistanceAndScore(clickRate);                // current distance from start yields score (1:1)
-                                                                                // some fetures might need a raw distance delta
+    }
+
+    void FixedUpdate()
+    {
+        float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
 
         // Below rely on either clickRate or score
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
