@@ -16,6 +16,7 @@ public class WorldController : MonoBehaviour
     public float maxClickRateTarget = 30.0f;
     [Header("UI:")]
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI maxScoreText;
     [Header("Platforms:")]
     public float delta = 0.0f;
     public Transform platformA;
@@ -45,6 +46,7 @@ public class WorldController : MonoBehaviour
     public float lifespan = 30.0f;
     public float absoluteRandomDeltaRange = 6.0f;
 
+    private int maxScore = 0;
     private float clickRate = 0.0f;
     private float currAccumulatedDelta = 0.0f;
     private float nextSpawnTime;
@@ -191,6 +193,12 @@ public class WorldController : MonoBehaviour
         currScore += distanceDelta / deltaScoreRatio;
         currAccumulatedDelta += distanceDelta / deltaScoreRatio;
         scoreText.text = Mathf.Round(currScore).ToString();
+        if (Mathf.Round(currScore) > maxScore) {
+            PlayerPrefs.SetInt("Max Score", (int) Mathf.Round(currScore));
+            PlayerPrefs.Save();
+            maxScore = (int) Mathf.Round(currScore);
+        }
+        maxScoreText.text = maxScore.ToString();
     }
 
     float UpdateDistanceAndScore(float clickRate) {
@@ -202,6 +210,8 @@ public class WorldController : MonoBehaviour
     
     void Start()
     {
+        maxScore = PlayerPrefs.GetInt("Max Score", 0);
+        maxScore = 0;
         pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();
         pushingSpriteAnimator = pushingSprite.GetComponent<Animator>(); 
 
