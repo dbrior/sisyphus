@@ -190,7 +190,7 @@ public class WorldController : MonoBehaviour
     void UpdateScore(float distanceDelta) {
         currScore += distanceDelta / deltaScoreRatio;
         currAccumulatedDelta += distanceDelta / deltaScoreRatio;
-        scoreText.text = "Score: " + Mathf.Round(currScore).ToString();
+        scoreText.text = Mathf.Round(currScore).ToString();
     }
 
     float UpdateDistanceAndScore(float clickRate) {

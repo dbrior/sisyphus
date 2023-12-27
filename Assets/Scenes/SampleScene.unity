@@ -166,7 +166,7 @@ Animator:
   m_GameObject: {fileID: 24032346}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c62b9f076cb76b540b66ecf42dc51f53, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7c20bfadee0ff460da48dfa09c4cdb28, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -218,7 +218,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 542187415, guid: b6f943e362c416d4da48104efc1197ee, type: 3}
+  m_Sprite: {fileID: 552228048, guid: 50693e1ebba89467899da812a23b0de2, type: 3}
   m_Color: {r: 0.8490566, g: 0.6688323, b: 0.6688323, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -715,7 +715,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 0'
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
