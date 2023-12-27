@@ -8,6 +8,10 @@ public class Cloud : MonoBehaviour
     public float lifespan;
     private WorldController controller;
 
+    private float minDecay = 0.45f;
+    private float maxDecay = 0.01f;
+    private float bobbleRange = 2f;
+
     void OnBecameInvisible () {
         if (spawnTimestamp >= Time.time - lifespan) {
             Destroy(gameObject);
@@ -19,11 +23,11 @@ public class Cloud : MonoBehaviour
     }
 
     void Update () {
-        float newXPosition = (transform.localPosition.x - (controller.delta * Mathf.Max(0.05f, (transform.localScale.x / controller.maxScale))));
+        float newXPosition = (transform.localPosition.x - (controller.delta * Mathf.Min(minDecay, Mathf.Max(maxDecay, (transform.localScale.x / controller.maxScale)))));
         Vector2 newPosition = new Vector2(
             newXPosition,
-            transform.localPosition.y
+            transform.localPosition.y + Random.Range(-bobbleRange, bobbleRange)
         );
-        transform.localPosition = Vector2.Lerp(transform.localPosition, newPosition, Time.deltaTime);
+        transform.localPosition = Vector2.Lerp(transform.localPosition, newPosition, Time.deltaTime/2);
     }
 }

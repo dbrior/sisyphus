@@ -1071,13 +1071,13 @@ MonoBehaviour:
   - {fileID: 209355659682367036, guid: 398e9b3852b89684bb8e512fa5065cef, type: 3}
   minScale: 1
   maxScale: 4
-  minHeight: 2.25
-  maxHeight: 3.5
-  spawnX: 5
+  minHeight: 2
+  maxHeight: 3
+  spawnX: 3.5
   spawnInterval: 2
-  deltaForSpawn: 10
+  deltaForSpawn: 8
   lifespan: 9
-  absoluteRandomDeltaRange: 6
+  absoluteRandomDeltaRange: 5.73
 --- !u!1 &1543748116
 GameObject:
   m_ObjectHideFlags: 0
