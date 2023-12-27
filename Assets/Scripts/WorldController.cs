@@ -81,6 +81,7 @@ public class WorldController : MonoBehaviour
         float height = Random.Range(minHeight, maxHeight);
 
         Cloud cloud = Instantiate(cloudPrefab).GetComponent<Cloud>();
+        cloud.height = height;
         cloud.spawnTimestamp = Time.time;
         cloud.lifespan = lifespan;
         cloud.transform.SetParent(transform);
