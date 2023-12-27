@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7aa090dbb4da6e04f806230b364a25e9
+guid: 24d444e05d3e44102a056e4f8900f3ac
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -107,19 +107,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -136,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boulderBlue_0
+      name: enemybird_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eee4916acc30c548bfbc5fc92f135e0
-      internalID: -1326435205
+      spriteID: 2087a84068935408c9200b5bb2f4562d
+      internalID: -1165128293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boulderBlue_1
+      name: enemybird_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aaad1dad9f89a5744950b5dbc6d2d9c4
-      internalID: -2081863709
+      spriteID: 9a727c53cd44b484a8d3571565e7acb2
+      internalID: 699456741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boulderBlue_2
+      name: enemybird_2
       rect:
         serializedVersion: 2
         x: 64
@@ -192,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0aacb5e602cefe488c5aa032211d633
-      internalID: 1060390093
+      spriteID: 2fc39bbc4f924414584dac5ae7a2c816
+      internalID: 1867286585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boulderBlue_3
+      name: enemybird_3
       rect:
         serializedVersion: 2
         x: 96
@@ -213,50 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db2ad4a51af65dd4fb1907e8fcf56315
-      internalID: -11694604
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: boulderBlue_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 666352375648f3240810299252894eb0
-      internalID: -1124740570
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: boulderBlue_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc93443401cafce498848bbf347932e4
-      internalID: -37095790
+      spriteID: fbd9dd06a39ba4d18b551bc91a37f517
+      internalID: 963196104
       vertices: []
       indices: 
       edges: []
@@ -272,12 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      boulderBlue_0: -1326435205
-      boulderBlue_1: -2081863709
-      boulderBlue_2: 1060390093
-      boulderBlue_3: -11694604
-      boulderBlue_4: -1124740570
-      boulderBlue_5: -37095790
+      enemybird_0: -1165128293
+      enemybird_1: 699456741
+      enemybird_2: 1867286585
+      enemybird_3: 963196104
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

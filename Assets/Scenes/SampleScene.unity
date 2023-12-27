@@ -1064,6 +1064,10 @@ MonoBehaviour:
   minRollbackSpeed: 0.1
   maxRollbackSpeed: 3
   TimeWindow: 2
+  birdPrefabs:
+  - {fileID: 7180171716697619950, guid: e005dbb7b1a754778a1786ae6fcc02c0, type: 3}
+  minX: 0
+  maxX: 0
   cloudPrefabs:
   - {fileID: 7870258094562550003, guid: 2c86eaca1eee11e40bd32f23538acd73, type: 3}
   - {fileID: 913133032201720849, guid: faa080481e1b5704aa844cef26a7683e, type: 3}

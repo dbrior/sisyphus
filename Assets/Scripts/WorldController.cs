@@ -32,6 +32,9 @@ public class WorldController : MonoBehaviour
     public float minRollbackSpeed = 0.1f;
     public float maxRollbackSpeed = 3.0f;
     public float TimeWindow = 2f; // 2 seconds
+    [Header("Bird Spawning:")]
+    public List<GameObject> birdPrefabs;
+    public float minX, maxX;
     [Header("Cloud Spawning:")]
     public List<GameObject> cloudPrefabs;
     public float minScale, maxScale;
@@ -61,6 +64,28 @@ public class WorldController : MonoBehaviour
     }
     private void SetTerrainAngle(float currScore) {
         transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, GetTerrainAngle(currScore));
+    }
+
+    // Birds
+    private bool ShouldSpawnBird()
+    {
+        if (currScore > 2 && Mathf.Round(currScore) % 10 == 0) {
+            return true;
+        }
+        return false;
+    }
+    void SpawnBird()
+    {
+        // TODO: Track spawned clouds in list for cleanup
+        // TODO: Have clouds operate on independent x position, for parallax
+        GameObject birdPrefab = birdPrefabs[Random.Range(0, birdPrefabs.Count)];
+
+        Bird bird = Instantiate(birdPrefab).GetComponent<Bird>();
+        bird.spawnTimestamp = Time.time;
+        bird.lifespan = lifespan;
+        bird.transform.position = new Vector2(1, 4);
+        bird.transform.SetParent(platformA);
+        bird.transform.eulerAngles = new Vector3(0,0,-90);
     }
 
     // Clouds
@@ -200,6 +225,10 @@ public class WorldController : MonoBehaviour
         // TODO: These functions have todo's
         if(ShouldSpawnCloud()) {
             SpawnCloud();
+        }
+        if(ShouldSpawnBird()) {
+            Debug.Log("Spawn Bird");
+            SpawnBird();
         }
     }
 }
