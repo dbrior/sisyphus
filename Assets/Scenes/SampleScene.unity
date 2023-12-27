@@ -1055,7 +1055,7 @@ MonoBehaviour:
   maxTerrainScoreTarget: 1000
   maxTerrainAngle: 70
   minTerrainAngle: 5
-  deltaScoreRatio: 10
+  deltaScoreRatio: 1000
   moveSpeed: 0.25
   minRollbackSpeed: 0.1
   maxRollbackSpeed: 3
@@ -1066,14 +1066,14 @@ MonoBehaviour:
   - {fileID: 3177141667479105182, guid: 4b16531a681bbdf4b909c2bb2cf1b9f3, type: 3}
   - {fileID: 209355659682367036, guid: 398e9b3852b89684bb8e512fa5065cef, type: 3}
   minScale: 1
-  maxScale: 3.5
+  maxScale: 4
   minHeight: 1.75
-  maxHeight: 3.25
+  maxHeight: 2.5
   spawnX: 5
   spawnInterval: 2
-  deltaForSpawn: 10
+  deltaForSpawn: 1
   lifespan: 9
-  absoluteRandomDeltaRange: 6
+  absoluteRandomDeltaRange: 0.01
 --- !u!1 &1543748116
 GameObject:
   m_ObjectHideFlags: 0

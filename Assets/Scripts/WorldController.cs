@@ -59,6 +59,31 @@ public class WorldController : MonoBehaviour
         transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, GetTerrainAngle(currScore));
     }
 
+    // Rendering functions
+    public int CalculateLayerIndex(float inputValue, float minValue, float maxValue, int numberOfLayers)
+    {
+        // Ensure the object scale is within the bounds
+        // inputValue = Mathf.Clamp(inputValue, minValue, maxValue);
+
+        // Normalize scale to a 0-1 range within min and max scale
+        float normalizedScale = (inputValue - minValue) / (maxValue - minValue);
+
+        // Convert the normalized scale to a layer index
+        int layerOrder = Mathf.RoundToInt(normalizedScale * (numberOfLayers - 1));
+
+        return layerOrder;
+    }
+    void SetLayerIndex(GameObject obj, int index)
+    {
+        SpriteRenderer renderer = obj.GetComponent<SpriteRenderer>();
+        if(renderer != null)
+        {
+            renderer.sortingOrder = index;
+        }
+    }
+
+
+
     // Clouds
     private bool ShouldSpawnCloud()
     {
@@ -76,7 +101,11 @@ public class WorldController : MonoBehaviour
         float scale = Random.Range(minScale, maxScale);
         float height = Random.Range(minHeight, maxHeight);
 
-        Cloud cloud = Instantiate(cloudPrefab).GetComponent<Cloud>();
+        GameObject cloudObject = Instantiate(cloudPrefab);
+        int renderIndex = CalculateLayerIndex(scale, minScale, maxScale, 10) + 2;
+        SetLayerIndex(cloudObject, renderIndex);
+
+        Cloud cloud = cloudObject.GetComponent<Cloud>();
         cloud.spawnTimestamp = Time.time;
         cloud.lifespan = lifespan;
         cloud.transform.SetParent(transform);
@@ -163,6 +192,12 @@ public class WorldController : MonoBehaviour
         UpdateScore(distanceDelta);
         return distanceDelta;
     }
+
+    void Awake () {
+        // 0 for no sync, 1 for panel refresh rate, 2 for 1/2 panel rate
+        QualitySettings.vSyncCount = 1;
+    }
+
     
     void Start()
     {

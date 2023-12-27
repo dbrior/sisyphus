@@ -19,7 +19,7 @@ public class Cloud : MonoBehaviour
     }
 
     void Update () {
-        float newXPosition = (transform.localPosition.x - (controller.delta * Mathf.Max(0.05f, (transform.localScale.x / controller.maxScale))));
+        float newXPosition = (transform.localPosition.x - (controller.delta * Mathf.Min(0.80f, Mathf.Max(0.05f, (transform.localScale.x / controller.maxScale)))));
         Vector2 newPosition = new Vector2(
             newXPosition,
             transform.localPosition.y
