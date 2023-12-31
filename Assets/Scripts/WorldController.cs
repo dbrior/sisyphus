@@ -77,7 +77,7 @@ public class WorldController : MonoBehaviour
         float cost = 10.0f;
         if (points >= cost) {
             points -= cost;
-            baseClickRate += 1.0f;
+            baseClickRate += 2.0f;
             Debug.Log("Base Click Rate Increase!");
         }
     }
@@ -232,14 +232,14 @@ public class WorldController : MonoBehaviour
     void UpdateScore(float distanceDelta) {
         currScore += distanceDelta / deltaScoreRatio;
         currAccumulatedDelta += distanceDelta / deltaScoreRatio;
-        scoreText.text = Mathf.Round(currScore).ToString();
+        scoreText.text = Mathf.Floor(currScore).ToString();
         if (currScore > maxScore) {
             PlayerPrefs.SetFloat("Max Score", currScore);
             PlayerPrefs.Save();
             points += currScore - maxScore;
             maxScore = currScore;
         }
-        maxScoreText.text = Mathf.Round(maxScore).ToString();
+        maxScoreText.text = Mathf.Floor(maxScore).ToString();
     }
 
     float UpdateDistanceAndScore(float clickRate) {
@@ -280,7 +280,7 @@ public class WorldController : MonoBehaviour
         // if(ShouldSpawnBird()) {
         //     SpawnBird();
         // }
-        pointsText.text = Mathf.Round(points).ToString();
+        pointsText.text = Mathf.Floor(points).ToString();
         pointsText.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }
