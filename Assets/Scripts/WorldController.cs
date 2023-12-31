@@ -17,6 +17,8 @@ public class WorldController : MonoBehaviour
     [Header("UI:")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI maxScoreText;
+    public TextMeshProUGUI pointsText;
+    public GameObject shopUI;
     [Header("Platforms:")]
     public float delta = 0.0f;
     public Transform platformA;
@@ -46,15 +48,44 @@ public class WorldController : MonoBehaviour
     public float lifespan = 30.0f;
     public float absoluteRandomDeltaRange = 6.0f;
 
-    private int maxScore = 0;
+    private float maxScore = 0.0f;
     private float clickRate = 0.0f;
     private float currAccumulatedDelta = 0.0f;
     private float nextSpawnTime;
     private float currScore = 0.0f;
+    private float terrainAngle;
     private List<float> inputTimestamps = new List<float>();
     private SpriteRenderer pushingSpriteRenderer;
     private Animator pushingSpriteAnimator;
     private SpriteRenderer idleSpriteRenderer;
+
+    // Progression
+    public float points = 0.0f;
+    private float sisMaxTerrainAngle = 8.0f;
+    private float baseClickRate = 0.0f;
+
+    // Sisyphus skills
+    public void increaseSisMaxTerrainAngle() {
+        float cost = 10.0f;
+        if (points >= cost) {
+            points -= cost;
+            sisMaxTerrainAngle += 10.0f;
+            Debug.Log("Max Angle Increase!");
+        }
+    }
+    public void increaseBaseClickRate() {
+        float cost = 10.0f;
+        if (points >= cost) {
+            points -= cost;
+            baseClickRate += 1.0f;
+            Debug.Log("Base Click Rate Increase!");
+        }
+    }
+
+    // UI Toggle
+    public void ToggleShopUI() {
+        shopUI.SetActive(!shopUI.activeSelf);
+    }
 
     // Setting terrain angle
     private float GetTerrainAngle(float score) {
@@ -65,7 +96,8 @@ public class WorldController : MonoBehaviour
         }
     }
     private void SetTerrainAngle(float currScore) {
-        transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, GetTerrainAngle(currScore));
+        terrainAngle = GetTerrainAngle(currScore);
+        transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, terrainAngle);
     }
 
     // Birds
@@ -164,20 +196,28 @@ public class WorldController : MonoBehaviour
         Vector2 newPlatformAPosition;
         Vector2 newPlatformBPosition;
 
+        float currTerrainSkillModifier = (1 - (terrainAngle / sisMaxTerrainAngle));
+        float movement = (clickRate * moveSpeed) * currTerrainSkillModifier;
+        Debug.Log(currTerrainSkillModifier);
+
+        bool shouldLerp = true;
         if (clickRate > 0) {
-            newPlatformAPosition = new Vector2(platformA.localPosition.x - (clickRate * moveSpeed), platformA.localPosition.y);
-            newPlatformBPosition = new Vector2(platformB.localPosition.x - (clickRate * moveSpeed), platformB.localPosition.y);
+            newPlatformAPosition = new Vector2(platformA.localPosition.x - movement, platformA.localPosition.y);
+            newPlatformBPosition = new Vector2(platformB.localPosition.x - movement, platformB.localPosition.y);
         } else if (clickRate == 0 && Mathf.Round(currScore) > 0) {
             float rollbackAmount = ((GetTerrainAngle(currScore)/maxTerrainAngle)*(maxRollbackSpeed - minRollbackSpeed)) + minRollbackSpeed;
             newPlatformAPosition = new Vector2(platformA.localPosition.x + rollbackAmount, platformA.localPosition.y);
             newPlatformBPosition = new Vector2(platformB.localPosition.x + rollbackAmount, platformB.localPosition.y);
         } else {
+            shouldLerp = false;
             newPlatformAPosition = platformA.localPosition;
             newPlatformBPosition = platformB.localPosition;
         }
 
-        platformA.localPosition = Vector2.Lerp(currPlatformAPosition, newPlatformAPosition, Time.deltaTime);
-        platformB.localPosition = Vector2.Lerp(currPlatformBPosition, newPlatformBPosition, Time.deltaTime);
+        if (shouldLerp) {
+            platformA.localPosition = Vector2.Lerp(currPlatformAPosition, newPlatformAPosition, Time.deltaTime);
+            platformB.localPosition = Vector2.Lerp(currPlatformBPosition, newPlatformBPosition, Time.deltaTime);
+        }
 
         delta = currPlatformAPosition.x - newPlatformAPosition.x;
 
@@ -193,12 +233,13 @@ public class WorldController : MonoBehaviour
         currScore += distanceDelta / deltaScoreRatio;
         currAccumulatedDelta += distanceDelta / deltaScoreRatio;
         scoreText.text = Mathf.Round(currScore).ToString();
-        if (Mathf.Round(currScore) > maxScore) {
-            PlayerPrefs.SetInt("Max Score", (int) Mathf.Round(currScore));
+        if (currScore > maxScore) {
+            PlayerPrefs.SetFloat("Max Score", currScore);
             PlayerPrefs.Save();
-            maxScore = (int) Mathf.Round(currScore);
+            points += currScore - maxScore;
+            maxScore = currScore;
         }
-        maxScoreText.text = maxScore.ToString();
+        maxScoreText.text = Mathf.Round(maxScore).ToString();
     }
 
     float UpdateDistanceAndScore(float clickRate) {
@@ -210,8 +251,8 @@ public class WorldController : MonoBehaviour
     
     void Start()
     {
-        maxScore = PlayerPrefs.GetInt("Max Score", 0);
-        maxScore = 0;
+        maxScore = PlayerPrefs.GetFloat("Max Score", 0.0f);
+        maxScore = 0.0f;
         pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();
         pushingSpriteAnimator = pushingSprite.GetComponent<Animator>(); 
 
@@ -220,7 +261,7 @@ public class WorldController : MonoBehaviour
 
     void Update() 
     {
-        clickRate = Mathf.Min(maxClickRate, CalculateClickRate());     // clickRate determines the speed of the game
+        clickRate = Mathf.Min(maxClickRate, CalculateClickRate()) + baseClickRate;     // clickRate determines the speed of the game
         Debug.Log("Click rate: " + clickRate + " clicks per second");               
     }
 
@@ -239,5 +280,7 @@ public class WorldController : MonoBehaviour
         // if(ShouldSpawnBird()) {
         //     SpawnBird();
         // }
+        pointsText.text = Mathf.Round(points).ToString();
+        pointsText.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }
