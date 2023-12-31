@@ -2019,8 +2019,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00060001016, y: 0, z: 0}
-    m_Extent: {x: 0.9977, y: 0.9969, z: 0}
+    m_Center: {x: 0.00024998188, y: -0.00034999847, z: 0}
+    m_Extent: {x: 0.99755, y: 0.99765, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2419,7 +2419,7 @@ MonoBehaviour:
   minHeight: 2
   maxHeight: 3
   spawnX: 3.5
-  spawnInterval: 2
+  spawnInterval: 6
   deltaForSpawn: 7
   lifespan: 9
   absoluteRandomDeltaRange: 4.73

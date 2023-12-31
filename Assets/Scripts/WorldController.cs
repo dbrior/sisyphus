@@ -39,14 +39,17 @@ public class WorldController : MonoBehaviour
     public List<GameObject> birdPrefabs;
     public float minX, maxX;
     [Header("Cloud Spawning:")]
+    // Public
     public List<GameObject> cloudPrefabs;
     public float minScale, maxScale;
     public float minHeight, maxHeight;
-    public float spawnX;
-    public float spawnInterval;
+    public const float spawnX = 3.5f;
+    public float spawnInterval = 6.0f;
     public float deltaForSpawn = 9.0f;
     public float lifespan = 30.0f;
     public float absoluteRandomDeltaRange = 6.0f;
+    // Private
+    private float lastSpawnTime = 0.0f;
 
     private float maxScore = 0.0f;
     private float clickRate = 0.0f;
@@ -125,13 +128,19 @@ public class WorldController : MonoBehaviour
     // Clouds
     private bool ShouldSpawnCloud()
     {
-        if (Mathf.Abs(currAccumulatedDelta) >= deltaForSpawn + Random.Range(-absoluteRandomDeltaRange, absoluteRandomDeltaRange)) {
+        bool timeCondition = Time.time - lastSpawnTime >= (spawnInterval + Random.Range(-1.0f,1.0f));
+        bool distanceCondition = Mathf.Abs(currAccumulatedDelta) >= deltaForSpawn + Random.Range(-absoluteRandomDeltaRange, absoluteRandomDeltaRange);
+        if (timeCondition) {
+            lastSpawnTime = Time.time;
+            return true;
+        }
+        if (distanceCondition) {
             currAccumulatedDelta = 0.0f;
             return true;
         }
         return false;
     }
-    void SpawnCloud()
+    void SpawnCloud(float spawnLocation = spawnX)
     {
         // TODO: Track spawned clouds in list for cleanup
         // TODO: Have clouds operate on independent x position, for parallax
@@ -146,7 +155,7 @@ public class WorldController : MonoBehaviour
         cloud.transform.SetParent(transform);
         cloud.transform.localScale = new Vector3(scale, scale, 1);
         cloud.transform.eulerAngles = new Vector3(0,0,0);
-        cloud.transform.localPosition = new Vector3(spawnX * Mathf.Sign(delta), height);
+        cloud.transform.localPosition = new Vector3(spawnLocation * Mathf.Sign(delta), height);
     }
 
     // Getting click rate
@@ -257,6 +266,13 @@ public class WorldController : MonoBehaviour
         pushingSpriteAnimator = pushingSprite.GetComponent<Animator>(); 
 
         idleSpriteRenderer = idleSprite.GetComponent<SpriteRenderer>(); 
+
+        // Initialization
+        SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
+        SetTerrainAngle(currScore);                     // Steepness changes accoding to score
+        for (float i=-5.0f; i<5.0f; i+=1.0f) {
+            SpawnCloud(i);
+        }
     }
 
     void Update() 
