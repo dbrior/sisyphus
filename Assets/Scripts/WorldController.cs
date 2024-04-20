@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class WorldController : MonoBehaviour
 {
@@ -119,6 +120,20 @@ public class WorldController : MonoBehaviour
     private void SetTerrainAngle(float currScore) {
         terrainAngle = GetTerrainAngle(currScore);
         transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, terrainAngle);
+    }
+
+    private string numberFormatter(float points) {
+        string formattedNumber;
+        points = Mathf.Floor(points);
+        if (points >= 1000)
+        {
+            formattedNumber = (points / 1000).ToString("0.#") + "k";
+        }
+        else
+        {
+            formattedNumber = points.ToString();
+        }
+        return formattedNumber;
     }
 
     // Birds
@@ -314,7 +329,8 @@ public class WorldController : MonoBehaviour
         // if(ShouldSpawnBird()) {
         //     SpawnBird();
         // }
-        pointsText.text = Mathf.Floor(points).ToString();
+
+        pointsText.text = numberFormatter(points);
         pointsText.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }
