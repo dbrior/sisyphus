@@ -15,6 +15,7 @@ public class WorldController : MonoBehaviour
     public float minAnimationSpeed = 0.25f;
     public float maxClickRateTarget = 30.0f;
     [Header("UI:")]
+    public TextMeshProUGUI shopButtonText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI maxScoreText;
     public TextMeshProUGUI pointsText;
@@ -63,6 +64,10 @@ public class WorldController : MonoBehaviour
     private SpriteRenderer idleSpriteRenderer;
 
     // Progression
+    private int angleUpgradeCount = 0;
+    public GameObject angleUpgradeContainer;
+    public TextMeshProUGUI angleUpgradeText;
+    private int autoUpgradeCount = 0;
     public float points = 0.0f;
     private float sisMaxTerrainAngle = 8.0f;
     private float baseClickRate = 0.0f;
@@ -73,7 +78,12 @@ public class WorldController : MonoBehaviour
         if (points >= cost) {
             points -= cost;
             sisMaxTerrainAngle += 10.0f;
+            angleUpgradeCount += 1;
             Debug.Log("Max Angle Increase!");
+        }
+        angleUpgradeText.text = angleUpgradeCount.ToString();
+        if (angleUpgradeCount > 0) {
+            angleUpgradeContainer.SetActive(true);
         }
     }
     public void increaseBaseClickRate() {
@@ -88,6 +98,7 @@ public class WorldController : MonoBehaviour
     // UI Toggle
     public void ToggleShopUI() {
         shopUI.SetActive(!shopUI.activeSelf);
+        shopButtonText.text = shopUI.activeSelf ? "Close" : "Shop";
     }
 
     // Setting terrain angle
