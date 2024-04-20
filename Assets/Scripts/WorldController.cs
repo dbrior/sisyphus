@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
+using UnityEngine.Rendering.Universal;
 
 public class WorldController : MonoBehaviour
 {
@@ -77,6 +78,8 @@ public class WorldController : MonoBehaviour
     public AudioSource purchaseSound;
     public SpriteAnimatorUI autoClickAnim;
     public SpriteAnimatorUI angleAnim;
+    public Light2D light;
+    
 
     // Sisyphus skills
     public void increaseSisMaxTerrainAngle() {
@@ -318,7 +321,10 @@ public class WorldController : MonoBehaviour
 
     void Update() 
     {
-        clickRate = Mathf.Min(maxClickRate, CalculateClickRate()) + baseClickRate;     // clickRate determines the speed of the game
+        float rawClickRate = CalculateClickRate();
+        light.intensity = (rawClickRate / 25.0f) * 32;
+        // sisGlow.intensity = (rawClickRate / 25) * 16;
+        clickRate = rawClickRate + baseClickRate;     // clickRate determines the speed of the game
         Debug.Log(clickRate);
         maxScoreText.text = Mathf.Floor(clickRate).ToString();               
     }

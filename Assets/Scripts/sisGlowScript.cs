@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class ShopButton : MonoBehaviour
+// private Light2D light;
+
+public class sisGlowScript : MonoBehaviour
 {
-    public Light2D light;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        // light = GetComponent<Light2D>();   
     }
 
     // Update is called once per frame
