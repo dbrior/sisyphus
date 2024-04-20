@@ -2337,8 +2337,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: -0.00009998679, z: 0}
-    m_Extent: {x: 0.9976, y: 0.9977, z: 0}
+    m_Center: {x: 0.00015002489, y: 0.00014999509, z: 0}
+    m_Extent: {x: 0.99715, y: 0.99775004, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3187,6 +3187,8 @@ MonoBehaviour:
   autoUpgradeText: {fileID: 983885060}
   points: 0
   purchaseSound: {fileID: 346752999}
+  autoClickAnim: {fileID: 813439253}
+  angleAnim: {fileID: 119640276}
 --- !u!1 &1145882490
 GameObject:
   m_ObjectHideFlags: 0
@@ -5743,7 +5745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2071948452
 RectTransform:
   m_ObjectHideFlags: 0
