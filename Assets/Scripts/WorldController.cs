@@ -296,7 +296,7 @@ public class WorldController : MonoBehaviour
     
     void Start()
     {
-        currScore = 1000.0f;
+        // currScore = 1000.0f;
         maxScore = PlayerPrefs.GetFloat("Max Score", 0.0f);
         maxScore = 0.0f;
         pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();
