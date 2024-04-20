@@ -74,6 +74,7 @@ public class WorldController : MonoBehaviour
     public float points = 0.0f;
     private float sisMaxTerrainAngle = 8.0f;
     private float baseClickRate = 0.0f;
+    public AudioSource purchaseSound;
 
     // Sisyphus skills
     public void increaseSisMaxTerrainAngle() {
@@ -83,6 +84,7 @@ public class WorldController : MonoBehaviour
             sisMaxTerrainAngle += 10.0f;
             angleUpgradeCount += 1;
             Debug.Log("Max Angle Increase!");
+            purchaseSound.Play();
         }
         angleUpgradeText.text = angleUpgradeCount.ToString();
         if (angleUpgradeCount > 0) {
@@ -96,6 +98,7 @@ public class WorldController : MonoBehaviour
             baseClickRate += 2.0f;
             autoUpgradeCount += 1;
             Debug.Log("Base Click Rate Increase!");
+            purchaseSound.Play();
         }
         autoUpgradeText.text = autoUpgradeCount.ToString();
         if (autoUpgradeCount > 0) {
@@ -293,6 +296,7 @@ public class WorldController : MonoBehaviour
     
     void Start()
     {
+        currScore = 1000.0f;
         maxScore = PlayerPrefs.GetFloat("Max Score", 0.0f);
         maxScore = 0.0f;
         pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();
