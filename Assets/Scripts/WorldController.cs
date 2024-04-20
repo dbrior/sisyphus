@@ -68,6 +68,8 @@ public class WorldController : MonoBehaviour
     public GameObject angleUpgradeContainer;
     public TextMeshProUGUI angleUpgradeText;
     private int autoUpgradeCount = 0;
+    public GameObject autoUpgradeContainer;
+    public TextMeshProUGUI autoUpgradeText;
     public float points = 0.0f;
     private float sisMaxTerrainAngle = 8.0f;
     private float baseClickRate = 0.0f;
@@ -91,7 +93,12 @@ public class WorldController : MonoBehaviour
         if (points >= cost) {
             points -= cost;
             baseClickRate += 2.0f;
+            autoUpgradeCount += 1;
             Debug.Log("Base Click Rate Increase!");
+        }
+        autoUpgradeText.text = autoUpgradeCount.ToString();
+        if (autoUpgradeCount > 0) {
+            autoUpgradeContainer.SetActive(true);
         }
     }
 
