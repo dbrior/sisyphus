@@ -137,7 +137,11 @@ public class WorldController : MonoBehaviour
     private string numberFormatter(float points) {
         string formattedNumber;
         points = Mathf.Floor(points);
-        if (points >= 1000)
+        if (points >= 1000000)
+        {
+            formattedNumber = (points / 1000).ToString("0.#") + "m";
+        }
+        else if (points >= 1000)
         {
             formattedNumber = (points / 1000).ToString("0.#") + "k";
         }
