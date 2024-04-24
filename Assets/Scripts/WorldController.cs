@@ -79,6 +79,8 @@ public class WorldController : MonoBehaviour
     public SpriteAnimatorUI autoClickAnim;
     public SpriteAnimatorUI angleAnim;
     public Light2D light;
+    public GameObject lightWheel;
+    public float timeFactor = 0.005f;
     
 
     // Sisyphus skills
@@ -240,6 +242,10 @@ public class WorldController : MonoBehaviour
         }
     }
 
+    private void RotateLight(float distanceDelta) {
+        lightWheel.transform.eulerAngles = new Vector3(lightWheel.transform.eulerAngles.x, lightWheel.transform.eulerAngles.y, lightWheel.transform.eulerAngles.z - (distanceDelta * timeFactor));   
+    }
+
     // Moving platforms & adjust score accordingly
     private float MovePlatforms(float clickRate) {
         Vector2 currPlatformAPosition = platformA.localPosition;
@@ -332,6 +338,7 @@ public class WorldController : MonoBehaviour
     void FixedUpdate()
     {
         float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
+        RotateLight(distanceDelta);
 
         // Below rely on either clickRate or score
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
