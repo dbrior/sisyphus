@@ -20,6 +20,7 @@ public class WorldController : MonoBehaviour
     public TextMeshProUGUI shopButtonText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI maxScoreText;
+    public TextMeshProUGUI maxClickRateText;
     public TextMeshProUGUI pointsText;
     public GameObject shopUI;
     [Header("Platforms:")]
@@ -404,7 +405,7 @@ public class WorldController : MonoBehaviour
         // sisGlow.intensity = (rawClickRate / 25) * 16;
         clickRate = rawClickRate + baseClickRate;     // clickRate determines the speed of the game
         Debug.Log(clickRate);
-        maxScoreText.text = Mathf.Floor(clickRate).ToString();              
+        maxClickRateText.text = Mathf.Floor(clickRate).ToString();              
     }
 
     void FixedUpdate()
