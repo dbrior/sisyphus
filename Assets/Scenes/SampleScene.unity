@@ -2382,7 +2382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6855ed88dab3c4effb61466a3d0c2d8a, type: 3}
+  m_Sprite: {fileID: -1693449162, guid: 6cb2089b0213b3e44b08e3c4298a0696, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2566,8 +2566,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.00019997358, y: 0.00025001168, z: 0}
-    m_Extent: {x: 0.9975, y: 0.99724996, z: 0}
+    m_Center: {x: -0.00049999356, y: 0.00030001998, z: 0}
+    m_Extent: {x: 0.998, y: 0.9977, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -6066,7 +6066,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3801ae28dd11d465e9954ae92721a223, type: 3}
+  m_Sprite: {fileID: 35152687, guid: 6cb2089b0213b3e44b08e3c4298a0696, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -172,7 +172,7 @@ public class WorldController : MonoBehaviour
         Color lerpedColor;
         float t;
         // Define RGB values (you can adjust these values as needed)
-        Color color_d = new Color(0.3f, 0.0f, 0.3f); // Dark Purple
+        Color color_d = new Color(27/255, 22/255, 34/255); // Dark Purple
         Color mid = new Color(0.0f, 0.5f, 0.0f); // Greenish
         Color end = new Color(1.0f, 0.843f, 0.0f); // White
         // Define the range over which the color will change (1 to 1000 to 100000)
@@ -187,8 +187,9 @@ public class WorldController : MonoBehaviour
         }
         else
         {
-            t = Mathf.Clamp01((points - minValue) / (midValue - minValue));
-            lerpedColor = Color.Lerp(color_d, mid, t);
+            lerpedColor = color_d;
+            // t = Mathf.Clamp01((points - minValue) / (midValue - minValue));
+            // lerpedColor = Color.Lerp(color_d, mid, t);
         }
         formattedColor = lerpedColor;
         return formattedColor;
