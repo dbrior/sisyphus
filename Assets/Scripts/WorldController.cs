@@ -84,6 +84,7 @@ public class WorldController : MonoBehaviour
     public GameObject lightWheel;
     public float timeFactor = 0.005f;
     public GameObject sparklePrefab;
+    private float sprocketTimestamp = 0.0f;
     
 
     // Sisyphus skills
@@ -275,12 +276,10 @@ public class WorldController : MonoBehaviour
             {
                 // Spawn at default position if any other key is pressed
                 spawnPosition = new Vector3(pushingSprite.transform.position.x, pushingSprite.transform.position.y, 0);
-            }
-
+            }            
             GameObject sparkle = Instantiate(sparklePrefab, spawnPosition, Quaternion.identity);
             Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
         }
-
 
         // Remove timestamps older than 30 seconds
         inputTimestamps.RemoveAll(timestamp => Time.time - timestamp > TimeWindow);
@@ -333,7 +332,8 @@ public class WorldController : MonoBehaviour
             newPlatformAPosition = new Vector2(platformA.localPosition.x - movement, platformA.localPosition.y);
             newPlatformBPosition = new Vector2(platformB.localPosition.x - movement, platformB.localPosition.y);
         } else if (clickRate == 0 && Mathf.Round(currScore) > 0) {
-            float rollbackAmount = ((GetTerrainAngle(currScore)/maxTerrainAngle)*(maxRollbackSpeed - minRollbackSpeed)) + minRollbackSpeed;
+            // float rollbackAmount = ((GetTerrainAngle(currScore)/maxTerrainAngle)*(maxRollbackSpeed - minRollbackSpeed)) + minRollbackSpeed;
+            float rollbackAmount = 0.0f;
             newPlatformAPosition = new Vector2(platformA.localPosition.x + rollbackAmount, platformA.localPosition.y);
             newPlatformBPosition = new Vector2(platformB.localPosition.x + rollbackAmount, platformB.localPosition.y);
         } else {
@@ -389,7 +389,7 @@ public class WorldController : MonoBehaviour
 
         // Initialization
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
-        SetTerrainAngle(currScore);                     // Steepness changes accoding to score
+        SetTerrainAngle(currScore);                     // Steepness changes accoding to scoregit
         for (float i=-5.0f; i<5.0f; i+=1.0f) {
             SpawnCloud(i);
         }
@@ -411,6 +411,12 @@ public class WorldController : MonoBehaviour
     {
         float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
         RotateLight(distanceDelta);
+
+        if (baseClickRate != 0 && (Time.time - sprocketTimestamp >= (1 / baseClickRate))) {
+            GameObject sparkle = Instantiate(sparklePrefab, idleSpriteRenderer.transform.position, Quaternion.identity);
+            Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
+            sprocketTimestamp = Time.time;
+        }
 
         // Below rely on either clickRate or score
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
