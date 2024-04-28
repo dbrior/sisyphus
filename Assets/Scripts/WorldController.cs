@@ -83,6 +83,7 @@ public class WorldController : MonoBehaviour
     public Light2D light;
     public GameObject lightWheel;
     public float timeFactor = 0.005f;
+    public GameObject sparklePrefab;
     
 
     // Sisyphus skills
@@ -256,6 +257,29 @@ public class WorldController : MonoBehaviour
         {
             inputTimestamps.Add(Time.time);
         }
+
+        // Spawn tap sparkle
+        if (Input.anyKeyDown)
+        {
+            Vector3 spawnPosition;
+
+            // Check if the mouse button was clicked
+            if (Input.GetMouseButtonDown(0))
+            {
+                // Spawn at mouse position if mouse is clicked
+                spawnPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                spawnPosition.z = 0;  // Set z to 0 for 2D
+            }
+            else
+            {
+                // Spawn at default position if any other key is pressed
+                spawnPosition = new Vector3(pushingSprite.transform.position.x, pushingSprite.transform.position.y, 0);
+            }
+
+            GameObject sparkle = Instantiate(sparklePrefab, spawnPosition, Quaternion.identity);
+            Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
+        }
+
 
         // Remove timestamps older than 30 seconds
         inputTimestamps.RemoveAll(timestamp => Time.time - timestamp > TimeWindow);
