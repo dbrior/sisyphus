@@ -72,6 +72,8 @@ public class WorldController : MonoBehaviour
     private int autoUpgradeCount = 0;
     public GameObject autoUpgradeContainer;
     public TextMeshProUGUI autoUpgradeText;
+    public TextMeshProUGUI autoStrengthUpgradeText;
+    public TextMeshProUGUI autoClickUpgradeText;
     public float points = 0.0f;
     private float sisMaxTerrainAngle = 8.0f;
     private float baseClickRate = 0.0f;
@@ -85,7 +87,7 @@ public class WorldController : MonoBehaviour
 
     // Sisyphus skills
     public void increaseSisMaxTerrainAngle() {
-        float cost = 10.0f;
+        float cost = angleUpgradeCount * 10 + 10;
         if (points >= cost) {
             points -= cost;
             sisMaxTerrainAngle += 10.0f;
@@ -93,6 +95,7 @@ public class WorldController : MonoBehaviour
             Debug.Log("Max Angle Increase!");
             purchaseSound.Play();
             angleAnim.frameRate = angleAnim.frameRate - ((angleUpgradeCount * 0.01f * angleAnim.frameRate) * angleAnim.frameRate);
+            UpdateStrengthUpgrade(cost + 10);
         }
         angleUpgradeText.text = angleUpgradeCount.ToString();
         if (angleUpgradeCount > 0) {
@@ -100,7 +103,7 @@ public class WorldController : MonoBehaviour
         }
     }
     public void increaseBaseClickRate() {
-        float cost = 10.0f;
+        float cost = autoUpgradeCount * 10 + 10;
         if (points >= cost) {
             points -= cost;
             baseClickRate += 2.0f;
@@ -108,6 +111,7 @@ public class WorldController : MonoBehaviour
             Debug.Log("Base Click Rate Increase!");
             purchaseSound.Play();
             autoClickAnim.frameRate = autoClickAnim.frameRate - ((autoUpgradeCount * 0.01f * autoClickAnim.frameRate) * autoClickAnim.frameRate);
+            UpdateClickUpgrade(cost + 10);
         }
         autoUpgradeText.text = autoUpgradeCount.ToString();
         if (autoUpgradeCount > 0) {
@@ -119,6 +123,15 @@ public class WorldController : MonoBehaviour
     public void ToggleShopUI() {
         shopUI.SetActive(!shopUI.activeSelf);
         shopButtonText.text = shopUI.activeSelf ? "Close" : "Shop";
+    }
+
+    public void UpdateStrengthUpgrade(float cost){
+        string _cost = "COST: " + cost.ToString();
+        autoStrengthUpgradeText.text = _cost;
+    }
+    public void UpdateClickUpgrade(float cost){
+        string _cost = "COST: " + cost.ToString();
+        autoClickUpgradeText.text = _cost;
     }
 
     // Setting terrain angle
@@ -327,6 +340,8 @@ public class WorldController : MonoBehaviour
         for (float i=-5.0f; i<5.0f; i+=1.0f) {
             SpawnCloud(i);
         }
+        UpdateStrengthUpgrade(10);
+        UpdateClickUpgrade(10);
     }
 
     void Update() 
@@ -336,7 +351,7 @@ public class WorldController : MonoBehaviour
         // sisGlow.intensity = (rawClickRate / 25) * 16;
         clickRate = rawClickRate + baseClickRate;     // clickRate determines the speed of the game
         Debug.Log(clickRate);
-        maxScoreText.text = Mathf.Floor(clickRate).ToString();               
+        maxScoreText.text = Mathf.Floor(clickRate).ToString();              
     }
 
     void FixedUpdate()
