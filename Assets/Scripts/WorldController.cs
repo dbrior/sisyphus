@@ -86,6 +86,7 @@ public class WorldController : MonoBehaviour
     public float timeFactor = 0.005f;
     public GameObject sparklePrefab;
     private float sprocketTimestamp = 0.0f;
+    public AudioSource blipAudio;
     
 
     // Sisyphus skills
@@ -280,6 +281,9 @@ public class WorldController : MonoBehaviour
             }            
             GameObject sparkle = Instantiate(sparklePrefab, spawnPosition, Quaternion.identity);
             Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
+            float pitchModifier = Random.Range(-0.75f, -0.2f);
+            blipAudio.pitch = 1 + pitchModifier;
+            blipAudio.Play();
         }
 
         // Remove timestamps older than 30 seconds
@@ -417,6 +421,9 @@ public class WorldController : MonoBehaviour
             GameObject sparkle = Instantiate(sparklePrefab, idleSpriteRenderer.transform.position, Quaternion.identity);
             Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
             sprocketTimestamp = Time.time;
+            float pitchModifier = Random.Range(-0.75f, -0.2f);
+            blipAudio.pitch = 1 + pitchModifier;
+            blipAudio.Play();
         }
 
         // Below rely on either clickRate or score
