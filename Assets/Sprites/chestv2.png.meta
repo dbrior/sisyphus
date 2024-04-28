@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed7907570c5f5e344b9f225fb113053c
-      internalID: 1616138281
+      spriteID: 2ad53235029e14a2fba70d01fbac0512
+      internalID: -1693449162
       vertices: []
       indices: 
       edges: []
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65a3f887324fc2b41b6948e5f55712c4
-      internalID: -1182698985
+      spriteID: 84df48b342a6c4c83bea6606c4b407b9
+      internalID: 35152687
       vertices: []
       indices: 
       edges: []
@@ -175,8 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      chestv2_0: 1616138281
-      chestv2_1: -1182698985
+      chestv2_0: -1693449162
+      chestv2_1: 35152687
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
