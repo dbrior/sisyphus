@@ -152,6 +152,29 @@ public class WorldController : MonoBehaviour
         return formattedNumber;
     }
 
+    private Color colorFormatter(float points) {
+        points = Mathf.Floor(points);
+        Color formattedColor;
+        // Define RGB values for dark purple (you can adjust these values as needed)
+        float red = 27.0f;
+        float green = 22.0f;
+        float blue = 34.0f;
+        Color darkPurple = new Color(red, green, blue);
+        if (points >= 1000000)
+        {
+            formattedColor = Color.white;
+        }
+        else if (points >= 1000)
+        {
+            formattedColor = Color.green;
+        }
+        else
+        {
+            formattedColor = darkPurple;
+        }
+        return darkPurple;
+    }
+
     // Birds
     private bool ShouldSpawnBird()
     {
@@ -357,6 +380,7 @@ public class WorldController : MonoBehaviour
         // }
 
         pointsText.text = numberFormatter(points);
+        // pointsText.color = colorFormatter(points);
         pointsText.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }
