@@ -155,24 +155,29 @@ public class WorldController : MonoBehaviour
     private Color colorFormatter(float points) {
         points = Mathf.Floor(points);
         Color formattedColor;
-        // Define RGB values for dark purple (you can adjust these values as needed)
-        float red = 27.0f;
-        float green = 22.0f;
-        float blue = 34.0f;
-        Color darkPurple = new Color(red, green, blue);
-        if (points >= 1000000)
-        {
-            formattedColor = Color.white;
-        }
-        else if (points >= 1000)
-        {
-            formattedColor = Color.green;
+        Color lerpedColor;
+        float t;
+        // Define RGB values (you can adjust these values as needed)
+        Color color_d = new Color(0.3f, 0.0f, 0.3f); // Dark Purple
+        Color mid = new Color(0.0f, 0.5f, 0.0f); // Greenish
+        Color end = new Color(1.0f, 0.843f, 0.0f); // White
+        // Define the range over which the color will change (1 to 1000 to 100000)
+        float minValue = 1.0f;
+        float midValue = 1000.0f;
+        float maxValue = 10000.0f;
+        // Calculate the interpolation factor (normalized between 0 and 1)
+        if (points >= midValue)
+        {            
+            t = Mathf.Clamp01((points - midValue) / (maxValue - midValue));
+            lerpedColor = Color.Lerp(mid, end, t);
         }
         else
         {
-            formattedColor = darkPurple;
+            t = Mathf.Clamp01((points - minValue) / (midValue - minValue));
+            lerpedColor = Color.Lerp(color_d, mid, t);
         }
-        return darkPurple;
+        formattedColor = lerpedColor;
+        return formattedColor;
     }
 
     // Birds
@@ -380,7 +385,7 @@ public class WorldController : MonoBehaviour
         // }
 
         pointsText.text = numberFormatter(points);
-        // pointsText.color = colorFormatter(points);
+        pointsText.color = colorFormatter(points);
         pointsText.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }
