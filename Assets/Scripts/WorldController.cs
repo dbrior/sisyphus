@@ -152,6 +152,34 @@ public class WorldController : MonoBehaviour
         return formattedNumber;
     }
 
+    private Color colorFormatter(float points) {
+        points = Mathf.Floor(points);
+        Color formattedColor;
+        Color lerpedColor;
+        float t;
+        // Define RGB values (you can adjust these values as needed)
+        Color color_d = new Color(0.3f, 0.0f, 0.3f); // Dark Purple
+        Color mid = new Color(0.0f, 0.5f, 0.0f); // Greenish
+        Color end = new Color(1.0f, 0.843f, 0.0f); // White
+        // Define the range over which the color will change (1 to 1000 to 100000)
+        float minValue = 1.0f;
+        float midValue = 1000.0f;
+        float maxValue = 10000.0f;
+        // Calculate the interpolation factor (normalized between 0 and 1)
+        if (points >= midValue)
+        {            
+            t = Mathf.Clamp01((points - midValue) / (maxValue - midValue));
+            lerpedColor = Color.Lerp(mid, end, t);
+        }
+        else
+        {
+            t = Mathf.Clamp01((points - minValue) / (midValue - minValue));
+            lerpedColor = Color.Lerp(color_d, mid, t);
+        }
+        formattedColor = lerpedColor;
+        return formattedColor;
+    }
+
     // Birds
     private bool ShouldSpawnBird()
     {
@@ -357,6 +385,7 @@ public class WorldController : MonoBehaviour
         // }
 
         pointsText.text = numberFormatter(points);
+        pointsText.color = colorFormatter(points);
         pointsText.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }
