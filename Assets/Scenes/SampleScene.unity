@@ -2439,7 +2439,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6855ed88dab3c4effb61466a3d0c2d8a, type: 3}
+  m_Sprite: {fileID: 1616138281, guid: 6cb2089b0213b3e44b08e3c4298a0696, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2623,8 +2623,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.00020000339, y: -0.00040000677, z: 0}
-    m_Extent: {x: 0.9977, y: 0.9978, z: 0}
+    m_Center: {x: 0.00009998679, y: 0.00025001168, z: 0}
+    m_Extent: {x: 0.99740005, y: 0.99765, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3725,6 +3725,8 @@ MonoBehaviour:
   angleUpgradeText: {fileID: 47665408}
   autoUpgradeContainer: {fileID: 2142229953}
   autoUpgradeText: {fileID: 983885060}
+  autoStrengthUpgradeText: {fileID: 0}
+  autoClickUpgradeText: {fileID: 0}
   points: 0
   purchaseSound: {fileID: 346752999}
   autoClickAnim: {fileID: 813439253}
@@ -6121,7 +6123,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3801ae28dd11d465e9954ae92721a223, type: 3}
+  m_Sprite: {fileID: -1182698985, guid: 6cb2089b0213b3e44b08e3c4298a0696, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
