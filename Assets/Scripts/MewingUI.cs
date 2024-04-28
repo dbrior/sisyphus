@@ -1,48 +1,74 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class SpriteAnimatorUI : MonoBehaviour
 {
-    public Sprite[] frames;        // Array of sprites to animate
-    public float frameRate = 0.1f; // Time between frames
-    private Image imageComponent;  // Image component to display the sprites
+    public Sprite[] frames;           // Array of sprites to animate
+    public float frameRate = 0.1f;    // Time between frames
+    public bool singleShot = false;   // Should the animation play only once?
+    public bool isSprite = true;      // Is the component a SpriteRenderer?
+    private Image imageComponent;     // Image component to display the sprites
+    private SpriteRenderer spriteComponent; // SpriteRenderer to display the sprites
 
-    private int currentFrame;      // Track the current frame index
-    private float timer;           // Timer to manage animation speed
+    private int currentFrame;         // Track the current frame index
+    private float timer;              // Timer to manage animation speed
+    private bool hasFired;            // Flag to check if single-shot animation has played
 
     void Start()
     {
-        imageComponent = GetComponent<Image>();
-        if (imageComponent == null)
-        {
-            Debug.LogError("SpriteAnimatorUI requires an Image component on the same GameObject.");
-            enabled = false; // Disable script if no Image component is found
-            return;
+        if (isSprite) {
+            spriteComponent = GetComponent<SpriteRenderer>();
+        } else {
+            imageComponent = GetComponent<Image>();
         }
-
-        if (frames.Length == 0)
-        {
-            Debug.LogError("Frames array is empty. Please assign sprite frames in the inspector.");
-            enabled = false; // Disable script if no frames are assigned
-            return;
-        }
-
-        imageComponent.sprite = frames[0]; // Set the initial sprite frame
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (frames.Length > 1)
+        if ((singleShot && !hasFired) || !singleShot)
         {
             timer += Time.deltaTime;
 
             if (timer >= frameRate)
             {
-                currentFrame = (currentFrame + 1) % frames.Length; // Loop back to start
-                imageComponent.sprite = frames[currentFrame];      // Update the sprite frame
-                timer -= frameRate;                                // Reset the timer
+                if (currentFrame < frames.Length)
+                {
+                    UpdateSpriteFrame();
+                    currentFrame++;
+                }
+
+                if (currentFrame >= frames.Length)
+                {
+                    if (singleShot)
+                    {
+                        hasFired = true;
+                        DestroySelf(); // Destroy the GameObject at the end of the animation
+                    }
+                    else
+                    {
+                        currentFrame = 0; // Loop back to the start
+                    }
+                }
+
+                timer -= frameRate; // Reset the timer
             }
         }
+    }
+
+    private void UpdateSpriteFrame()
+    {
+        if (isSprite && spriteComponent != null)
+        {
+            spriteComponent.sprite = frames[currentFrame];
+        }
+        else if (imageComponent != null)
+        {
+            imageComponent.sprite = frames[currentFrame];
+        }
+    }
+
+    private void DestroySelf()
+    {
+        Destroy(gameObject); // Destroy the GameObject
     }
 }
