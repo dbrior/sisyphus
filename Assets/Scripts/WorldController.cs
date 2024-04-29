@@ -8,7 +8,8 @@ using UnityEngine.Rendering.Universal;
 public class WorldController : MonoBehaviour
 {
     [Header("Sprites:")]
-    public GameObject background;
+    public GameObject backgroundA;
+    public GameObject backgroundB;
     public GameObject pushingSprite;
     public GameObject idleSprite;
     public Animator boulderAnimator;
@@ -357,9 +358,13 @@ public class WorldController : MonoBehaviour
         return delta;
     }
     private void MoveBackground(float distanceDelta) {
-        Vector2 newBackgroundPosition = new Vector2(background.transform.localPosition.x - (distanceDelta * backgroundMoveFactor), background.transform.localPosition.y);
-        background.transform.localPosition = Vector2.Lerp(background.transform.localPosition, newBackgroundPosition, Time.deltaTime);
-        background.transform.eulerAngles = new Vector3(0,0,0);
+        Vector2 newBackgroundAPosition = new Vector2(backgroundA.transform.localPosition.x - (distanceDelta * backgroundMoveFactor), backgroundA.transform.localPosition.y);
+        backgroundA.transform.localPosition = Vector2.Lerp(backgroundA.transform.localPosition, newBackgroundAPosition, Time.deltaTime);
+        backgroundA.transform.eulerAngles = new Vector3(0,0,0);
+
+        Vector2 newBackgroundBPosition = new Vector2(backgroundB.transform.localPosition.x - (distanceDelta * backgroundMoveFactor), backgroundB.transform.localPosition.y);
+        backgroundB.transform.localPosition = Vector2.Lerp(backgroundB.transform.localPosition, newBackgroundBPosition, Time.deltaTime);
+        backgroundB.transform.eulerAngles = new Vector3(0,0,0);
     }
 
     void UpdateScore(float distanceDelta) {
@@ -384,7 +389,7 @@ public class WorldController : MonoBehaviour
     
     void Start()
     {
-        // currScore = 1000.0f;
+        currScore = 2000.0f;
         maxScore = PlayerPrefs.GetFloat("Max Score", 0.0f);
         maxScore = 0.0f;
         pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();

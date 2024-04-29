@@ -5,11 +5,10 @@ using UnityEngine.Rendering.Universal;
 
 public class SparkleScript : MonoBehaviour
 {
-    public float minLaunchForce = 3f;    // Minimum force with which to launch the prefab
-    public float maxLaunchForce = 10f;   // Maximum force with which to launch the prefab
-    public float minAngle = 305f;        // Minimum angle for launch direction
-    public float maxAngle = 60f;         // Maximum angle for launch direction
-    public float launchForce = 5f;
+    public float minLaunchForce = 10f;    // Minimum force with which to launch the prefab
+    public float maxLaunchForce = 11f;   // Maximum force with which to launch the prefab
+    public float minAngle = 0f;        // Minimum angle for launch direction
+    public float maxAngle = 5f;         // Maximum angle for launch direction
     public float torqueForce = 1f;
 
     float GetRandomAngle(float min, float max)
