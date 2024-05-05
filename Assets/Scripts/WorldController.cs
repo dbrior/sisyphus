@@ -88,6 +88,7 @@ public class WorldController : MonoBehaviour
     public GameObject sparklePrefab;
     private float sprocketTimestamp = 0.0f;
     public AudioSource blipAudio;
+    public Transform SprocketSpawn;
     
 
     // Sisyphus skills
@@ -157,11 +158,11 @@ public class WorldController : MonoBehaviour
         points = Mathf.Floor(points);
         if (points >= 1000000)
         {
-            formattedNumber = (points / 1000).ToString("0.#") + "m";
+            formattedNumber = (points / 1000).ToString("0.#") + "M";
         }
         else if (points >= 1000)
         {
-            formattedNumber = (points / 1000).ToString("0.#") + "k";
+            formattedNumber = (points / 1000).ToString("0.#") + "K";
         }
         else
         {
@@ -278,7 +279,7 @@ public class WorldController : MonoBehaviour
             else
             {
                 // Spawn at default position if any other key is pressed
-                spawnPosition = new Vector3(pushingSprite.transform.position.x, pushingSprite.transform.position.y, 0);
+                spawnPosition = new Vector3(SprocketSpawn.position.x, SprocketSpawn.position.y, 0);
             }            
             GameObject sparkle = Instantiate(sparklePrefab, spawnPosition, Quaternion.identity);
             Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
@@ -329,9 +330,10 @@ public class WorldController : MonoBehaviour
         Vector2 newPlatformAPosition;
         Vector2 newPlatformBPosition;
 
-        float currTerrainSkillModifier = (1 - (terrainAngle / sisMaxTerrainAngle));
-        float movement = (clickRate * moveSpeed) * currTerrainSkillModifier;
-        Debug.Log(currTerrainSkillModifier);
+        // float currTerrainSkillModifier = (1 - (terrainAngle / sisMaxTerrainAngle));
+        // float movement = (clickRate * moveSpeed) * currTerrainSkillModifier;
+        float movement = (clickRate * moveSpeed);
+        // Debug.Log(currTerrainSkillModifier);
 
         bool shouldLerp = true;
         if (clickRate > 0) {
@@ -389,7 +391,7 @@ public class WorldController : MonoBehaviour
     
     void Start()
     {
-        currScore = 2000.0f;
+        // currScore = 2000.0f;
         maxScore = PlayerPrefs.GetFloat("Max Score", 0.0f);
         maxScore = 0.0f;
         pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();
@@ -423,7 +425,7 @@ public class WorldController : MonoBehaviour
         RotateLight(distanceDelta);
 
         if (baseClickRate != 0 && (Time.time - sprocketTimestamp >= (1 / baseClickRate))) {
-            GameObject sparkle = Instantiate(sparklePrefab, idleSpriteRenderer.transform.position, Quaternion.identity);
+            GameObject sparkle = Instantiate(sparklePrefab, SprocketSpawn.position, Quaternion.identity);
             Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
             sprocketTimestamp = Time.time;
             float pitchModifier = Random.Range(-0.75f, -0.2f);
@@ -445,6 +447,8 @@ public class WorldController : MonoBehaviour
 
         pointsText.text = numberFormatter(points);
         pointsText.color = colorFormatter(points);
+        pointsText.outlineWidth = 0.4f;
+        pointsText.outlineColor = new Color(27/255,22/255,34/255);
         pointsText.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }

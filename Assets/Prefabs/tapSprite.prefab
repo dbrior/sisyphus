@@ -155,8 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minLaunchForce: 2
   maxLaunchForce: 5
-  minAngle: 330
-  maxAngle: 30
+  minAngle: 310
+  maxAngle: 340
   torqueForce: 5
 --- !u!114 &2894083933055934896
 MonoBehaviour:
