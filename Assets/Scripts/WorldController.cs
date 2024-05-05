@@ -93,6 +93,7 @@ public class WorldController : MonoBehaviour
 
     // Sisyphus skills
     public void increaseSisMaxTerrainAngle() {
+        Debug.Log("angle button pressed");
         float cost = angleUpgradeCount * 10 + 10;
         if (points >= cost) {
             points -= cost;
@@ -109,6 +110,7 @@ public class WorldController : MonoBehaviour
         }
     }
     public void increaseBaseClickRate() {
+        Debug.Log("auto button pressed");
         float cost = autoUpgradeCount * 10 + 10;
         if (points >= cost) {
             points -= cost;
@@ -415,7 +417,7 @@ public class WorldController : MonoBehaviour
         light.intensity = (rawClickRate / 25.0f) * 32;
         // sisGlow.intensity = (rawClickRate / 25) * 16;
         clickRate = rawClickRate + baseClickRate;     // clickRate determines the speed of the game
-        Debug.Log(clickRate);
+        // Debug.Log(clickRate);
         maxClickRateText.text = Mathf.Floor(clickRate).ToString();              
     }
 
