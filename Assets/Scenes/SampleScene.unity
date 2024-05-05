@@ -491,8 +491,8 @@ Transform:
   m_GameObject: {fileID: 60925234}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21, y: -0.37, z: 0}
-  m_LocalScale: {x: 1.860495, y: 1.860495, z: 1.860495}
+  m_LocalPosition: {x: -0.21000001, y: -0.36999997, z: 0}
+  m_LocalScale: {x: 1.8604951, y: 1.8604951, z: 1.860495}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1105420138}
@@ -2369,7 +2369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &543969774
 Transform:
   m_ObjectHideFlags: 0
@@ -2689,8 +2689,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00024998188, y: 0, z: 0}
-    m_Extent: {x: 0.99785, y: 0.9978, z: 0}
+    m_Center: {x: -0.00025001168, y: 0.00049999356, z: 0}
+    m_Extent: {x: 0.99775004, y: 0.9973, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3943,8 +3943,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 937977150}
-  - {fileID: 60925235}
   - {fileID: 296033537}
+  - {fileID: 1208713025}
+  - {fileID: 60925235}
   - {fileID: 24032347}
   - {fileID: 1543748117}
   - {fileID: 2092049527}
@@ -3982,9 +3983,9 @@ MonoBehaviour:
   platformB: {fileID: 2092049527}
   maxTerrainScoreTarget: 100000
   maxTerrainAngle: 70
-  minTerrainAngle: 5
+  minTerrainAngle: 1
   maxClickRate: 200
-  deltaScoreRatio: 50
+  deltaScoreRatio: 10
   moveSpeed: 0.3
   backgroundMoveFactor: 0.005
   minRollbackSpeed: 1
@@ -4022,6 +4023,7 @@ MonoBehaviour:
   timeFactor: 0.005
   sparklePrefab: {fileID: 7834042367965131081, guid: 11198c505f79b498c9b6b5926e82d45e, type: 3}
   blipAudio: {fileID: 1018931711}
+  SprocketSpawn: {fileID: 1208713025}
 --- !u!1 &1145882490
 GameObject:
   m_ObjectHideFlags: 0
@@ -4341,6 +4343,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1208713024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1208713025}
+  m_Layer: 0
+  m_Name: SprocketSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1208713025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208713024}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.449, y: -0.665, z: 0}
+  m_LocalScale: {x: 1.7719002, y: 1.7719002, z: 1.7719}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1105420138}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1367376610
 GameObject:
   m_ObjectHideFlags: 0
