@@ -89,6 +89,7 @@ public class WorldController : MonoBehaviour
     private float sprocketTimestamp = 0.0f;
     public AudioSource blipAudio;
     public Transform SprocketSpawn;
+    public GameObject devilPrefab;
     
 
     // Sisyphus skills
@@ -114,12 +115,16 @@ public class WorldController : MonoBehaviour
         float cost = autoUpgradeCount * 10 + 10;
         if (points >= cost) {
             points -= cost;
-            baseClickRate += 2.0f;
+            baseClickRate += 1.0f;
             autoUpgradeCount += 1;
             Debug.Log("Base Click Rate Increase!");
             purchaseSound.Play();
             autoClickAnim.frameRate = autoClickAnim.frameRate - ((autoUpgradeCount * 0.01f * autoClickAnim.frameRate) * autoClickAnim.frameRate);
             UpdateClickUpgrade(cost + 10);
+
+            // Spawn devil
+            GameObject devil = Instantiate(devilPrefab);
+            devil.transform.position = new Vector2(0, -10);
         }
         autoUpgradeText.text = autoUpgradeCount.ToString();
         if (autoUpgradeCount > 0) {
