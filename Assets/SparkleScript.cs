@@ -9,7 +9,13 @@ public class SparkleScript : MonoBehaviour
     public float maxLaunchForce = 11f;   // Maximum force with which to launch the prefab
     public float minAngle = 0f;        // Minimum angle for launch direction
     public float maxAngle = 5f;         // Maximum angle for launch direction
-    public float torqueForce = 1f;
+    public bool randomizeColor = true; // Toggle for randomizing color
+    public bool alignRotation = true;  // Toggle for aligning rotation with trajectory
+    public float rotationOffset = 0.0f;
+    public bool setParent = false;
+    private Transform parentObject;
+    public AudioSource collisionSound;
+    public WorldController worldController;
 
     float GetRandomAngle(float min, float max)
     {
@@ -19,6 +25,27 @@ public class SparkleScript : MonoBehaviour
             return random > 0.5 ? Random.Range(min, 360) : Random.Range(0, max);
         }
         return Random.Range(min, max);
+    }
+    void SwitchToSecondaryAnimation()
+    {
+        SpriteAnimatorUI animator = GetComponent<SpriteAnimatorUI>();
+        animator.useSecondaryAnimation = true;
+        animator.singleShot = true;
+        animator.currentFrame = 0;
+    }
+    void OnMouseDown()
+    {
+        SwitchToSecondaryAnimation();
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GetComponent<Rigidbody2D>().simulated = false;
+        SwitchToSecondaryAnimation();
+        transform.position = new Vector3(transform.position.x, transform.position.y-0.5f, transform.position.z);
+        collisionSound.Play();
+        worldController.currScore = worldController.currScore - 100.0f;
+        worldController.scoreText.text = Mathf.Floor(worldController.currScore).ToString();
     }
 
     Vector2 AngleToVector2(float angle)
@@ -30,7 +57,9 @@ public class SparkleScript : MonoBehaviour
     }
 
     void SetRandomColor()
-{
+    {
+        if (!randomizeColor) return; // Check if color randomization is enabled
+
         // Create a random color
         Color randomColor = new Color(Random.value, Random.value, Random.value);
 
@@ -40,13 +69,6 @@ public class SparkleScript : MonoBehaviour
         {
             spriteRenderer.color = randomColor;
         }
-
-        // // Alternatively, retrieve and set color for an Image component if used instead
-        // Image image = GetComponent<Image>();
-        // if (image != null)
-        // {
-        //     image.color = randomColor;
-        // }
 
         // Retrieve the Light2D component and set its color
         Light2D light2D = GetComponent<Light2D>();
@@ -58,26 +80,28 @@ public class SparkleScript : MonoBehaviour
 
     void Start()
     {
-        // Add a Rigidbody2D component dynamically if not already added
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (setParent) {
+            gameObject.transform.SetParent(GameObject.Find("Platform A").transform);
+        }
 
-        // Calculate a random angle and force
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         float angle = GetRandomAngle(minAngle, maxAngle);
         float force = Random.Range(minLaunchForce, maxLaunchForce);
-
-        // Convert angle to radians and then to a direction vector
         Vector2 launchDirection = AngleToVector2(angle);
 
-        // Align object rotation with launch direction
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        // Apply random color
+        SetRandomColor();
+
+        // Align object rotation with the launch direction if enabled
+        if (alignRotation)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(launchDirection.y, launchDirection.x) * Mathf.Rad2Deg) + rotationOffset);
+        }
 
         // Apply the force in the calculated direction
         rb.AddForce(launchDirection * force, ForceMode2D.Impulse);
-
-        // Random color
-        SetRandomColor();
     }
-    // Update is called once per frame
+
     void Update()
     {
         
