@@ -109,8 +109,12 @@ MonoBehaviour:
   - {fileID: 1187152144, guid: 50d6694c7e725434c824bef5b4d0923e, type: 3}
   - {fileID: 603656139, guid: 50d6694c7e725434c824bef5b4d0923e, type: 3}
   frameRate: 0.10625
+  useSecondaryAnimation: 0
+  secondaryFrames: []
+  secondaryFrameRate: 0.1
   singleShot: 0
   isSprite: 1
+  currentFrame: 0
 --- !u!114 &5463446841291720128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +144,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entrySpeed: 0.425
+  targetVolumeIn: 0.25
+  rampDuration: 6
+  prefabToSpawn: {fileID: 6302066617068866306, guid: 32150a7224aab4e8582413d2b757e1bc, type: 3}
+  spawnPosition: {x: -0.21000001, y: 10, z: 0}
+  spawnInterval: 1
+  randomFactor: 0.5
 --- !u!1 &5658961468172317997
 GameObject:
   m_ObjectHideFlags: 0

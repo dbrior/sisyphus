@@ -1,16 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
+// using UnityEngine.Experimental.Rendering.Universal;
 
 public class SpriteAnimatorUI : MonoBehaviour
 {
     public Sprite[] frames;           // Array of sprites to animate
     public float frameRate = 0.1f;    // Time between frames
+    public bool useSecondaryAnimation = false;
+    public Sprite[] secondaryFrames;
+    public float secondaryFrameRate = 0.1f;
+    
     public bool singleShot = false;   // Should the animation play only once?
     public bool isSprite = true;      // Is the component a SpriteRenderer?
     private Image imageComponent;     // Image component to display the sprites
     private SpriteRenderer spriteComponent; // SpriteRenderer to display the sprites
 
-    private int currentFrame;         // Track the current frame index
+    public int currentFrame;         // Track the current frame index
     private float timer;              // Timer to manage animation speed
     private bool hasFired;            // Flag to check if single-shot animation has played
 
@@ -21,6 +27,9 @@ public class SpriteAnimatorUI : MonoBehaviour
         } else {
             imageComponent = GetComponent<Image>();
         }
+        // if (hasSpriteLight) {
+        //     spriteLight = GetComponent<Light2D>();
+        // }
     }
 
     void FixedUpdate()
@@ -29,15 +38,15 @@ public class SpriteAnimatorUI : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if (timer >= frameRate)
+            if ((!useSecondaryAnimation && timer >= frameRate) || (useSecondaryAnimation && timer >= secondaryFrameRate))
             {
-                if (currentFrame < frames.Length)
+                if ((!useSecondaryAnimation && currentFrame < frames.Length) || (useSecondaryAnimation && currentFrame < secondaryFrames.Length))
                 {
                     UpdateSpriteFrame();
                     currentFrame++;
                 }
 
-                if (currentFrame >= frames.Length)
+                if ((!useSecondaryAnimation && currentFrame >= frames.Length) || (useSecondaryAnimation && currentFrame >= secondaryFrames.Length))
                 {
                     if (singleShot)
                     {
@@ -50,20 +59,35 @@ public class SpriteAnimatorUI : MonoBehaviour
                     }
                 }
 
-                timer -= frameRate; // Reset the timer
+                if (!useSecondaryAnimation) {
+                    timer -= frameRate; // Reset the timer
+                } else {
+                    timer -= secondaryFrameRate; // Reset the timer
+                }
             }
         }
     }
 
     private void UpdateSpriteFrame()
     {
-        if (isSprite && spriteComponent != null)
-        {
-            spriteComponent.sprite = frames[currentFrame];
-        }
-        else if (imageComponent != null)
-        {
-            imageComponent.sprite = frames[currentFrame];
+        if (!useSecondaryAnimation) {
+            if (isSprite && spriteComponent != null)
+            {
+                spriteComponent.sprite = frames[currentFrame];
+            }
+            else if (imageComponent != null)
+            {
+                imageComponent.sprite = frames[currentFrame];
+            }
+        } else {
+            if (isSprite && spriteComponent != null)
+            {
+                spriteComponent.sprite = secondaryFrames[currentFrame];
+            }
+            else if (imageComponent != null)
+            {
+                imageComponent.sprite = secondaryFrames[currentFrame];
+            }
         }
     }
 

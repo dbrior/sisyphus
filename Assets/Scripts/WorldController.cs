@@ -60,7 +60,7 @@ public class WorldController : MonoBehaviour
     private float clickRate = 0.0f;
     private float currAccumulatedDelta = 0.0f;
     private float nextSpawnTime;
-    private float currScore = 0.0f;
+    public float currScore = 0.0f;
     private float terrainAngle;
     private List<float> inputTimestamps = new List<float>();
     private SpriteRenderer pushingSpriteRenderer;
@@ -428,6 +428,7 @@ public class WorldController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log(currScore);
         float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
         RotateLight(distanceDelta);
 
