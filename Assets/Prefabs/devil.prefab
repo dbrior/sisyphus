@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
-  speed: 0.25
+  speed: 1
   smoothTime: 0.3
   centerPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &7724902570203724685
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c1be9e996c9445ca2cbada31cf4c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entrySpeed: 4
+  entrySpeed: 0.425
 --- !u!1 &5658961468172317997
 GameObject:
   m_ObjectHideFlags: 0
