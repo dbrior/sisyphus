@@ -23,9 +23,9 @@ public class Devil : MonoBehaviour
 
     void Start()
     {
-        spawnSound.Play();
+        scoreBlip.mute = true;
+        // spawnSound.Play();
         bossMusic.Play();
-        bossMusic.mute = true;
         transform.position = new Vector3(0, -5, 0);
     }
 
@@ -40,8 +40,6 @@ public class Devil : MonoBehaviour
                 hasCentered = true;
                 gameObject.GetComponent<RandomBobbing>().centerPosition = targetTransform.position;
                 SendMessage("OnCentered");
-                bossMusic.mute = false;
-                scoreBlip.mute = true;
             }
         }
     }
