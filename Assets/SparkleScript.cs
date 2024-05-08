@@ -15,6 +15,7 @@ public class SparkleScript : MonoBehaviour
     public bool setParent = false;
     private Transform parentObject;
     public AudioSource collisionSound;
+    public WorldController worldController;
 
     float GetRandomAngle(float min, float max)
     {
@@ -43,7 +44,7 @@ public class SparkleScript : MonoBehaviour
         SwitchToSecondaryAnimation();
         transform.position = new Vector3(transform.position.x, transform.position.y-0.5f, transform.position.z);
         collisionSound.Play();
-        WorldController.points -= 100.0f;
+        worldController.points -= 100.0f;
     }
 
     Vector2 AngleToVector2(float angle)
