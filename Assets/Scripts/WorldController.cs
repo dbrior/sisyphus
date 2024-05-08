@@ -60,7 +60,7 @@ public class WorldController : MonoBehaviour
     private float clickRate = 0.0f;
     private float currAccumulatedDelta = 0.0f;
     private float nextSpawnTime;
-    public float currScore = 0.0f;
+    public static float currScore = 0.0f;
     private float terrainAngle;
     private List<float> inputTimestamps = new List<float>();
     private SpriteRenderer pushingSpriteRenderer;
@@ -76,7 +76,7 @@ public class WorldController : MonoBehaviour
     public TextMeshProUGUI autoUpgradeText;
     public TextMeshProUGUI autoStrengthUpgradeText;
     public TextMeshProUGUI autoClickUpgradeText;
-    public float points = 0.0f;
+    public static float points = 0.0f;
     private float sisMaxTerrainAngle = 8.0f;
     private float baseClickRate = 0.0f;
     public AudioSource purchaseSound;
@@ -379,7 +379,7 @@ public class WorldController : MonoBehaviour
     void UpdateScore(float distanceDelta) {
         currScore += distanceDelta / deltaScoreRatio;
         currAccumulatedDelta += distanceDelta / deltaScoreRatio;
-        scoreText.text = Mathf.Floor(currScore).ToString();
+        // scoreText.text = Mathf.Floor(currScore).ToString();
         if (currScore > maxScore) {
             PlayerPrefs.SetFloat("Max Score", currScore);
             PlayerPrefs.Save();

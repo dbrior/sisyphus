@@ -65,7 +65,6 @@ public class Devil : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval + Random.Range(-randomFactor, randomFactor));
             GameObject fireball = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
             fireball.GetComponent<SparkleScript>().collisionSound = collisionSound;
-            fireball.GetComponent<SparkleScript>().worldController = worldController;
             Destroy(fireball, 5.0f);
         }
     }
