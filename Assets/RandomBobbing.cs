@@ -36,6 +36,11 @@ public class RandomBobbing : MonoBehaviour
         }
     }
 
+    void OnComplete()
+    {
+        startBobbing = false;
+    }
+
     void OnCentered()
     {
         startBobbing = true;

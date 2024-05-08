@@ -17,8 +17,13 @@ public class Devil : MonoBehaviour
     public Vector3 spawnPosition; // The fixed position to spawn at
     public float spawnInterval = 5.0f; // Base interval in seconds
     public float randomFactor = 2.0f; // Randomness factor
+    public float duration = 60.0f;
+    private float lifetime = 0.0f;
     private WorldController worldController;
     private AudioSource collisionSound;
+    private bool spawnFireballs = false;
+    private bool cycleComplete = false;
+    private Vector3 exitLocation;
 
     void Awake()
     {
@@ -39,6 +44,7 @@ public class Devil : MonoBehaviour
         // spawnSound.Play();
         bossMusic.Play();
         transform.position = new Vector3(0, -5, 0);
+        exitLocation = transform.position;
         StartCoroutine(RampVolume(bossMusic, baseMusic));
     }
 
@@ -51,16 +57,46 @@ public class Devil : MonoBehaviour
             if (Vector3.Distance(transform.position, targetTransform.position) < 0.01f)
             {
                 hasCentered = true;
+                spawnFireballs = true;
                 StartCoroutine(SpawnPrefabsAtInterval());
                 gameObject.GetComponent<RandomBobbing>().centerPosition = targetTransform.position;
                 SendMessage("OnCentered");
             }
+        } else if (cycleComplete)
+        {
+            if (transform.position == exitLocation) {
+                SendMessage("Exiting");
+            }
+            transform.position = Vector3.MoveTowards(transform.position, exitLocation, entrySpeed * Time.deltaTime * 2.0f);
         }
+        else
+        {
+            lifetime += Time.deltaTime;
+
+            if (lifetime >= duration)
+            {
+                SendMessage("OnComplete");  
+            }
+        }
+    }
+
+    void Exiting()
+    {
+        bossMusic.Stop();
+        Destroy(gameObject);
+    }
+
+    void OnComplete()
+    {
+        scoreBlip.mute = false;
+        cycleComplete = true;
+        spawnFireballs = false;
+        StartCoroutine(RampVolume(baseMusic, bossMusic));
     }
 
     IEnumerator SpawnPrefabsAtInterval()
     {
-        while (true)
+        while (spawnFireballs)
         {
             yield return new WaitForSeconds(spawnInterval + Random.Range(-randomFactor, randomFactor));
             GameObject fireball = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
