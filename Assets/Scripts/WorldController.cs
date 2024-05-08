@@ -90,6 +90,8 @@ public class WorldController : MonoBehaviour
     public AudioSource blipAudio;
     public Transform SprocketSpawn;
     public GameObject devilPrefab;
+    private bool startedFirstStage = false;
+    private float devilSpawnDistance;
     
 
     // Sisyphus skills
@@ -394,8 +396,10 @@ public class WorldController : MonoBehaviour
         for (float i=-5.0f; i<5.0f; i+=1.0f) {
             SpawnCloud(i);
         }
-        UpdateStrengthUpgrade(10);
-        UpdateClickUpgrade(10);
+
+        devilSpawnDistance = 1000.0f + Random.Range(0.0f, 1000.0f);
+        // UpdateStrengthUpgrade(10);
+        // UpdateClickUpgrade(10);
     }
 
     void Update() 
@@ -435,6 +439,13 @@ public class WorldController : MonoBehaviour
         // if(ShouldSpawnBird()) {
         //     SpawnBird();
         // }
+
+        if (!startedFirstStage && currScore >= devilSpawnDistance)
+        {
+            GameObject devilObject = Instantiate(devilPrefab);
+            devilObject.transform.position = new Vector2(0.0f, -4.0f);
+            startedFirstStage = true;
+        }
 
         pointsText.text = numberFormatter(points);
         pointsText.color = colorFormatter(points);
