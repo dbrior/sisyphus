@@ -379,7 +379,7 @@ public class WorldController : MonoBehaviour
     void UpdateScore(float distanceDelta) {
         currScore += distanceDelta / deltaScoreRatio;
         currAccumulatedDelta += distanceDelta / deltaScoreRatio;
-        // scoreText.text = Mathf.Floor(currScore).ToString();
+        scoreText.text = Mathf.Floor(currScore).ToString();
         if (currScore > maxScore) {
             PlayerPrefs.SetFloat("Max Score", currScore);
             PlayerPrefs.Save();
