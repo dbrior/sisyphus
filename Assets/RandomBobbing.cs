@@ -9,7 +9,7 @@ public class RandomBobbing : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 velocity = Vector3.zero;
     private float timeOffset;
-    private bool startBobbing = false;
+    public bool startBobbing = false;
     private float lastUpdateTime = 0;
     private float updateInterval = 0.1f; // Update target position every 0.1 seconds
 
