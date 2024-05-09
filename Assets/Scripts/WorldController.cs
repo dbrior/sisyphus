@@ -382,6 +382,7 @@ public class WorldController : MonoBehaviour
     
     void Start()
     {
+        Application.targetFrameRate = 60;
         // currScore = 2000.0f;
         maxScore = PlayerPrefs.GetFloat("Max Score", 0.0f);
         maxScore = 0.0f;
