@@ -131,6 +131,7 @@ MonoBehaviour:
   speed: 1
   smoothTime: 0.3
   centerPosition: {x: 0, y: 0, z: 0}
+  startBobbing: 0
 --- !u!114 &7724902570203724685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +151,7 @@ MonoBehaviour:
   spawnPosition: {x: -0.21000001, y: 10, z: 0}
   spawnInterval: 1
   randomFactor: 0.5
-  duration: 60
+  duration: 45
 --- !u!1 &5658961468172317997
 GameObject:
   m_ObjectHideFlags: 0

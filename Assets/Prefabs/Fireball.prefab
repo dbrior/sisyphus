@@ -195,12 +195,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minLaunchForce: 1
   maxLaunchForce: 3
-  minAngle: 160
-  maxAngle: 200
+  minAngle: 170
+  maxAngle: 190
   randomizeColor: 0
   alignRotation: 1
   rotationOffset: 135
   setParent: 0
+  collisionSound: {fileID: 0}
+  worldController: {fileID: 0}
 --- !u!50 &-4957633765396177591
 Rigidbody2D:
   serializedVersion: 4
@@ -260,6 +262,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.125, y: -0.12}
+  m_Offset: {x: -0.1, y: -0.09}
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.093198426

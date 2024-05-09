@@ -397,7 +397,7 @@ public class WorldController : MonoBehaviour
             SpawnCloud(i);
         }
 
-        devilSpawnDistance = 1000.0f + Random.Range(0.0f, 1000.0f);
+        devilSpawnDistance = 500.0f + Random.Range(0.0f, 1000.0f);
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
     }
