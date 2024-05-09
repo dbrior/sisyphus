@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Upgrade : MonoBehaviour
 {
@@ -12,9 +13,13 @@ public class Upgrade : MonoBehaviour
     public TextMeshProUGUI upgradeCountUI;
     public TextMeshProUGUI upgradeCostUI;
     public TextMeshProUGUI upgradeValueUI;
+    public Image iconImage;
+    public Material grayscaleMaterial;
+    public GameObject grayscaleCover;
 
     private int upgradeCount;
     private WorldController controller;
+    private bool hidden = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +33,15 @@ public class Upgrade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (hidden && controller.points >= cost) {
+            iconImage.material = null;
+            grayscaleCover.SetActive(false);
+            hidden = false;
+        } else if (!hidden && controller.points < cost) {
+            iconImage.material = grayscaleMaterial;
+            grayscaleCover.SetActive(true);
+            hidden = true;
+        }
     }
 
     public void Pressed()
