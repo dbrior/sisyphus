@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering.Universal;
 
-public class WorldController : MonoBehaviour
+public class WorldController : Singleton<WorldController>
 {
     [Header("Sprites:")]
     public GameObject backgroundA;
@@ -92,6 +92,9 @@ public class WorldController : MonoBehaviour
     public GameObject devilPrefab;
     private bool startedFirstStage = false;
     private float devilSpawnDistance;
+    public float animationSpeed;
+    public bool isMoving;
+    public float rawClickRate;
     
 
     // Sisyphus skills
@@ -295,7 +298,6 @@ public class WorldController : MonoBehaviour
         }
     }
     private void SetSpriteAnimationSpeed(float clickRate) {
-        float animationSpeed = GetAnimationSpeed(clickRate);
         if (clickRate > 0) {
             pushingSpriteRenderer.sortingOrder = 5;
             pushingSpriteAnimator.speed = animationSpeed;
@@ -389,7 +391,9 @@ public class WorldController : MonoBehaviour
         pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();
         pushingSpriteAnimator = pushingSprite.GetComponent<Animator>(); 
 
-        idleSpriteRenderer = idleSprite.GetComponent<SpriteRenderer>(); 
+        idleSpriteRenderer = idleSprite.GetComponent<SpriteRenderer>();
+
+        animationSpeed = GetAnimationSpeed(0.0f);
 
         // Initialization
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
@@ -405,7 +409,7 @@ public class WorldController : MonoBehaviour
 
     void Update() 
     {
-        float rawClickRate = CalculateClickRate();
+        rawClickRate = CalculateClickRate();
         light.intensity = (rawClickRate / 25.0f) * 32;
         // sisGlow.intensity = (rawClickRate / 25) * 16;
         clickRate = rawClickRate + baseClickRate;     // clickRate determines the speed of the game
@@ -419,6 +423,10 @@ public class WorldController : MonoBehaviour
         points = Mathf.Max(0.0f, points);
         float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
         RotateLight(distanceDelta);
+
+        isMoving = clickRate > 0.0f;
+
+        animationSpeed = GetAnimationSpeed(clickRate);
 
         if (baseClickRate != 0 && (Time.time - sprocketTimestamp >= (1 / baseClickRate))) {
             GameObject sparkle = Instantiate(sparklePrefab, SprocketSpawn.position, Quaternion.identity);
