@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Upgrade : MonoBehaviour
 {
@@ -16,11 +17,13 @@ public class Upgrade : MonoBehaviour
     public Image iconImage;
     public Material grayscaleMaterial;
     public GameObject grayscaleCover;
+    public UnityEvent onPurchase;
+    
 
     private int upgradeCount;
     private WorldController controller;
     private bool hidden = true;
-    // Start is called before the first frame update
+
     void Start()
     {
         controller = GameObject.Find("Main Grid").GetComponent<WorldController>();
@@ -28,9 +31,10 @@ public class Upgrade : MonoBehaviour
         upgradeCostUI.text = "COST: " + cost.ToString();
         upgradeCountUI.text = upgradeCount.ToString();
         upgradeValueUI.text = "CPS: " + value.ToString();
+
+        if (onPurchase == null) onPurchase = new UnityEvent();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (hidden && controller.points >= cost) {
@@ -67,6 +71,8 @@ public class Upgrade : MonoBehaviour
             {
                 upgradeCountObject.SetActive(true);
             }
+
+            onPurchase.Invoke();
         }
     }
 
