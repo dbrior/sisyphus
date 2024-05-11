@@ -95,7 +95,21 @@ public class WorldController : Singleton<WorldController>
     public float animationSpeed;
     public bool isMoving;
     public float rawClickRate;
-    
+    public Transform dewieSpawn;
+    public GameObject dewiePrefab;
+    private bool dewieSpawned = false;
+
+    public void SpawnDewie()
+    {
+        if (!dewieSpawned)
+        {
+            GameObject dewie = Instantiate(dewiePrefab);
+            dewie.transform.position = dewieSpawn.position;
+            // dewie.transform.rotation = dewieSpawn.rotation;
+            // dewie.transform.scale = dewieSpawn.scale;
+            dewieSpawned = true;
+        }
+    }
 
     // Sisyphus skills
     public void increaseSisMaxTerrainAngle() {
