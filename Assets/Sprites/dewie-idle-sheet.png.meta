@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 490e1f43ae9514c45842b1bfac054b50
+guid: 386379897511b446290cac39af498f48
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sitting-sheet-export_0
+      name: dewie-idle-sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 602f607cea4e74617a01f00576577e26
-      internalID: 2018215932
+      spriteID: 1e6f4df51bbba48cab5f034fb1cb2b2e
+      internalID: 909730821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sitting-sheet-export_1
+      name: dewie-idle-sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -158,8 +158,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae98a540ca6264bb2b85d991c4931dbe
-      internalID: -613756104
+      spriteID: e6d6c8ed752cc4b1cb0e921be06718f5
+      internalID: 888220595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-idle-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f36ee077101a49a885ba436e5460b3e
+      internalID: 411998788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-idle-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13e39d8535f214dc78d45ba1caf2d3db
+      internalID: -544101327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-idle-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a8138a9d96c24e6bbf19b349674a2fe
+      internalID: -2144919688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-idle-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6686b6dde9635403b9ad48a9fe776dfc
+      internalID: -1302618112
       vertices: []
       indices: 
       edges: []
@@ -175,8 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sitting-sheet-export_0: 2018215932
-      sitting-sheet-export_1: -613756104
+      dewie-idle-sheet_0: 909730821
+      dewie-idle-sheet_1: 888220595
+      dewie-idle-sheet_2: 411998788
+      dewie-idle-sheet_3: -544101327
+      dewie-idle-sheet_4: -2144919688
+      dewie-idle-sheet_5: -1302618112
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

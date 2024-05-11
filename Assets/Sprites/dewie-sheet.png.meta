@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4308839d382154ca69e19427344d60a1
+guid: 4e36810f588fa43f18f4eb301fe71b9c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sisIdleOutline_0
+      name: dewie-sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be37d2d0db6c645c18f8ecf8867f2a95
-      internalID: 1856454855
+      spriteID: 6f6d61b5a43bf411bbab8c11724167b3
+      internalID: 1395228212
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisIdleOutline_1
+      name: dewie-sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8c86afcc39394a50b7568b14b521964
-      internalID: 796311507
+      spriteID: c2c526de33013450c99449f1deef94a9
+      internalID: -263290562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisIdleOutline_2
+      name: dewie-sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83589ae0ee8764af9b0c01d559f9a934
-      internalID: 1369462606
+      spriteID: 94b870cc324d84509915bc26012a3325
+      internalID: -1563738549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisIdleOutline_3
+      name: dewie-sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -200,8 +200,155 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00ca6f7704f854a1097b910567d718c4
-      internalID: 434984678
+      spriteID: 503dfe5d3eeb84a79812c201f775d3b7
+      internalID: 874395496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe7aa79c6066b43e89e35ce2da2abc0f
+      internalID: 174754056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6731b0054fb647f782b6e3f415fa994
+      internalID: 1463173230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73276c8aa0daf48278c7b513ea4048eb
+      internalID: -676636564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a2ebf6d649444bdba156c537354ffde
+      internalID: 836164858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 135d84b2c5396405f8caf1b980d0030d
+      internalID: 337021362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-sheet_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ad28425882cb4311a65d9896d38382c
+      internalID: 799997490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dewie-sheet_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e40de6d19f1b444da876e4605eff7561
+      internalID: -1658754736
       vertices: []
       indices: 
       edges: []
@@ -217,10 +364,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sisIdleOutline_0: 1856454855
-      sisIdleOutline_1: 796311507
-      sisIdleOutline_2: 1369462606
-      sisIdleOutline_3: 434984678
+      dewie-sheet_0: 1395228212
+      dewie-sheet_1: -263290562
+      dewie-sheet_10: -1658754736
+      dewie-sheet_2: -1563738549
+      dewie-sheet_3: 874395496
+      dewie-sheet_4: 174754056
+      dewie-sheet_5: 1463173230
+      dewie-sheet_6: -676636564
+      dewie-sheet_7: 836164858
+      dewie-sheet_8: 337021362
+      dewie-sheet_9: 799997490
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
