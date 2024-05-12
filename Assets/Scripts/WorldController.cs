@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 public class WorldController : Singleton<WorldController>
 {
+    public TMP_FontAsset globalFont;
     [Header("Sprites:")]
     public GameObject backgroundA;
     public GameObject backgroundB;
@@ -98,6 +99,15 @@ public class WorldController : Singleton<WorldController>
     public Transform dewieSpawn;
     public GameObject dewiePrefab;
     private bool dewieSpawned = false;
+    public RectTransform lostPointsTargetTransform;
+    public RectTransform lostPointsSpawnTransform;
+    public GameObject lostPointsPrefab;
+    public void SpawnLostPoints(int amount)
+    {
+        GameObject lostPoints = Instantiate(lostPointsPrefab);
+        lostPoints.GetComponent<TextMeshPro>().text = "-" + amount.ToString();
+        lostPoints.transform.position = lostPointsSpawnTransform.position;
+    }
 
     public void SpawnDewie()
     {
@@ -398,6 +408,13 @@ public class WorldController : Singleton<WorldController>
     
     void Start()
     {
+        // Set Font
+        var tmpTexts = FindObjectsOfType<TMP_Text>();
+        foreach (TMP_Text tmpText in tmpTexts)
+        {
+            tmpText.font = globalFont;
+        }
+
         Application.targetFrameRate = 60;
         // currScore = 2000.0f;
         maxScore = PlayerPrefs.GetFloat("Max Score", 0.0f);
@@ -416,7 +433,7 @@ public class WorldController : Singleton<WorldController>
             SpawnCloud(i);
         }
 
-        devilSpawnDistance = 500.0f + Random.Range(0.0f, 1000.0f);
+        devilSpawnDistance = 500.0f + Random.Range(0.0f, 500.0f);
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
     }
