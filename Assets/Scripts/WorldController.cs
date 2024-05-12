@@ -102,6 +102,7 @@ public class WorldController : Singleton<WorldController>
     public RectTransform lostPointsTargetTransform;
     public RectTransform lostPointsSpawnTransform;
     public GameObject lostPointsPrefab;
+    public GameObject boulder;
     public void SpawnLostPoints(int amount)
     {
         GameObject lostPoints = Instantiate(lostPointsPrefab);
@@ -467,6 +468,8 @@ public class WorldController : Singleton<WorldController>
             blipAudio.pitch = 1 + pitchModifier;
             blipAudio.Play();
         }
+
+        boulder.transform.eulerAngles = new Vector3(boulder.transform.eulerAngles.x, boulder.transform.eulerAngles.y, boulder.transform.eulerAngles.z - (clickRate/ 10.0f));
 
         // Below rely on either clickRate or score
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
