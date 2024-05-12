@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
+// using UnityEditor.Animations;
 using UnityEngine.Rendering.Universal;
 
 public class Dewie : MonoBehaviour
 {
-    public AnimatorController idleController;
-    public AnimatorController runningController;
+    public RuntimeAnimatorController idleController;
+    public RuntimeAnimatorController runningController;
     public Light2D dewieGlow;
     private Animator animator;
 
