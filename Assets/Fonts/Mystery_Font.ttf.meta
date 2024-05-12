@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 0f28a28617d0d40c9b92fe0a4799ba7a
+guid: dd0adae11cc7842ab962eb370da5ed61
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 9
+  fontSize: 16
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Sis Font
+  - Mystery Font
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
