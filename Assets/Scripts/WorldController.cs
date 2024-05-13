@@ -157,6 +157,7 @@ public class WorldController : Singleton<WorldController>
     }
     public void increaseBaseClickRate(float amount) {
         baseClickRate += amount;
+        accumulatedTime = 0f;
     }
 
     // UI Toggle
@@ -211,7 +212,7 @@ public class WorldController : Singleton<WorldController>
         Color lerpedColor;
         float t;
         // Define RGB values (you can adjust these values as needed)
-        Color color_d = new Color(27/255, 22/255, 34/255); // Dark Purple
+        Color color_d = new Color(192f/255, 192f/255, 192f/255); // White
         Color mid = new Color(0.0f, 0.5f, 0.0f); // Greenish
         Color end = new Color(1.0f, 0.843f, 0.0f); // White
         // Define the range over which the color will change (1 to 1000 to 100000)
@@ -579,9 +580,9 @@ public class WorldController : Singleton<WorldController>
             GameObject sparkle = Instantiate(sparklePrefab, SprocketSpawn.position, Quaternion.identity);
             Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
             sprocketTimestamp = Time.time;
-            float pitchModifier = Random.Range(-0.75f, -0.2f);
-            blipAudio.pitch = 1 + pitchModifier;
-            blipAudio.Play();
+            // float pitchModifier = Random.Range(-0.75f, -0.2f);
+            // blipAudio.pitch = 1 + pitchModifier;
+            // blipAudio.Play();
         }
 
         // boulder.transform.eulerAngles = new Vector3(boulder.transform.eulerAngles.x, boulder.transform.eulerAngles.y, boulder.transform.eulerAngles.z - (clickRate/ 10.0f));
