@@ -295,42 +295,7 @@ public class WorldController : Singleton<WorldController>
     // Getting click rate
     private float CalculateClickRate()
     {
-        // Check for mouse clicks, keyboard presses, or screen taps
-        if (Input.anyKeyDown || Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
-        {
-            inputTimestamps.Add(Time.time);
-            boulder_rb.AddTorque(-1000.0f);
-        }
-
-        // Spawn tap sparkle
-        if (Input.anyKeyDown)
-        {
-            Vector3 spawnPosition;
-
-            // Check if the mouse button was clicked
-            if (Input.GetMouseButtonDown(0))
-            {
-                // Spawn at mouse position if mouse is clicked
-                spawnPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                spawnPosition.z = 0;  // Set z to 0 for 2D
-            }
-            else
-            {
-                // Spawn at default position if any other key is pressed
-                spawnPosition = new Vector3(SprocketSpawn.position.x, SprocketSpawn.position.y, 0);
-            }            
-            GameObject sparkle = Instantiate(sparklePrefab, spawnPosition, Quaternion.identity);
-            Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
-            float pitchModifier = Random.Range(-0.75f, -0.2f);
-            blipAudio.pitch = 1 + pitchModifier;
-            blipAudio.Play();
-        }
-
-        // Remove timestamps older than 30 seconds
         inputTimestamps.RemoveAll(timestamp => Time.time - timestamp > TimeWindow);
-
-        // Return the click rate
-        // return (inputTimestamps.Count / TimeWindow)*10;
         return inputTimestamps.Count / TimeWindow;
     }
 
@@ -488,9 +453,28 @@ public class WorldController : Singleton<WorldController>
         }
         return sum / angularVelocities.Count;
     }
+    void SpawnSparkle(Vector3 spawnPosition)
+    {
+        GameObject sparkle = Instantiate(sparklePrefab, spawnPosition, Quaternion.identity);
+        Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
+    }
+    void PlayClickSound()
+    {
+        float pitchModifier = Random.Range(-0.75f, -0.2f);
+        blipAudio.pitch = 1 + pitchModifier;
+        blipAudio.Play();
+    }
+    public void ManualClick(Vector3 clickLocation)
+    {
+        inputTimestamps.Add(Time.time);
+        boulder_rb.AddTorque(-1000.0f);
+
+        SpawnSparkle(clickLocation);
+        PlayClickSound();
+    }
     void AutoClick(int num_clicks)
     {
-        boulder_rb.AddTorque(-100.0f * num_clicks);
+        boulder_rb.AddTorque(-1000.0f * num_clicks);
     }
 
     void Update() 
