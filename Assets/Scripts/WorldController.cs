@@ -113,6 +113,9 @@ public class WorldController : Singleton<WorldController>
     private Vector2 velocity = Vector2.zero;
     private float previousAngularVelocity = 0f;
     private float angularAcceleration = 0f;
+    public float autoClicksPerSecond = 1;  // Example starting rate
+    private float accumulatedTime = 0.0f;
+
 
 
     public void SpawnLostPoints(int amount)
@@ -482,9 +485,28 @@ public class WorldController : Singleton<WorldController>
         }
         return sum / angularVelocities.Count;
     }
+    void AutoClick(int num_clicks)
+    {
+        boulder_rb.AddTorque(-100.0f * num_clicks);
+    }
 
     void Update() 
     {
+        // CLick function
+        // Calculate the number of clicks that should have occurred since the last frame
+        accumulatedTime += Time.deltaTime;
+        int clicksThisFrame = (int)(baseClickRate * accumulatedTime);
+
+        // Reset the accumulated time
+        if (clicksThisFrame > 0)
+        {
+            accumulatedTime -= clicksThisFrame / baseClickRate;
+        }
+
+        // Perform the click action however many times is necessary
+        AutoClick(clicksThisFrame);
+
+
         rawClickRate = CalculateClickRate();
         light.intensity = (rawClickRate / 25.0f) * 32;
         // sisGlow.intensity = (rawClickRate / 25) * 16;
@@ -530,7 +552,7 @@ public class WorldController : Singleton<WorldController>
         float angularAcceleration = (boulder_rb.angularVelocity - previousAngularVelocity) / Time.fixedDeltaTime;
         previousAngularVelocity = boulder_rb.angularVelocity;
 
-        float cameraOffset = angularAcceleration / 1000f;
+        float cameraOffset = angularAcceleration / -1000f;
 
         Vector2 cameraOffsetPosition = new Vector2(cameraOriginalPosition.x + cameraOffset, camera.transform.position.y);
         
