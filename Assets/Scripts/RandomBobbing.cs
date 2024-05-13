@@ -10,6 +10,7 @@ public class RandomBobbing : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private float timeOffset;
     public bool startBobbing = false;
+    public bool lockToX = false;
     private float lastUpdateTime = 0;
     private float updateInterval = 0.1f; // Update target position every 0.1 seconds
 
@@ -26,13 +27,19 @@ public class RandomBobbing : MonoBehaviour
             {
                 lastUpdateTime = Time.time;
                 float newX = Mathf.PerlinNoise(timeOffset + Time.time * speed, 0f) * 2 - 1;
-                float newY = Mathf.PerlinNoise(0f, timeOffset + Time.time * speed) * 2 - 1;
-                float newZ = Mathf.PerlinNoise(timeOffset + Time.time * speed, timeOffset + Time.time * speed) * 2 - 1;
+                float newY = 0f;
+                float newZ = 0f;
+                if (!lockToX)
+                {
+                    newY = Mathf.PerlinNoise(0f, timeOffset + Time.time * speed) * 2 - 1;
+                    newZ = Mathf.PerlinNoise(timeOffset + Time.time * speed, timeOffset + Time.time * speed) * 2 - 1;
+                }
+                
 
                 targetPosition = new Vector3(newX, newY, newZ) * radius + centerPosition;
             }
 
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+            transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPosition, ref velocity, smoothTime);
         }
     }
 

@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 9065157424224320240}
   - component: {fileID: 969072156193427976}
   - component: {fileID: 5565254628494071796}
+  - component: {fileID: -2799663887497238979}
   m_Layer: 0
   m_Name: Dewie
   m_TagString: Untagged
@@ -204,4 +205,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleController: {fileID: 9100000, guid: 34aedf12883ed4d1aa8a53ccdd804999, type: 2}
   runningController: {fileID: 9100000, guid: 1439e6f066d0242b6a836e1bb4df4642, type: 2}
+  color: {r: 1, g: 1, b: 1, a: 1}
   dewieGlow: {fileID: 5237559847523321482}
+  wander: 0
+--- !u!114 &-2799663887497238979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449591296631621636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323d26ffa1f5a435e8df735d105d1036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 2
+  speed: 0.1
+  smoothTime: 0.3
+  centerPosition: {x: 0, y: 0, z: 0}
+  startBobbing: 0
+  lockToX: 1
