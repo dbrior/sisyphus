@@ -99,6 +99,7 @@ public class WorldController : Singleton<WorldController>
     public bool isMoving;
     public float rawClickRate;
     public Transform dewieSpawn;
+    public Transform dewieGangSpawn;
     public GameObject dewiePrefab;
     private bool dewieSpawned = false;
     public RectTransform lostPointsTargetTransform;
@@ -115,6 +116,7 @@ public class WorldController : Singleton<WorldController>
     private float angularAcceleration = 0f;
     public float autoClicksPerSecond = 1;  // Example starting rate
     private float accumulatedTime = 0.0f;
+    private GameObject dewie;
 
 
 
@@ -129,7 +131,7 @@ public class WorldController : Singleton<WorldController>
     {
         if (!dewieSpawned)
         {
-            GameObject dewie = Instantiate(dewiePrefab);
+            dewie = Instantiate(dewiePrefab);
             dewie.transform.position = dewieSpawn.position;
             // dewie.transform.rotation = dewieSpawn.rotation;
             // dewie.transform.scale = dewieSpawn.scale;
@@ -557,7 +559,7 @@ public class WorldController : Singleton<WorldController>
 
         Vector2 cameraOffsetPosition = new Vector2(cameraOriginalPosition.x + cameraOffset, camera.transform.position.y);
         
-        Debug.Log(cameraOffset.ToString());
+        // Debug.Log(cameraOffset.ToString());
 
         Vector2 dampedPosition = Vector2.SmoothDamp(camera.transform.position, cameraOffsetPosition, ref velocity, 2f);
 
@@ -604,6 +606,24 @@ public class WorldController : Singleton<WorldController>
             GameObject devilObject = Instantiate(devilPrefab);
             devilObject.transform.position = new Vector2(0.0f, -4.0f);
             startedFirstStage = true;
+            if (dewieSpawned)
+            {
+                Destroy(dewie);
+                for (int i = 0; i<=5; i++)
+                {
+                    Dewie newDewie = Instantiate(dewiePrefab).GetComponent<Dewie>();
+                    newDewie.wander = true;
+                    newDewie.baseGlowIntensity = 2;
+                    newDewie.color = new Color(Random.value, Random.value, Random.value);
+                    newDewie.transform.SetParent(dewieGangSpawn.parent);
+                    // newDewie.UpdateColor(new Color(Random.value, Random.value, Random.value));
+                    newDewie.transform.localPosition = new Vector2(dewieGangSpawn.localPosition.x + Random.Range(-1f,1f), dewieGangSpawn.localPosition.y);
+                    RandomBobbing dewieBobber = newDewie.GetComponent<RandomBobbing>();
+                    dewieBobber.centerPosition = newDewie.transform.localPosition;
+                    dewieBobber.startBobbing = true;
+                    Debug.Log(newDewie.transform.position);
+                }
+            }
         }
 
         pointsText.text = numberFormatter(points);

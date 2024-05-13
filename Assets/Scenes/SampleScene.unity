@@ -5782,6 +5782,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983885058}
   m_CullTransparentMesh: 1
+--- !u!1 &1017234452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1017234453}
+  m_Layer: 0
+  m_Name: DewieGangSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1017234453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017234452}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.019936932, w: 0.9998013}
+  m_LocalPosition: {x: 0.295, y: -0.537, z: 0}
+  m_LocalScale: {x: -0.92445123, y: 0.92445123, z: 0.9244513}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1105420138}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1018748952
 GameObject:
   m_ObjectHideFlags: 0
@@ -6607,6 +6638,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1036110658}
+  - {fileID: 1017234453}
   - {fileID: 937977150}
   - {fileID: 296033537}
   - {fileID: 1208713025}
@@ -6699,6 +6731,7 @@ MonoBehaviour:
   isMoving: 0
   rawClickRate: 0
   dewieSpawn: {fileID: 1036110658}
+  dewieGangSpawn: {fileID: 1017234453}
   dewiePrefab: {fileID: 8449591296631621636, guid: 3042e87cee7f44062aff7a6db105fa0a, type: 3}
   lostPointsTargetTransform: {fileID: 1657845218}
   lostPointsSpawnTransform: {fileID: 1375791408}
@@ -10171,6 +10204,7 @@ GameObject:
   - component: {fileID: 1602483053}
   - component: {fileID: 1602483052}
   - component: {fileID: 1602483051}
+  - component: {fileID: 1602483054}
   m_Layer: 0
   m_Name: Boulder Display
   m_TagString: Untagged
@@ -10261,6 +10295,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 31
   m_TargetDisplay: 0
+--- !u!114 &1602483054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602483049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ef26224a65b40128a64b48cb09d339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 519420032}
 --- !u!1 &1625195036
 GameObject:
   m_ObjectHideFlags: 0
