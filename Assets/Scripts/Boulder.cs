@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Boulder : MonoBehaviour
 {
+    public float mass = 1.0f;
+    public float tapDecayMps2;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         foreach (ContactPoint2D contact in collision.contacts)
