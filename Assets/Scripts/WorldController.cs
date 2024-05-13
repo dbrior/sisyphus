@@ -59,7 +59,7 @@ public class WorldController : Singleton<WorldController>
     // Private
     private float lastSpawnTime = 0.0f;
 
-    private float maxScore = 0.0f;
+    public float maxScore = 0.0f;
     private float clickRate = 0.0f;
     private float currAccumulatedDelta = 0.0f;
     private float nextSpawnTime;
@@ -117,6 +117,7 @@ public class WorldController : Singleton<WorldController>
     public float autoClicksPerSecond = 1;  // Example starting rate
     private float accumulatedTime = 0.0f;
     private GameObject dewie;
+    public float speed;
 
 
 
@@ -338,7 +339,8 @@ public class WorldController : Singleton<WorldController>
         float angularVelocityRadians = boulder_rb.angularVelocity * Mathf.Deg2Rad;
 
         // Calculate linear distance traveled using the formula: distance = angular velocity * radius * time
-        float movement = angularVelocityRadians * (width) * Time.deltaTime * -10;
+        speed = angularVelocityRadians * (width) * -1;
+        float movement = speed * Time.deltaTime * 10;
         // Debug.Log(angularVelocityRadians.ToString());
 
         newPlatformAPosition = new Vector2(platformA.localPosition.x - movement, platformA.localPosition.y);
@@ -389,14 +391,14 @@ public class WorldController : Singleton<WorldController>
     void UpdateScore(float distanceDelta) {
         currScore += distanceDelta / deltaScoreRatio;
         currAccumulatedDelta += distanceDelta / deltaScoreRatio;
-        scoreText.text = Mathf.Floor(currScore).ToString();
+        // scoreText.text = Mathf.Floor(currScore).ToString();
         if (currScore > maxScore) {
             PlayerPrefs.SetFloat("Max Score", currScore);
             PlayerPrefs.Save();
             points += currScore - maxScore;
             maxScore = currScore;
         }
-        maxScoreText.text = Mathf.Floor(maxScore).ToString();
+        // maxScoreText.text = Mathf.Floor(maxScore).ToString();
     }
 
     float UpdateDistanceAndScore(float clickRate) {
@@ -499,7 +501,7 @@ public class WorldController : Singleton<WorldController>
         // sisGlow.intensity = (rawClickRate / 25) * 16;
         clickRate = rawClickRate + baseClickRate;     // clickRate determines the speed of the game
         // Debug.Log(clickRate);
-        maxClickRateText.text = Mathf.Floor(clickRate).ToString();
+        // maxClickRateText.text = Mathf.Floor(clickRate).ToString();
 
         // Remove the oldest data if the total time exceeds 10 seconds
         while (timeSum > TimeWindow)
@@ -610,10 +612,10 @@ public class WorldController : Singleton<WorldController>
             }
         }
 
-        pointsText.text = numberFormatter(points);
-        pointsText.color = colorFormatter(points);
-        pointsText.outlineWidth = 0.4f;
-        pointsText.outlineColor = new Color(27/255,22/255,34/255);
-        pointsText.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        // pointsText.text = numberFormatter(points);
+        // pointsText.color = colorFormatter(points);
+        // pointsText.outlineWidth = 0.4f;
+        // pointsText.outlineColor = new Color(27/255,22/255,34/255);
+        // pointsText.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }
