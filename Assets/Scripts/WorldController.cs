@@ -121,6 +121,7 @@ public class WorldController : Singleton<WorldController>
     public GameObject pointAdditionPrefab;
     public float critChance = 5f;
     public float critMultiplier = 2f;
+    public AudioSource rockHit;
 
 
     public void SpawnLostPoints(int amount)
@@ -491,12 +492,12 @@ public class WorldController : Singleton<WorldController>
             addition.textColor = new Color(255f/255, 110f/255, 0f/255, 1f);
             addition.fontSize = 1.5f;
             addition.fadeDuration = 1.5f;
+            rockHit.Play();
+        } else {
+            PlayClickSound();
         }
-        
-        Destroy(addition, 3f);
-
         SpawnSparkle(clickLocation);
-        PlayClickSound();
+        Destroy(addition, 2f);
     }
     void AutoClick(int num_clicks)
     {
