@@ -121,6 +121,12 @@ public class WorldController : Singleton<WorldController>
     public GameObject pointAdditionPrefab;
     public float critChance = 5f;
     public float critMultiplier = 2f;
+    public AudioSource rockHit;
+    public float gemSpawnDelta;
+    private float accumulatedGemDelta = 0f;
+    public GameObject gemPrefab;
+    public AudioSource gemSpawnSound;
+    public AudioSource gemCollectSound;
 
 
     public void SpawnLostPoints(int amount)
@@ -471,6 +477,17 @@ public class WorldController : Singleton<WorldController>
         blipAudio.pitch = 1 + pitchModifier;
         blipAudio.Play();
     }
+    public void AddPointTextSpawn(Vector3 clickLocation, string amount, Color color, float fontSize, float fadeDuration)
+    {
+        PointAddition addition = Instantiate(pointAdditionPrefab).GetComponent<PointAddition>();
+        addition.initialForce = Vector2.left * Random.Range(-50f,50f);
+        addition.text = "+" + amount;
+        addition.textColor = color;
+        addition.fontSize = fontSize;
+        addition.fadeDuration = fadeDuration;
+        addition.transform.position = clickLocation;
+        Destroy(addition, 2f);
+    }
     public void ManualClick(Vector3 clickLocation)
     {
         bool critical = Random.Range(0, 100) <= critChance;
@@ -482,21 +499,17 @@ public class WorldController : Singleton<WorldController>
 
         inputTimestamps.Add(Time.time);
         boulder_rb.AddTorque(-clickForce);
-        PointAddition addition = Instantiate(pointAdditionPrefab).GetComponent<PointAddition>();
-        addition.initialForce = Vector2.left * Random.Range(-50f,50f);
-        addition.text = "+" + (Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f).ToString("F1");
-        addition.transform.position = clickLocation;
+        
+        string pointString = (Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f).ToString("F1");
         if (critical)
         {
-            addition.textColor = new Color(255f/255, 110f/255, 0f/255, 1f);
-            addition.fontSize = 1.5f;
-            addition.fadeDuration = 1.5f;
+            AddPointTextSpawn(clickLocation, pointString, new Color(255f/255, 110f/255, 0f/255, 1f), 1.5f, 1.5f);
+            rockHit.Play();
+        } else {
+            AddPointTextSpawn(clickLocation, pointString, new Color(1f, 1f, 1f, 1f), 1f, 0.75f);
+            PlayClickSound();
         }
-        
-        Destroy(addition, 3f);
-
         SpawnSparkle(clickLocation);
-        PlayClickSound();
     }
     void AutoClick(int num_clicks)
     {
@@ -540,6 +553,24 @@ public class WorldController : Singleton<WorldController>
                 timeSum = 0;  // Reset time sum if no velocities are stored
                 break;
             }
+        }
+
+        // Spawn gems
+        if (accumulatedGemDelta >= gemSpawnDelta)
+        {
+            gemSpawnSound.Play();
+            GameObject gem = Instantiate(gemPrefab);
+            gem.transform.position = boulder.transform.position;
+            float randomForceModifier = Random.Range(-75f,75f);
+            Vector2 sideForce = Vector2.left * randomForceModifier;
+            gem.GetComponent<Rigidbody2D>().AddForce((Vector2.up*400f) + sideForce);
+            gem.GetComponent<Rigidbody2D>().AddTorque(randomForceModifier/20f);
+            Color color = new Color(Random.value, Random.value, Random.value);
+            gem.GetComponent<SpriteRenderer>().color = color;
+            gem.GetComponent<Light2D>().color = color;
+            accumulatedGemDelta = 0f;
+        } else {
+            accumulatedGemDelta += Time.deltaTime;
         }
     }
 
