@@ -12,12 +12,12 @@ TagManager:
   - Water
   - UI
   - IgnoreSurfaceNormal
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - EdgeColliders
+  - Gems
+  - Platforms
+  - Boulder
+  - Sisyphus
+  - Fireballs
   - 
   - 
   - 

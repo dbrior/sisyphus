@@ -16,6 +16,7 @@ public class SparkleScript : MonoBehaviour
     private Transform parentObject;
     public AudioSource collisionSound;
     public WorldController worldController;
+    private bool destroying = false;
 
     float GetRandomAngle(float min, float max)
     {
@@ -35,17 +36,26 @@ public class SparkleScript : MonoBehaviour
     }
     void OnMouseDown()
     {
-        SwitchToSecondaryAnimation();
+        if(!destroying)
+        {
+            destroying = true;
+            SwitchToSecondaryAnimation();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        GetComponent<Rigidbody2D>().simulated = false;
-        SwitchToSecondaryAnimation();
-        transform.position = new Vector3(transform.position.x, transform.position.y-0.5f, transform.position.z);
-        collisionSound.Play();
-        worldController.SpawnLostPoints(100);
-        worldController.points -= 100.0f;
+        Debug.Log($"OnCollisionEnter2D: {gameObject.name} has collided with {collision.gameObject.name}");
+        if (!destroying)
+        {
+            destroying = true;
+            GetComponent<Rigidbody2D>().simulated = false;
+            SwitchToSecondaryAnimation();
+            transform.position = new Vector3(transform.position.x, transform.position.y-0.5f, transform.position.z);
+            collisionSound.Play();
+            worldController.SpawnLostPoints(100);
+            worldController.points -= 100.0f;
+        }
     }
 
     Vector2 AngleToVector2(float angle)
