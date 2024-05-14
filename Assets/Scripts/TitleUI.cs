@@ -61,15 +61,15 @@ public class TitleUI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Time.time - lastUpdateTime > updateInterval)
-        {
-            lastUpdateTime = Time.time;
-            float newX = Mathf.PerlinNoise(timeOffset + Time.time * speed, 0f) * 2 - 1;
-            float newY = Mathf.PerlinNoise(0f, timeOffset + Time.time * speed) * 2 - 1;
+        // if (Time.time - lastUpdateTime > updateInterval)
+        // {
+        //     lastUpdateTime = Time.time;
+        //     float newX = Mathf.PerlinNoise(timeOffset + Time.time * speed, 0f) * 2 - 1;
+        //     float newY = Mathf.PerlinNoise(0f, timeOffset + Time.time * speed) * 2 - 1;
 
-            targetPosition = new Vector2(newX, newY) * radius + centerPosition;
-        }
+        //     targetPosition = new Vector2(newX, newY) * radius + centerPosition;
+        // }
 
-        rectTransform.anchoredPosition = Vector2.SmoothDamp(rectTransform.anchoredPosition, targetPosition, ref velocity, smoothTime);
+        // rectTransform.anchoredPosition = Vector2.SmoothDamp(rectTransform.anchoredPosition, targetPosition, ref velocity, smoothTime);
     }
 }

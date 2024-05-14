@@ -13,6 +13,6 @@ public class PointsUI : MonoBehaviour
 
     void Update()
     {
-        textUI.text = "$" + WorldController.Instance.points.ToString("F0");
+        textUI.text = WorldController.Instance.points.ToString("F0");
     }
 }
