@@ -9,15 +9,33 @@ public class ClickShrinkEffect : MonoBehaviour
     private bool isShrinking = false;  // Track if we should be shrinking
     public float shrinkDuration = 0.5f;  // Duration to complete one cycle (shrink and grow back)
     private float timeSinceStarted = 0f;  // Track time since the animation started
-
+    private Collider2D collider;
+    private bool pressed = false;
     void Start()
     {
         originalScale = transform.localScale;  // Store the original scale
         targetScale = originalScale * scaleFactor;  // Target scale is 80% of the original
+        collider = GetComponent<Collider2D>();
     }
 
     void Update()
     {
+        if (Input.touchCount > 0)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Began)
+                {
+                    Vector3 touchPosWorld = Camera.main.ScreenToWorldPoint(touch.position);
+                    touchPosWorld.z = 0;
+                    
+                    if (collider.OverlapPoint(touchPosWorld))
+                    {
+                        Touched(touchPosWorld);
+                    }
+                }
+            }
+        }
         // if (isShrinking)
         // {
         //     // Increment time since started
@@ -43,23 +61,10 @@ public class ClickShrinkEffect : MonoBehaviour
         //     }
         // }
     }
-
-    private void OnMouseDown()
+    private void Touched(Vector3 touchLocation)
     {
-        Vector3 clickLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        clickLocation.z = 0;
-        WorldController.Instance.ManualClick(clickLocation);
-
+        WorldController.Instance.ManualClick(touchLocation);
         transform.localScale = Vector3.Lerp(originalScale, targetScale, 1f);
-
-        // isShrinking = true;
-        // timeSinceStarted = 0f;
-
-        // if (!isShrinking)  // Only allow new shrink if not already shrinking
-        // {
-        //     isShrinking = true;
-        //     timeSinceStarted = 0f;
-        // }
     }
     private void OnMouseUp()
     {

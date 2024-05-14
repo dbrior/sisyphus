@@ -118,7 +118,9 @@ public class WorldController : Singleton<WorldController>
     private float accumulatedTime = 0.0f;
     private GameObject dewie;
     public float speed;
-
+    public GameObject pointAdditionPrefab;
+    public float critChance = 5f;
+    public float critMultiplier = 2f;
 
 
     public void SpawnLostPoints(int amount)
@@ -325,6 +327,13 @@ public class WorldController : Singleton<WorldController>
     private void RotateLight(float distanceDelta) {
         lightWheel.transform.eulerAngles = new Vector3(lightWheel.transform.eulerAngles.x, lightWheel.transform.eulerAngles.y, lightWheel.transform.eulerAngles.z - (distanceDelta * timeFactor));   
     }
+    float GetBoulderSpeed()
+    {
+        float width = boulder_rb.transform.localScale.x;
+        float angularVelocityRadians = boulder_rb.angularVelocity * Mathf.Deg2Rad;
+
+        return angularVelocityRadians * (width) * -1;;
+    }
 
     // Moving platforms & adjust score accordingly
     private float MovePlatforms(float clickRate) {
@@ -334,14 +343,10 @@ public class WorldController : Singleton<WorldController>
         Vector2 newPlatformAPosition;
         Vector2 newPlatformBPosition;
 
-        // float width = boulder_sr.bounds.size.x;
-        float width = boulder_rb.transform.localScale.x;
-        float angularVelocityRadians = boulder_rb.angularVelocity * Mathf.Deg2Rad;
-
-        // Calculate linear distance traveled using the formula: distance = angular velocity * radius * time
-        speed = angularVelocityRadians * (width) * -1;
-        float movement = speed * Time.deltaTime * 10;
+        speed = GetBoulderSpeed();
         // Debug.Log(angularVelocityRadians.ToString());
+
+        float movement = speed * Time.deltaTime * 10;
 
         newPlatformAPosition = new Vector2(platformA.localPosition.x - movement, platformA.localPosition.y);
         newPlatformBPosition = new Vector2(platformB.localPosition.x - movement, platformB.localPosition.y);
@@ -468,8 +473,27 @@ public class WorldController : Singleton<WorldController>
     }
     public void ManualClick(Vector3 clickLocation)
     {
+        bool critical = Random.Range(0, 100) <= critChance;
+        float clickForce = 1000.0f;
+        if (critical)
+        {
+            clickForce *= critMultiplier;
+        }
+
         inputTimestamps.Add(Time.time);
-        boulder_rb.AddTorque(-1000.0f);
+        boulder_rb.AddTorque(-clickForce);
+        PointAddition addition = Instantiate(pointAdditionPrefab).GetComponent<PointAddition>();
+        addition.initialForce = Vector2.left * Random.Range(-50f,50f);
+        addition.text = "+" + (Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f).ToString("F1");
+        addition.transform.position = clickLocation;
+        if (critical)
+        {
+            addition.textColor = new Color(255f/255, 110f/255, 0f/255, 1f);
+            addition.fontSize = 1.5f;
+            addition.fadeDuration = 1.5f;
+        }
+        
+        Destroy(addition, 3f);
 
         SpawnSparkle(clickLocation);
         PlayClickSound();

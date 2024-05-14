@@ -2998,6 +2998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c2c07004c714494b811c288cad19cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothTime: 0.5
 --- !u!114 &414105208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3198,8 +3199,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278317311
+  m_fontColor: {r: 1, g: 0.9411765, b: 0.003921569, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6372,7 +6373,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 3
@@ -7629,6 +7630,7 @@ MonoBehaviour:
   averageAngularVelocity: 0
   autoClicksPerSecond: 1
   speed: 0
+  pointAdditionPrefab: {fileID: 132523178749661067, guid: 12565b7bf173947dcb1d25ac65ac8db7, type: 3}
 --- !u!1 &1159541670
 GameObject:
   m_ObjectHideFlags: 0
@@ -8563,8 +8565,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1225, y: 200}
+  m_AnchoredPosition: {x: 0, y: 24}
+  m_SizeDelta: {x: 1225, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1314466133
 MonoBehaviour:
@@ -9165,7 +9167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1173}
+  m_AnchoredPosition: {x: 0, y: 1113}
   m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1481299089
@@ -12286,7 +12288,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1749712950
 MonoBehaviour:
@@ -12329,8 +12331,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278317311
+  m_fontColor: {r: 1, g: 0.94023347, b: 0.0047169924, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
