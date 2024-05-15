@@ -63,7 +63,7 @@ public class Upgrade : MonoBehaviour
             // GameObject devil = Instantiate(devilPrefab);
             // devil.transform.position = new Vector2(0, -10);
 
-            cost += cost;
+            cost = Mathf.Round(cost * 1.3f * 10f) / 10f;
             upgradeCostUI.text = "COST: " + cost.ToString();
             upgradeCountUI.text = upgradeCount.ToString();
 
