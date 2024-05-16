@@ -127,6 +127,8 @@ public class WorldController : Singleton<WorldController>
     public GameObject gemPrefab;
     public AudioSource gemSpawnSound;
     public AudioSource gemCollectSound;
+    public Sisyphus sisyphus;
+    public float scoreMultiplier = 1f;
 
 
     public void SpawnLostPoints(int amount)
@@ -317,14 +319,12 @@ public class WorldController : Singleton<WorldController>
         }
     }
     private void SetSpriteAnimationSpeed(float clickRate) {
+        sisyphus.animationSpeed = animationSpeed;
         if (clickRate > 0) {
-            pushingSpriteRenderer.sortingOrder = 5;
-            pushingSpriteAnimator.speed = animationSpeed;
-            idleSpriteRenderer.sortingOrder = -1;
+            sisyphus.SetPushingState();
             boulderAnimator.speed = animationSpeed;
         } else {
-            idleSpriteRenderer.sortingOrder = 5;
-            pushingSpriteRenderer.sortingOrder = -1;
+            sisyphus.SetIdleState();
             boulderAnimator.speed = 0;
             boulderAnimator.playbackTime = 0;
         }
@@ -406,7 +406,7 @@ public class WorldController : Singleton<WorldController>
         if (currScore > maxScore) {
             PlayerPrefs.SetFloat("Max Score", currScore);
             PlayerPrefs.Save();
-            points += currScore - maxScore;
+            points += (currScore - maxScore) * scoreMultiplier;
             maxScore = currScore;
         }
         // maxScoreText.text = Mathf.Floor(maxScore).ToString();
@@ -436,10 +436,10 @@ public class WorldController : Singleton<WorldController>
         // currScore = 2000.0f;
         maxScore = PlayerPrefs.GetFloat("Max Score", 0.0f);
         maxScore = 0.0f;
-        pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();
-        pushingSpriteAnimator = pushingSprite.GetComponent<Animator>(); 
+        // pushingSpriteRenderer = pushingSprite.GetComponent<SpriteRenderer>();
+        // pushingSpriteAnimator = pushingSprite.GetComponent<Animator>(); 
 
-        idleSpriteRenderer = idleSprite.GetComponent<SpriteRenderer>();
+        // idleSpriteRenderer = idleSprite.GetComponent<SpriteRenderer>();
 
         animationSpeed = GetAnimationSpeed(0.0f);
 
@@ -451,6 +451,7 @@ public class WorldController : Singleton<WorldController>
         }
 
         devilSpawnDistance = 500.0f + Random.Range(0.0f, 500.0f);
+        Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
     }

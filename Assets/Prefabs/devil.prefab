@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4516731814350313281}
   - component: {fileID: 5463446841291720128}
   - component: {fileID: 7724902570203724685}
+  - component: {fileID: 3107439386000925370}
   m_Layer: 0
   m_Name: devil
   m_TagString: Untagged
@@ -132,6 +133,7 @@ MonoBehaviour:
   smoothTime: 0.3
   centerPosition: {x: 0, y: 0, z: 0}
   startBobbing: 0
+  lockToX: 0
 --- !u!114 &7724902570203724685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +154,41 @@ MonoBehaviour:
   spawnInterval: 1
   randomFactor: 0.5
   duration: 45
+--- !u!70 &3107439386000925370
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615601072952259109}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.016422853, y: 0.0077792555}
+  m_Size: {x: 0.3701329, y: 0.3701329}
+  m_Direction: 0
 --- !u!1 &5658961468172317997
 GameObject:
   m_ObjectHideFlags: 0
