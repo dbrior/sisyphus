@@ -450,7 +450,7 @@ public class WorldController : Singleton<WorldController>
             SpawnCloud(i);
         }
 
-        devilSpawnDistance = 500.0f + Random.Range(0.0f, 500.0f);
+        devilSpawnDistance = 100.0f + Random.Range(0.0f, 500.0f);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
