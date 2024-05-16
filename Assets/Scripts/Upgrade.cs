@@ -5,6 +5,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+/********************************************************************************************
+UPGRADE PROGRESSION:
+Base Cost = 10
+Base CPS = 0.3
+
+(Upgrade N Cost / Upgrade N CPS) = (Upgrade N-1 Cost / Upgrade N-1 CPS) * 3
+Uprage N Cost = Upgrade N-1 Cost * 10
+
+After purchase, Cost = Cost * 1.3
+After purchase, CPS = CPS
+********************************************************************************************/
+
 public class Upgrade : MonoBehaviour
 {
     public float cost;
