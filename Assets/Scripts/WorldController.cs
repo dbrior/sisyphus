@@ -43,6 +43,7 @@ public class WorldController : Singleton<WorldController>
     public float minRollbackSpeed = 0.1f;
     public float maxRollbackSpeed = 3.0f;
     public float TimeWindow;
+    public float ExtendedTimeWindow;
     [Header("Bird Spawning:")]
     public List<GameObject> birdPrefabs;
     public float minX, maxX;
@@ -66,6 +67,7 @@ public class WorldController : Singleton<WorldController>
     public float currScore = 0.0f;
     private float terrainAngle;
     private List<float> inputTimestamps = new List<float>();
+    private List<float> inputTimestampsExtended = new List<float>();
     private SpriteRenderer pushingSpriteRenderer;
     private Animator pushingSpriteAnimator;
     private SpriteRenderer idleSpriteRenderer;
@@ -98,6 +100,7 @@ public class WorldController : Singleton<WorldController>
     public float animationSpeed;
     public bool isMoving;
     public float rawClickRate;
+    public float rawExtendedClickRate;
     public Transform dewieSpawn;
     public Transform dewieGangSpawn;
     public GameObject dewiePrefab;
@@ -309,6 +312,11 @@ public class WorldController : Singleton<WorldController>
         inputTimestamps.RemoveAll(timestamp => Time.time - timestamp > TimeWindow);
         return inputTimestamps.Count / TimeWindow;
     }
+    private float CalculateExtendedClickRate()
+    {
+        inputTimestampsExtended.RemoveAll(timestamp => Time.time - timestamp > ExtendedTimeWindow);
+        return inputTimestampsExtended.Count / ExtendedTimeWindow;
+    }
 
     // Setting animation speeds
     private float GetAnimationSpeed(float clickRate) {
@@ -406,7 +414,7 @@ public class WorldController : Singleton<WorldController>
         if (currScore > maxScore) {
             PlayerPrefs.SetFloat("Max Score", currScore);
             PlayerPrefs.Save();
-            points += (currScore - maxScore) * scoreMultiplier;
+            points += (currScore - maxScore);
             maxScore = currScore;
         }
         // maxScoreText.text = Mathf.Floor(maxScore).ToString();
@@ -492,13 +500,14 @@ public class WorldController : Singleton<WorldController>
     public void ManualClick(Vector3 clickLocation)
     {
         bool critical = Random.Range(0, 100) <= critChance;
-        float clickForce = 1000.0f;
+        float clickForce = 1000.0f * scoreMultiplier;
         if (critical)
         {
             clickForce *= critMultiplier;
         }
 
         inputTimestamps.Add(Time.time);
+        inputTimestampsExtended.Add(Time.time);
         boulder_rb.AddTorque(-clickForce);
         
         string pointString = (Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f).ToString("F1");
@@ -514,7 +523,7 @@ public class WorldController : Singleton<WorldController>
     }
     void AutoClick(int num_clicks)
     {
-        boulder_rb.AddTorque(-1000.0f * num_clicks);
+        boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier);
     }
 
     void Update() 
@@ -535,6 +544,8 @@ public class WorldController : Singleton<WorldController>
 
 
         rawClickRate = CalculateClickRate();
+        rawExtendedClickRate = CalculateExtendedClickRate();
+
         light.intensity = (rawClickRate / 25.0f) * 32;
         // sisGlow.intensity = (rawClickRate / 25) * 16;
         clickRate = rawClickRate + baseClickRate;     // clickRate determines the speed of the game
