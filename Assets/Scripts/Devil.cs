@@ -5,10 +5,9 @@ public class Devil : MonoBehaviour
 {
     public float entrySpeed = 3.0f;
     private Transform targetTransform;
-    private AudioSource spawnSound;
-    private AudioSource bossMusic;
-    private AudioSource baseMusic;
-    private AudioSource scoreBlip;
+    public AudioSource spawnSound;
+    public AudioSource bossMusic;
+    public AudioSource hitSound;
     private bool hasCentered = false;
     public float targetVolumeIn = 0.25f;
     public float rampDuration = 13.0f;
@@ -19,33 +18,42 @@ public class Devil : MonoBehaviour
     public float randomFactor = 2.0f; // Randomness factor
     public float duration = 60.0f;
     private float lifetime = 0.0f;
-    private WorldController worldController;
-    private AudioSource collisionSound;
     private bool spawnFireballs = false;
     private bool cycleComplete = false;
     private Vector3 exitLocation;
+    private float maxHealth = 200f;
+    private float currHealth = 200f;
+    public float invincibleTime = 1f;
+    private float timeTillVulnerable = 0;
 
     void Awake()
     {
-        spawnSound = GameObject.Find("DevilSpawn").GetComponent<AudioSource>();
-        bossMusic = GameObject.Find("BossMusic").GetComponent<AudioSource>();
-        scoreBlip = GameObject.Find("ScoreBlip").GetComponent<AudioSource>();
-        baseMusic = GameObject.Find("Music").GetComponent<AudioSource>();
-        collisionSound = GameObject.Find("Explosion").GetComponent<AudioSource>();
-        
         targetTransform = GameObject.Find("devilFloatLocation").transform;
-
-        worldController = GameObject.Find("Main Grid").GetComponent<WorldController>();
     }
 
     void Start()
     {
-        scoreBlip.mute = true;
+        SoundManager.Instance.scoreBlipSound.mute = true;
         // spawnSound.Play();
         bossMusic.Play();
         transform.position = new Vector3(0, -5, 0);
         exitLocation = transform.position;
-        StartCoroutine(RampVolume(bossMusic, baseMusic));
+        StartCoroutine(RampVolume(bossMusic, SoundManager.Instance.backgroundMusic));
+
+        HealthBarManager.Instance.CreateHealthBar(gameObject);
+    }
+
+    void Update()
+    {
+        if (timeTillVulnerable > 0)
+        {
+            timeTillVulnerable -= Time.deltaTime;
+        }
+        if(currHealth <= 0f)
+        {
+            SendMessage("OnComplete");
+            SendMessage("Exiting");
+        }
     }
 
     void FixedUpdate()
@@ -80,6 +88,17 @@ public class Devil : MonoBehaviour
         }
     }
 
+    void OnMouseDown()
+    {
+        if (timeTillVulnerable <= 0)
+        {
+            hitSound.Play();
+            currHealth -= 10f;
+            HealthBarManager.Instance.UpdateHealthBar(gameObject, currHealth/maxHealth);
+            timeTillVulnerable = invincibleTime;
+        }
+    }
+
     void Exiting()
     {
         bossMusic.Stop();
@@ -88,10 +107,10 @@ public class Devil : MonoBehaviour
 
     void OnComplete()
     {
-        scoreBlip.mute = false;
+        SoundManager.Instance.scoreBlipSound.mute = false;
         cycleComplete = true;
         spawnFireballs = false;
-        StartCoroutine(RampVolume(baseMusic, bossMusic));
+        StartCoroutine(RampVolume(SoundManager.Instance.backgroundMusic, bossMusic));
     }
 
     IEnumerator SpawnPrefabsAtInterval()
@@ -101,8 +120,6 @@ public class Devil : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval + Random.Range(-randomFactor, randomFactor));
             GameObject fireball = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
             SparkleScript fireballScript = fireball.GetComponent<SparkleScript>();
-            fireballScript.collisionSound = collisionSound;
-            fireballScript.worldController = worldController;
             Destroy(fireball, 5.0f);
         }
     }
