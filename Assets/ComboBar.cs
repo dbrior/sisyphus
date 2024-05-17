@@ -15,10 +15,10 @@ public class ComboBar : MonoBehaviour
     }
     void SetMultiplier(float progress)
     {
-        if (progress >= 0.5) {
-            WorldController.Instance.scoreMultiplier = 2f;
-        } else if (progress >= 1) {
+        if (progress >= 1) {
             WorldController.Instance.scoreMultiplier = 3f;
+        } else if (progress >= 0.5) {
+            WorldController.Instance.scoreMultiplier = 2f;
         } else {
             WorldController.Instance.scoreMultiplier = 1f;
         }
@@ -26,12 +26,12 @@ public class ComboBar : MonoBehaviour
 
     void Update()
     {
-        float progress = WorldController.Instance.rawClickRate / 20f;
+        float progress = WorldController.Instance.rawExtendedClickRate / (1000f / 60f);
         bar.fillAmount = progress;
 
         SetMultiplier(progress);
 
-        if (WorldController.Instance.rawClickRate > 1) {
+        if (progress >= 0.1) {
             Debug.Log("Out");
             transform.position = Vector3.MoveTowards(transform.position, outPosition.position, moveSpeed * Time.deltaTime);
         } else {

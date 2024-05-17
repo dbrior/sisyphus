@@ -9062,6 +9062,7 @@ MonoBehaviour:
   minRollbackSpeed: 1
   maxRollbackSpeed: 5
   TimeWindow: 1
+  ExtendedTimeWindow: 15
   birdPrefabs:
   - {fileID: 7180171716697619950, guid: e005dbb7b1a754778a1786ae6fcc02c0, type: 3}
   minX: 0
@@ -9101,6 +9102,7 @@ MonoBehaviour:
   animationSpeed: 0
   isMoving: 0
   rawClickRate: 0
+  rawExtendedClickRate: 0
   dewieSpawn: {fileID: 1036110658}
   dewieGangSpawn: {fileID: 1017234453}
   dewiePrefab: {fileID: 8449591296631621636, guid: 3042e87cee7f44062aff7a6db105fa0a, type: 3}
