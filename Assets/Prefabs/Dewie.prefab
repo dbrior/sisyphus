@@ -206,6 +206,7 @@ MonoBehaviour:
   idleController: {fileID: 9100000, guid: 34aedf12883ed4d1aa8a53ccdd804999, type: 2}
   runningController: {fileID: 9100000, guid: 1439e6f066d0242b6a836e1bb4df4642, type: 2}
   color: {r: 1, g: 1, b: 1, a: 1}
+  baseGlowIntensity: 0
   dewieGlow: {fileID: 5237559847523321482}
   wander: 0
 --- !u!114 &-2799663887497238979

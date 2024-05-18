@@ -95,7 +95,8 @@ public class WorldController : Singleton<WorldController>
     public AudioSource blipAudio;
     public Transform SprocketSpawn;
     public GameObject devilPrefab;
-    private bool startedFirstStage = false;
+    public bool startedFirstStage = false;
+    public bool didGemTutorial = false;
     private float devilSpawnDistance;
     public float animationSpeed;
     public bool isMoving;
@@ -132,7 +133,13 @@ public class WorldController : Singleton<WorldController>
     public AudioSource gemCollectSound;
     public Sisyphus sisyphus;
     public float scoreMultiplier = 1f;
+    public bool frozen;
 
+    public void Freeze()
+    {
+        frozen = true;
+        Time.timeScale = 0;
+    }
 
     public void SpawnLostPoints(int amount)
     {
@@ -327,7 +334,7 @@ public class WorldController : Singleton<WorldController>
         }
     }
     private void SetSpriteAnimationSpeed(float clickRate) {
-        sisyphus.animationSpeed = animationSpeed;
+        sisyphus.SetAnimationSpeed(animationSpeed);
         if (clickRate > 0) {
             sisyphus.SetPushingState();
             boulderAnimator.speed = animationSpeed;
@@ -495,7 +502,7 @@ public class WorldController : Singleton<WorldController>
         addition.fontSize = fontSize;
         addition.fadeDuration = fadeDuration;
         addition.transform.position = clickLocation;
-        Destroy(addition, 2f);
+        Destroy(addition, 0.5f);
     }
     public void ManualClick(Vector3 clickLocation)
     {
@@ -570,7 +577,6 @@ public class WorldController : Singleton<WorldController>
         // Spawn gems
         if (accumulatedGemDelta >= gemSpawnDelta)
         {
-            // Time.timeScale = 0;
             gemSpawnSound.Play();
             GameObject gem = Instantiate(gemPrefab);
             gem.transform.position = boulder.transform.position;
@@ -582,6 +588,7 @@ public class WorldController : Singleton<WorldController>
             gem.GetComponent<SpriteRenderer>().color = color;
             gem.GetComponent<Light2D>().color = color;
             accumulatedGemDelta = 0f;
+            Destroy(gem, 5f);
         } else {
             accumulatedGemDelta += Time.deltaTime;
         }
