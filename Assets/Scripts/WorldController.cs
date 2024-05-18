@@ -570,6 +570,7 @@ public class WorldController : Singleton<WorldController>
         // Spawn gems
         if (accumulatedGemDelta >= gemSpawnDelta)
         {
+            Time.timeScale = 0;
             gemSpawnSound.Play();
             GameObject gem = Instantiate(gemPrefab);
             gem.transform.position = boulder.transform.position;

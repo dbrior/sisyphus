@@ -20,6 +20,10 @@ public class ClickShrinkEffect : MonoBehaviour
 
     void Update()
     {
+        if(Input.anyKeyDown)
+        {
+            Touched(new Vector3(0, 0, 0));
+        }
         if (Input.touchCount > 0)
         {
             foreach (Touch touch in Input.touches)
