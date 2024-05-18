@@ -7,21 +7,36 @@ public class ComboBar : MonoBehaviour
 {
     public Image bar;
     public float moveSpeed = 100f;
+    public Animator fireStreak;
     public Transform outPosition;
     public Transform inPosition;
-    void Start()
-    {
-        
-    }
+    private bool hitStreak = false;
     void SetMultiplier(float progress)
     {
         if (progress >= 1) {
             WorldController.Instance.scoreMultiplier = 3f;
+            if (!hitStreak) {
+                fireStreak.Play("Entry", 0, 0f);
+                fireStreak.gameObject.SetActive(true);
+                fireStreak.enabled = true;
+                hitStreak = true;
+            }
         } else if (progress >= 0.5) {
+            if (hitStreak) {
+                hitStreak = false;
+                fireStreak.gameObject.SetActive(false);
+                fireStreak.enabled = false;
+            }
             WorldController.Instance.scoreMultiplier = 2f;
         } else {
             WorldController.Instance.scoreMultiplier = 1f;
         }
+    }
+
+    void Start()
+    {
+        fireStreak.enabled = false;
+        fireStreak.gameObject.SetActive(false);
     }
 
     void Update()
