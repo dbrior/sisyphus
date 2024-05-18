@@ -9,16 +9,18 @@ public class Gem : MonoBehaviour
     private bool hasFrozen = false;
     private float currLifetime = 0f;
     public TappingTutorial tappingTutorial;
+    private bool didGemTutorial = false;
 
     void Start()
     {
         rb  = GetComponent<Rigidbody2D>();
+        didGemTutorial = WorldController.Instance.didGemTutorial;
     }
 
     void Update()
     {
         currLifetime += Time.deltaTime;
-        if (!hasFrozen && currLifetime > 1f)
+        if (!didGemTutorial && !hasFrozen && currLifetime > 1f)
         {
             hasFrozen = true;
             tappingTutorial.gameObject.SetActive(true);
@@ -31,6 +33,7 @@ public class Gem : MonoBehaviour
             Time.timeScale = 1f;
             tappingTutorial.gameObject.SetActive(false);
             WorldController.Instance.frozen = false;
+            WorldController.Instance.didGemTutorial = true;
         }
         WorldController.Instance.gemCollectSound.Play();
         WorldController.Instance.points += pointValue;

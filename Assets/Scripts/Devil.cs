@@ -6,7 +6,6 @@ public class Devil : MonoBehaviour
     public float entrySpeed = 3.0f;
     private Transform targetTransform;
     public AudioSource spawnSound;
-    public AudioSource bossMusic;
     public AudioSource hitSound;
     private bool hasCentered = false;
     public float targetVolumeIn = 0.25f;
@@ -21,15 +20,17 @@ public class Devil : MonoBehaviour
     private bool spawnFireballs = false;
     private bool cycleComplete = false;
     private Vector3 exitLocation;
-    private float maxHealth = 200f;
-    private float currHealth = 200f;
+    public float maxHealth = 200f;
+    private float currHealth;
     public float invincibleTime = 1f;
     private float timeTillVulnerable = 0;
     public RuntimeAnimatorController hitAnimation;
     public RuntimeAnimatorController flyingAnimation;
+    public RuntimeAnimatorController deathAnimation;
     private Animator animator;
     private bool isHit = false;
     private float hitTime;
+    bool ending = false;
 
     void Awake()
     {
@@ -38,13 +39,13 @@ public class Devil : MonoBehaviour
 
     void Start()
     {
+        currHealth = maxHealth;
         animator = GetComponent<Animator>();
         SoundManager.Instance.scoreBlipSound.mute = true;
-        // spawnSound.Play();
-        bossMusic.Play();
+        SoundManager.Instance.bossMusic.Play();
         transform.position = new Vector3(0, -5, 0);
         exitLocation = transform.position;
-        StartCoroutine(RampVolume(bossMusic, SoundManager.Instance.backgroundMusic));
+        SoundManager.Instance.RampInto(SoundManager.Instance.bossMusic, SoundManager.Instance.backgroundMusic, targetVolumeIn, 0f, rampDuration);
 
         HealthBarManager.Instance.CreateHealthBar(gameObject);
     }
@@ -76,10 +77,19 @@ public class Devil : MonoBehaviour
             EndHit();
         }
         
-        if(currHealth <= 0f)
+        if(currHealth <= 0f && !ending)
         {
-            SendMessage("OnComplete");
-            SendMessage("Exiting");
+            OnComplete();
+        }
+        
+        if (ending)
+        {
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.normalizedTime >= 1)
+            // if (!animator.IsInTransition(0))
+            {
+                Exiting();
+            }
         }
     }
 
@@ -97,15 +107,7 @@ public class Devil : MonoBehaviour
                 gameObject.GetComponent<RandomBobbing>().centerPosition = targetTransform.position;
                 SendMessage("OnCentered");
             }
-        } else if (cycleComplete)
-        {
-            if (transform.position == exitLocation) {
-                SendMessage("Exiting");
-            }
-            transform.position = Vector3.MoveTowards(transform.position, exitLocation, entrySpeed * Time.deltaTime * 2.0f);
-        }
-        else
-        {
+        } else {
             lifetime += Time.deltaTime;
 
             if (lifetime >= duration)
@@ -125,16 +127,20 @@ public class Devil : MonoBehaviour
 
     void Exiting()
     {
-        bossMusic.Stop();
+        Debug.Log("exiting");
+        // bossMusic.Stop();
         Destroy(gameObject);
     }
 
     void OnComplete()
     {
+        ending = true;
+        animator.runtimeAnimatorController = deathAnimation;
+        animator.Play("DeathAnimation"); // Ensure the correct animation state is played
         SoundManager.Instance.scoreBlipSound.mute = false;
         cycleComplete = true;
         spawnFireballs = false;
-        StartCoroutine(RampVolume(SoundManager.Instance.backgroundMusic, bossMusic));
+        SoundManager.Instance.RampInto(SoundManager.Instance.backgroundMusic, SoundManager.Instance.bossMusic, targetVolumeIn, 0f, rampDuration);
     }
 
     IEnumerator SpawnPrefabsAtInterval()

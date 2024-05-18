@@ -95,7 +95,8 @@ public class WorldController : Singleton<WorldController>
     public AudioSource blipAudio;
     public Transform SprocketSpawn;
     public GameObject devilPrefab;
-    private bool startedFirstStage = false;
+    public bool startedFirstStage = false;
+    public bool didGemTutorial = false;
     private float devilSpawnDistance;
     public float animationSpeed;
     public bool isMoving;
