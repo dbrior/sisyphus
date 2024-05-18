@@ -1082,7 +1082,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -383.49997}
+  m_AnchoredPosition: {x: 0, y: -383.50034}
   m_SizeDelta: {x: 600, y: 2000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &104571001
@@ -4248,6 +4248,7 @@ RectTransform:
   m_LocalScale: {x: 1.2121, y: 1.2121, z: 1.2121}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 468608775}
   - {fileID: 1481299090}
   - {fileID: 1305299117}
   - {fileID: 1694526707}
@@ -5252,6 +5253,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &468608774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468608775}
+  m_Layer: 5
+  m_Name: UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &468608775
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468608774}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.8250144, y: 0.8250144, z: 0.8250144}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 379886172}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 907.51587}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &470923562
 GameObject:
   m_ObjectHideFlags: 0
@@ -7673,8 +7709,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00049999356, y: -0.00045001507, z: 0}
-    m_Extent: {x: 0.74020004, y: 0.74025, z: 0}
+    m_Center: {x: -0.00049999356, y: 0.00019997358, z: 0}
+    m_Extent: {x: 0.74, y: 0.741, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -12040,6 +12076,7 @@ MonoBehaviour:
   maxClickRateText: {fileID: 0}
   pointsText: {fileID: 542385108}
   shopUI: {fileID: 1764574777}
+  sisyphusUpgradesUI: {fileID: 38961319}
   delta: 0
   platformA: {fileID: 1543748117}
   platformB: {fileID: 2092049527}
@@ -12378,7 +12415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1153692672
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12761,7 +12798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fb33190f0faf84c8c8ae0fc18ab8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 10
+  cost: 10000
   value: 10
   upgradeCountObject: {fileID: 548197527}
   upgradeCountUI: {fileID: 1591857335}
@@ -13734,7 +13771,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1305299118}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1105420139}
+        m_TargetAssemblyTypeName: WorldController, Assembly-CSharp
+        m_MethodName: ToggleUpgradeUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1305663437
 GameObject:
   m_ObjectHideFlags: 0
@@ -18657,7 +18706,7 @@ GameObject:
   - component: {fileID: 1366731108}
   - component: {fileID: 1366731107}
   m_Layer: 5
-  m_Name: CriticalHitChance
+  m_Name: hancecalqHitChance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24816,8 +24865,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 240095585}
   m_HandleRect: {fileID: 240095584}
   m_Direction: 2
-  m_Value: 0.9999998
-  m_Size: 0.6164802
+  m_Value: 1.0000005
+  m_Size: 0.6164994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
