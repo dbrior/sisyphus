@@ -10,7 +10,7 @@ public class Rotater : MonoBehaviour
     public float frequency = 1f; 
     void Update()
     {
-        transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+        transform.Rotate(0, 0, rotationSpeed * Time.unscaledDeltaTime);
         transform.localScale = baseScale + scaleAmplitude * Mathf.Sin(Time.time * frequency);
     }
 }

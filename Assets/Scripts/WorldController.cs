@@ -132,7 +132,13 @@ public class WorldController : Singleton<WorldController>
     public AudioSource gemCollectSound;
     public Sisyphus sisyphus;
     public float scoreMultiplier = 1f;
+    public bool frozen;
 
+    public void Freeze()
+    {
+        frozen = true;
+        Time.timeScale = 0;
+    }
 
     public void SpawnLostPoints(int amount)
     {
@@ -570,7 +576,6 @@ public class WorldController : Singleton<WorldController>
         // Spawn gems
         if (accumulatedGemDelta >= gemSpawnDelta)
         {
-            // Time.timeScale = 0;
             gemSpawnSound.Play();
             GameObject gem = Instantiate(gemPrefab);
             gem.transform.position = boulder.transform.position;
@@ -582,6 +587,7 @@ public class WorldController : Singleton<WorldController>
             gem.GetComponent<SpriteRenderer>().color = color;
             gem.GetComponent<Light2D>().color = color;
             accumulatedGemDelta = 0f;
+            Destroy(gem, 5f);
         } else {
             accumulatedGemDelta += Time.deltaTime;
         }

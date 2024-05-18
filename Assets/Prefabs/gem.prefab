@@ -34,7 +34,8 @@ Transform:
   m_LocalPosition: {x: -1.436, y: 0.823, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9200384070683175796}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7252981841463898671
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointValue: 1000
+  tappingTutorial: {fileID: 4933015732487628276}
 --- !u!70 &6570819585391126786
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -235,3 +237,85 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.3, y: 0.64}
   m_Direction: 0
+--- !u!1001 &4801067687795076864
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5800805454818198666}
+    m_Modifications:
+    - target: {fileID: 492376922881723124, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: fingerAnimator
+      value: 
+      objectReference: {fileID: 3671371786049016367}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291483256387068425, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_Name
+      value: TappingTutorial
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+--- !u!95 &3671371786049016367 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8093958846503353647, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+  m_PrefabInstance: {fileID: 4801067687795076864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4933015732487628276 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 492376922881723124, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+  m_PrefabInstance: {fileID: 4801067687795076864}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556acdad6e163420b92404ce4450d709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &9200384070683175796 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4399600185250546804, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+  m_PrefabInstance: {fileID: 4801067687795076864}
+  m_PrefabAsset: {fileID: 0}
