@@ -7,6 +7,7 @@ public class Devil : MonoBehaviour
     private Transform targetTransform;
     public AudioSource spawnSound;
     public AudioSource hitSound;
+    public AudioSource deathSound;
     private bool hasCentered = false;
     public float targetVolumeIn = 0.25f;
     public float rampDuration = 13.0f;
@@ -136,6 +137,8 @@ public class Devil : MonoBehaviour
     {
         ending = true;
         animator.runtimeAnimatorController = deathAnimation;
+        // deathSound.Play();
+        SoundManager.Instance.DelaySound(SoundManager.Instance.successSound, 1.75f);
         animator.Play("DeathAnimation"); // Ensure the correct animation state is played
         SoundManager.Instance.scoreBlipSound.mute = false;
         cycleComplete = true;
