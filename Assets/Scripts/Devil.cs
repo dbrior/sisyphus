@@ -25,6 +25,11 @@ public class Devil : MonoBehaviour
     private float currHealth = 200f;
     public float invincibleTime = 1f;
     private float timeTillVulnerable = 0;
+    public RuntimeAnimatorController hitAnimation;
+    public RuntimeAnimatorController flyingAnimation;
+    private Animator animator;
+    private bool isHit = false;
+    private float hitTime;
 
     void Awake()
     {
@@ -33,6 +38,7 @@ public class Devil : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         SoundManager.Instance.scoreBlipSound.mute = true;
         // spawnSound.Play();
         bossMusic.Play();
@@ -42,6 +48,22 @@ public class Devil : MonoBehaviour
 
         HealthBarManager.Instance.CreateHealthBar(gameObject);
     }
+    void StartHit()
+    {
+        isHit = true;
+        animator.runtimeAnimatorController = hitAnimation;
+
+        hitSound.Play();
+        animator.runtimeAnimatorController = hitAnimation;
+        currHealth -= 10f;
+        HealthBarManager.Instance.UpdateHealthBar(gameObject, currHealth/maxHealth);
+        timeTillVulnerable = invincibleTime;
+    }
+    void EndHit()
+    {
+        isHit = false;
+        animator.runtimeAnimatorController = flyingAnimation;
+    }
 
     void Update()
     {
@@ -49,6 +71,11 @@ public class Devil : MonoBehaviour
         {
             timeTillVulnerable -= Time.deltaTime;
         }
+        if (isHit && timeTillVulnerable <= 0)
+        {
+            EndHit();
+        }
+        
         if(currHealth <= 0f)
         {
             SendMessage("OnComplete");
@@ -90,12 +117,9 @@ public class Devil : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (timeTillVulnerable <= 0)
+        if (!isHit)
         {
-            hitSound.Play();
-            currHealth -= 10f;
-            HealthBarManager.Instance.UpdateHealthBar(gameObject, currHealth/maxHealth);
-            timeTillVulnerable = invincibleTime;
+            StartHit();
         }
     }
 

@@ -327,7 +327,7 @@ public class WorldController : Singleton<WorldController>
         }
     }
     private void SetSpriteAnimationSpeed(float clickRate) {
-        sisyphus.animationSpeed = animationSpeed;
+        sisyphus.SetAnimationSpeed(animationSpeed);
         if (clickRate > 0) {
             sisyphus.SetPushingState();
             boulderAnimator.speed = animationSpeed;
@@ -495,7 +495,7 @@ public class WorldController : Singleton<WorldController>
         addition.fontSize = fontSize;
         addition.fadeDuration = fadeDuration;
         addition.transform.position = clickLocation;
-        Destroy(addition, 2f);
+        Destroy(addition, 0.5f);
     }
     public void ManualClick(Vector3 clickLocation)
     {
