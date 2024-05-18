@@ -27,6 +27,7 @@ public class WorldController : Singleton<WorldController>
     public TextMeshProUGUI maxClickRateText;
     public TextMeshProUGUI pointsText;
     public GameObject shopUI;
+    public GameObject sisyphusUpgradesUI;
     [Header("Platforms:")]
     public float delta = 0.0f;
     public Transform platformA;
@@ -186,7 +187,12 @@ public class WorldController : Singleton<WorldController>
     // UI Toggle
     public void ToggleShopUI() {
         shopUI.SetActive(!shopUI.activeSelf);
+        sisyphusUpgradesUI.SetActive(false);
         shopButtonText.text = shopUI.activeSelf ? "Close" : "Shop";
+    }
+    public void ToggleUpgradeUI() {
+        sisyphusUpgradesUI.SetActive(!sisyphusUpgradesUI.activeSelf);
+        shopUI.SetActive(false);
     }
 
     public void UpdateStrengthUpgrade(float cost){
