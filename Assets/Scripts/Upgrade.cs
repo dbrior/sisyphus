@@ -30,6 +30,7 @@ public class Upgrade : MonoBehaviour
     public Material grayscaleMaterial;
     public GameObject grayscaleCover;
     public UnityEvent onPurchase;
+    public bool isStaticText = false;
     
 
     private int upgradeCount;
@@ -42,7 +43,9 @@ public class Upgrade : MonoBehaviour
 
         upgradeCostUI.text = "COST: " + cost.ToString();
         upgradeCountUI.text = upgradeCount.ToString();
-        upgradeValueUI.text = "CPS: " + value.ToString();
+        if (!isStaticText) {
+            upgradeValueUI.text = "CPS: " + value.ToString();
+        }
 
         if (onPurchase == null) onPurchase = new UnityEvent();
     }

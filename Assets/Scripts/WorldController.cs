@@ -136,6 +136,14 @@ public class WorldController : Singleton<WorldController>
     public float scoreMultiplier = 1f;
     public bool frozen;
 
+    public void IncreaseCritChance(float amount) {
+        critChance += amount;
+    }
+    
+    public void IncreaseCritPower(float amount) {
+        critMultiplier += amount;
+    }
+
     public void Freeze()
     {
         frozen = true;
@@ -541,6 +549,7 @@ public class WorldController : Singleton<WorldController>
 
     void Update() 
     {
+        Debug.Log(critChance);
         // CLick function
         // Calculate the number of clicks that should have occurred since the last frame
         accumulatedTime += Time.deltaTime;
