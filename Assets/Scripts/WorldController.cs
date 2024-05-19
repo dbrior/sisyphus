@@ -72,6 +72,7 @@ public class WorldController : Singleton<WorldController>
     private SpriteRenderer pushingSpriteRenderer;
     private Animator pushingSpriteAnimator;
     private SpriteRenderer idleSpriteRenderer;
+    private int devilLevel = 1;
 
     // Progression
     private int angleUpgradeCount = 0;
@@ -139,7 +140,7 @@ public class WorldController : Singleton<WorldController>
     public void IncreaseCritChance(float amount) {
         critChance += amount;
     }
-    
+
     public void IncreaseCritPower(float amount) {
         critMultiplier += amount;
     }
