@@ -40,6 +40,7 @@ public class Devil : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Voice: " + BossIntro.Instance.GetRandomIntroLine());
         currHealth = maxHealth;
         animator = GetComponent<Animator>();
         SoundManager.Instance.scoreBlipSound.mute = true;
