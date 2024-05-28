@@ -30,6 +30,7 @@ public class Upgrade : MonoBehaviour
     public Material grayscaleMaterial;
     public GameObject grayscaleCover;
     public UnityEvent onPurchase;
+    public UnityEvent onFirstPurchase;
     public bool isStaticText = false;
     
 
@@ -41,13 +42,15 @@ public class Upgrade : MonoBehaviour
     {
         controller = GameObject.Find("Main Grid").GetComponent<WorldController>();
 
-        upgradeCostUI.text = "COST: " + cost.ToString();
         upgradeCountUI.text = upgradeCount.ToString();
         if (!isStaticText) {
+            upgradeCostUI.text = "COST: " + cost.ToString();
             upgradeValueUI.text = "CPS: " + value.ToString();
         }
 
         if (onPurchase == null) onPurchase = new UnityEvent();
+
+        if (onFirstPurchase == null) onFirstPurchase = new UnityEvent();
     }
 
     void Update()
@@ -79,7 +82,10 @@ public class Upgrade : MonoBehaviour
             // devil.transform.position = new Vector2(0, -10);
 
             cost = Mathf.Round(cost * 1.3f * 10f) / 10f;
-            upgradeCostUI.text = "COST: " + cost.ToString();
+
+            if (!isStaticText) {
+                upgradeCostUI.text = "COST: " + cost.ToString();
+            }
             upgradeCountUI.text = upgradeCount.ToString();
 
             if (upgradeCount > 0)
@@ -88,6 +94,9 @@ public class Upgrade : MonoBehaviour
             }
 
             onPurchase.Invoke();
+            if (upgradeCount == 1) {
+                onFirstPurchase.Invoke();
+            }
         }
     }
 

@@ -137,6 +137,8 @@ public class WorldController : Singleton<WorldController>
     public Sisyphus sisyphus;
     public float scoreMultiplier = 1f;
     public bool frozen;
+    public GameObject cerberusPrefab;
+    public Transform cerberusSpawn;
 
     public void IncreaseCritChance(float amount) {
         critChance += amount;
@@ -157,6 +159,13 @@ public class WorldController : Singleton<WorldController>
         GameObject lostPoints = Instantiate(lostPointsPrefab);
         lostPoints.GetComponent<TextMeshPro>().text = "-" + amount.ToString();
         lostPoints.transform.position = lostPointsSpawnTransform.position;
+    }
+
+    public void SpawnCerberus()
+    {
+        GameObject cerberus = Instantiate(cerberusPrefab);
+        cerberus.transform.position = cerberusSpawn.position;
+        cerberus.transform.SetParent(transform);
     }
 
     public void SpawnDewie()
