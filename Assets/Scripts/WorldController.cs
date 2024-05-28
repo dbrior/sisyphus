@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 public class WorldController : Singleton<WorldController>
 {
+    public Light2D globalLight;
     public GameObject camera;
     private Vector3 cameraOriginalPosition;
     public TMP_FontAsset globalFont;
@@ -648,8 +649,16 @@ public class WorldController : Singleton<WorldController>
 
         // Debug.Log(currScore);
         points = Mathf.Max(0.0f, points);
+
         float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
-        RotateLight(distanceDelta);
+
+        // DAY AND NIGHt
+        // float frequency = 0.001f;
+        // float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
+        // float lightLevel = (Mathf.Sin(currScore * frequency) + 0) / 2 * 0.75f;
+        // globalLight.intensity = lightLevel;
+
+        // RotateLight(distanceDelta);
 
         isMoving = clickRate > 0.0f;
 
