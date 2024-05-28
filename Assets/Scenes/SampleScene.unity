@@ -13393,6 +13393,7 @@ MonoBehaviour:
   pointsText: {fileID: 542385108}
   shopUI: {fileID: 1764574777}
   sisyphusUpgradesUI: {fileID: 38961319}
+  petsUI: {fileID: 1902687857}
   delta: 0
   platformA: {fileID: 1543748117}
   platformB: {fileID: 2092049527}
@@ -25719,9 +25720,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1902687862}
-        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
-        m_MethodName: ToggleUI
+      - m_Target: {fileID: 1105420139}
+        m_TargetAssemblyTypeName: WorldController, Assembly-CSharp
+        m_MethodName: TogglePetsUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

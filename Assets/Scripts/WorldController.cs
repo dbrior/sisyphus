@@ -29,6 +29,7 @@ public class WorldController : Singleton<WorldController>
     public TextMeshProUGUI pointsText;
     public GameObject shopUI;
     public GameObject sisyphusUpgradesUI;
+    public GameObject petsUI;
     [Header("Platforms:")]
     public float delta = 0.0f;
     public Transform platformA;
@@ -207,11 +208,18 @@ public class WorldController : Singleton<WorldController>
     public void ToggleShopUI() {
         shopUI.SetActive(!shopUI.activeSelf);
         sisyphusUpgradesUI.SetActive(false);
+        petsUI.SetActive(false);
         shopButtonText.text = shopUI.activeSelf ? "Close" : "Shop";
     }
     public void ToggleUpgradeUI() {
         sisyphusUpgradesUI.SetActive(!sisyphusUpgradesUI.activeSelf);
         shopUI.SetActive(false);
+        petsUI.SetActive(false);
+    }
+    public void TogglePetsUI() {
+        petsUI.SetActive(!petsUI.activeSelf);
+        shopUI.SetActive(false);
+        sisyphusUpgradesUI.SetActive(false);
     }
 
     public void UpdateStrengthUpgrade(float cost){
