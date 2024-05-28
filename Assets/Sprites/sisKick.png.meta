@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1eb8f9a67ac6640d5a05cfb2cddd2923
+guid: cf8d9d0eb6131441ab6514f0eb73963f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,43 +123,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fingerV2_0
+      name: sisKick_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.6251956, y: 0.43114245}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad5c8d5ac93c3401aa600a2d9e2ef32d
-      internalID: -1597935355
+      spriteID: 397359c0d272a4f07b8c9fee94e70093
+      internalID: -838091608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fingerV2_1
+      name: sisKick_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.6502347, y: 0.43740222}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35c762a87c0c241279f54b40eeb85b23
-      internalID: 1519702421
+      spriteID: 1f35d628d0a584f8da0101e65aca3ec3
+      internalID: 76659356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sisKick_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bef8d8479ae64b889ec67ec8e2199f2
+      internalID: -933628478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sisKick_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cfe24629447b4ac891e38bb2a419d48
+      internalID: 113227091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sisKick_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0302fd0d192b4aadad3fdb4d2dab23e
+      internalID: -315177512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sisKick_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b80f5304e19ab4adbae8125dd115e3e7
+      internalID: -1263804445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sisKick_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50b829f74d1db4e9086d15b62fc332fc
+      internalID: -398483537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sisKick_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e43ec59a83224ce493c7e872b77d92f
+      internalID: 1680379878
       vertices: []
       indices: 
       edges: []
@@ -175,8 +301,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      fingerV2_0: -1597935355
-      fingerV2_1: 1519702421
+      sisKick_0: -838091608
+      sisKick_1: 76659356
+      sisKick_2: -933628478
+      sisKick_3: 113227091
+      sisKick_4: -315177512
+      sisKick_5: -1263804445
+      sisKick_6: -398483537
+      sisKick_7: 1680379878
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
