@@ -309,6 +309,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6463749523722477867, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009062400147310848, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
+      propertyPath: m_Intensity
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7009062400147310848, guid: 4d9fb68d76efc4de1bd2f9d547cae48e, type: 3}
       propertyPath: m_LocalBounds.m_Center.x
       value: 0

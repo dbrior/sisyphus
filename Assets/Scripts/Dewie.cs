@@ -41,6 +41,6 @@ public class Dewie : MonoBehaviour
         } else {
             animator.runtimeAnimatorController = idleController;
         }
-        dewieGlow.intensity = ((WorldController.Instance.rawClickRate / 25.0f) * 2) + baseGlowIntensity;
+        dewieGlow.intensity = Mathf.Min(((WorldController.Instance.rawClickRate / 25.0f) * 2) + baseGlowIntensity, 0.75f);
     }
 }

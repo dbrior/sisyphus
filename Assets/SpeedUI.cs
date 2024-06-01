@@ -5,7 +5,6 @@ using TMPro;
 
 public class SpeedUI : MonoBehaviour
 {
-    public float smoothTime = 0.5f;
     private float displayedSpeed = 0f;
     private TextMeshProUGUI textUI;
     void Start()
@@ -15,7 +14,6 @@ public class SpeedUI : MonoBehaviour
 
     void Update()
     {
-        displayedSpeed = Mathf.Lerp(displayedSpeed, WorldController.Instance.speed, Time.deltaTime / smoothTime);
-        textUI.text = displayedSpeed.ToString("F1");
+        textUI.text = WorldController.Instance.smoothedSpeed.ToString("F1");
     }
 }

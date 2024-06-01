@@ -126,7 +126,7 @@ TextureImporter:
       name: tapSprite_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 0
         width: 32
         height: 32
@@ -147,7 +147,7 @@ TextureImporter:
       name: tapSprite_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 0
         width: 32
         height: 32
@@ -168,7 +168,7 @@ TextureImporter:
       name: tapSprite_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
         width: 32
         height: 32
@@ -189,7 +189,7 @@ TextureImporter:
       name: tapSprite_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 128
         y: 0
         width: 32
         height: 32
@@ -210,7 +210,7 @@ TextureImporter:
       name: tapSprite_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 160
         y: 0
         width: 32
         height: 32
@@ -231,7 +231,7 @@ TextureImporter:
       name: tapSprite_5
       rect:
         serializedVersion: 2
-        x: 160
+        x: 192
         y: 0
         width: 32
         height: 32
@@ -252,7 +252,7 @@ TextureImporter:
       name: tapSprite_6
       rect:
         serializedVersion: 2
-        x: 192
+        x: 224
         y: 0
         width: 32
         height: 32
@@ -273,27 +273,6 @@ TextureImporter:
       name: tapSprite_7
       rect:
         serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09ae1f516226b4565bb4f35b218b0a83
-      internalID: 2029226589
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tapSprite_8
-      rect:
-        serializedVersion: 2
         x: 256
         y: 0
         width: 32
@@ -305,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e89637becebaf4810bdebd15b9f60e4f
-      internalID: -920690783
+      spriteID: 2bb4c4aa46e7f40429449eb0595b7b46
+      internalID: -1320160095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tapSprite_9
+      name: tapSprite_8
       rect:
         serializedVersion: 2
         x: 288
@@ -326,8 +305,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73446358136894ab0927626dd9bcda54
-      internalID: -2009837913
+      spriteID: 86062f794cf764fb2b35c5d8a6621c76
+      internalID: 547827644
       vertices: []
       indices: 
       edges: []
@@ -350,9 +329,8 @@ TextureImporter:
       tapSprite_4: 849507007
       tapSprite_5: 614678409
       tapSprite_6: -1354023534
-      tapSprite_7: 2029226589
-      tapSprite_8: -920690783
-      tapSprite_9: -2009837913
+      tapSprite_7: -1320160095
+      tapSprite_8: 547827644
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
