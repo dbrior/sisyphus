@@ -126,6 +126,7 @@ public class WorldController : Singleton<WorldController>
     private float accumulatedTime = 0.0f;
     private GameObject dewie;
     public float speed;
+    public float smoothedSpeed;
     public GameObject pointAdditionPrefab;
     public float critChance = 5f;
     public float critMultiplier = 2f;
@@ -398,6 +399,7 @@ public class WorldController : Singleton<WorldController>
         Vector2 newPlatformBPosition;
 
         speed = GetBoulderSpeed();
+        smoothedSpeed = Mathf.Lerp(smoothedSpeed, speed, Time.deltaTime / 0.5f);
         // Debug.Log(angularVelocityRadians.ToString());
 
         float movement = speed * Time.deltaTime * 10;
@@ -498,7 +500,7 @@ public class WorldController : Singleton<WorldController>
             SpawnCloud(i);
         }
 
-        devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
+        devilSpawnDistance = 500.0f + Random.Range(0.0f, 10.0f);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
@@ -559,7 +561,7 @@ public class WorldController : Singleton<WorldController>
             AddPointTextSpawn(clickLocation, pointString, new Color(1f, 1f, 1f, 1f), 1f, 0.75f);
             PlayClickSound();
         }
-        SpawnSparkle(clickLocation);
+        SpawnSparkle(SprocketSpawn.position);
     }
     void AutoClick(int num_clicks)
     {
