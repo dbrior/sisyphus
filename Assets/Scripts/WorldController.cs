@@ -552,7 +552,7 @@ public class WorldController : Singleton<WorldController>
     public void ManualClick(Vector3 clickLocation)
     {
         bool critical = Random.Range(0, 100) <= critChance;
-        float clickForce = 1000.0f * scoreMultiplier;
+        float clickForce = 1000.0f * scoreMultiplier * manualClickMultiplier;
         if (critical)
         {
             clickForce *= critMultiplier;
