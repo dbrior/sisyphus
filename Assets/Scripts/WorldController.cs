@@ -144,6 +144,10 @@ public class WorldController : Singleton<WorldController>
     public Transform cerberusSpawn;
     private float initialMass;
     public int prestigePointsMultiplier = 3;
+    public float manualClickMultiplier = 1f;
+    public void InceaseClickPower(float amount) {
+        manualClickMultiplier *= (1+amount);
+    }
 
     public void IncreaseCritChance(float amount) {
         critChance += amount;
