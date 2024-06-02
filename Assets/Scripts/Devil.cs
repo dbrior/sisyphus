@@ -21,7 +21,7 @@ public class Devil : MonoBehaviour
     private bool spawnFireballs = false;
     private bool cycleComplete = false;
     private Vector3 exitLocation;
-    public float maxHealth = 200f;
+    public float maxHealth = 400f;
     private float currHealth;
     public float invincibleTime = 1f;
     private float timeTillVulnerable = 0;
