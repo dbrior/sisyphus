@@ -9,15 +9,28 @@ public class Sisyphus : MonoBehaviour
     public RuntimeAnimatorController idleController;
     public RuntimeAnimatorController pushingController;
     public RuntimeAnimatorController pushingBootsController;
+    public RuntimeAnimatorController kickingController;
 
     // Parts
     public Animator glovesController;
     public float animationSpeed = 0f;
+    public bool kicking = false;
     
     // Controllers
     private bool bootsMode;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    public void Jump() {
+        WorldController.Instance.boulder_b.Jump();
+    }
+    public void Kick() {
+        kicking = true;
+        animator.speed = 1f;
+        animator.runtimeAnimatorController = kickingController;
+    }
+    public void StopKick() {
+        kicking = false;
+    }
 
     public void SetAnimationSpeed(float newAnimationSpeed)
     {
