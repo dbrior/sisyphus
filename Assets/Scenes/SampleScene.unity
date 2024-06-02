@@ -1187,7 +1187,19 @@ MonoBehaviour:
   grayscaleCover: {fileID: 715863798}
   onPurchase:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1105420139}
+        m_TargetAssemblyTypeName: WorldController, Assembly-CSharp
+        m_MethodName: InceaseClickPower
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onFirstPurchase:
     m_PersistentCalls:
       m_Calls: []
@@ -5267,7 +5279,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3949125de43e14097a58d5be2cc7aff1, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -10426,7 +10438,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'CPS: 0.3'
+  m_text: '+10%
+
+    CLICK   FORCE'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c07e44b447fe048fc89a5dee751d117c, type: 2}
   m_sharedMaterial: {fileID: -4437325441058136643, guid: c07e44b447fe048fc89a5dee751d117c, type: 2}
@@ -10465,7 +10479,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 75
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -13918,7 +13932,8 @@ MonoBehaviour:
   frozen: 0
   cerberusPrefab: {fileID: 310403509733854255, guid: bf83cc8ad0e66415cbbb1fba20551ea5, type: 3}
   cerberusSpawn: {fileID: 2104935505}
-  prestigePointsMultiplier: 3
+  prestigePointsMultiplier: 10
+  manualClickMultiplier: 1
 --- !u!1 &1111910739
 GameObject:
   m_ObjectHideFlags: 0
@@ -34898,7 +34913,7 @@ Transform:
   m_GameObject: {fileID: 2104935504}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.449, y: -0.07000005, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
