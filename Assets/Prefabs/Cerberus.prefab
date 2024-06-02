@@ -123,7 +123,7 @@ MonoBehaviour:
   radius: 4
   speed: 0.45
   smoothTime: 0.3
-  centerPosition: {x: 0, y: -0.4, z: 0}
+  centerPosition: {x: 0.5, y: -0.4, z: 0}
   startBobbing: 1
   lockToX: 1
 --- !u!1 &4734363599608643232

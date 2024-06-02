@@ -116,7 +116,7 @@ public class WorldController : Singleton<WorldController>
     public GameObject boulder;
     private Rigidbody2D boulder_rb;
     private SpriteRenderer boulder_sr;
-    private Boulder boulder_b;
+    public Boulder boulder_b;
     private List<float> angularVelocities = new List<float>();
     private float timeSum = 0;
     public float averageAngularVelocity;
@@ -375,14 +375,16 @@ public class WorldController : Singleton<WorldController>
         }
     }
     private void SetSpriteAnimationSpeed(float clickRate) {
-        sisyphus.SetAnimationSpeed(animationSpeed);
-        if (clickRate > 0) {
-            sisyphus.SetPushingState();
-            boulderAnimator.speed = animationSpeed;
-        } else {
-            sisyphus.SetIdleState();
-            boulderAnimator.speed = 0;
-            boulderAnimator.playbackTime = 0;
+        if (!sisyphus.kicking) {
+            sisyphus.SetAnimationSpeed(animationSpeed);
+            if (clickRate > 0) {
+                sisyphus.SetPushingState();
+                boulderAnimator.speed = animationSpeed;
+            } else {
+                sisyphus.SetIdleState();
+                boulderAnimator.speed = 0;
+                boulderAnimator.playbackTime = 0;
+            }
         }
     }
 
@@ -710,7 +712,7 @@ public class WorldController : Singleton<WorldController>
 
         // TODO: These functions have todo's
         if(ShouldSpawnCloud()) {
-            SpawnCloud();
+            // SpawnCloud();
         }
         // if(ShouldSpawnBird()) {
         //     SpawnBird();
