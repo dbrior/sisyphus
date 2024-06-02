@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Boulder : MonoBehaviour
 {
-    public float mass = 1.0f;
     private Rigidbody2D rb;
-    public float tapDecayMps2;
     public Material glowMaterial;
     public int currPrestige = 0;
     public float maxGlowThickness = 0.03f;
@@ -26,7 +24,7 @@ public class Boulder : MonoBehaviour
     private ClickShrinkEffect cse;
 
     public void Jump() {
-        rb.AddForce(Vector3.up * 200000f);
+        rb.AddForce(Vector3.up * 60000f);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
