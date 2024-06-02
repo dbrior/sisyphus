@@ -116,6 +116,7 @@ public class WorldController : Singleton<WorldController>
     public GameObject boulder;
     private Rigidbody2D boulder_rb;
     private SpriteRenderer boulder_sr;
+    private Boulder boulder_b;
     private List<float> angularVelocities = new List<float>();
     private float timeSum = 0;
     public float averageAngularVelocity;
@@ -141,6 +142,8 @@ public class WorldController : Singleton<WorldController>
     public bool frozen;
     public GameObject cerberusPrefab;
     public Transform cerberusSpawn;
+    private float initialMass;
+    public int prestigePointsMultiplier = 3;
 
     public void IncreaseCritChance(float amount) {
         critChance += amount;
@@ -456,7 +459,7 @@ public class WorldController : Singleton<WorldController>
         if (currScore > maxScore) {
             PlayerPrefs.SetFloat("Max Score", currScore);
             PlayerPrefs.Save();
-            points += (currScore - maxScore);
+            points += ((currScore - maxScore) * (boulder_rb.mass / initialMass)) * Mathf.Max((boulder_b.currPrestige * prestigePointsMultiplier), 1f);
             maxScore = currScore;
         }
         // maxScoreText.text = Mathf.Floor(maxScore).ToString();
@@ -480,7 +483,10 @@ public class WorldController : Singleton<WorldController>
         }
 
         boulder_rb = boulder.GetComponent<Rigidbody2D>();
-        boulder_sr = boulder.GetComponent <SpriteRenderer>();
+        boulder_sr = boulder.GetComponent<SpriteRenderer>();
+        boulder_b = boulder.GetComponent<Boulder>();
+
+        initialMass = boulder_rb.mass;
 
         Application.targetFrameRate = 60;
         // currScore = 2000.0f;
@@ -552,7 +558,7 @@ public class WorldController : Singleton<WorldController>
         inputTimestampsExtended.Add(Time.time);
         boulder_rb.AddTorque(-clickForce);
         
-        string pointString = (Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f).ToString("F1");
+        string pointString = ((Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f) * (boulder_rb.mass / initialMass) * Mathf.Max((boulder_b.currPrestige * prestigePointsMultiplier), 1f)).ToString("F1");
         if (critical)
         {
             AddPointTextSpawn(clickLocation, pointString, new Color(255f/255, 110f/255, 0f/255, 1f), 1.5f, 1.5f);
