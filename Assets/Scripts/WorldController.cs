@@ -712,7 +712,7 @@ public class WorldController : Singleton<WorldController>
 
         // TODO: These functions have todo's
         if(ShouldSpawnCloud()) {
-            // SpawnCloud();
+            SpawnCloud();
         }
         // if(ShouldSpawnBird()) {
         //     SpawnBird();

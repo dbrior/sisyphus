@@ -10,13 +10,13 @@ public class Cloud : MonoBehaviour
     private WorldController controller;
 
     // Bobbing
-    private float amplitude = 0.25f;    // TODO: Bobbing should adapt to scale
-    private float frequency = 0.5f;
+    public float amplitude = 0.25f;
+    public float frequency = 0.5f;
     private float phase;
 
     private float minDecay = 0.45f;
     private float maxDecay = 0.01f;
-    private float baseSpeed = 0.5f;
+    public float baseSpeed = 0.5f;
 
     void OnBecameInvisible () {
         if (spawnTimestamp >= Time.time - lifespan) {
