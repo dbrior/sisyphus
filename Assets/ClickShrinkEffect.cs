@@ -11,6 +11,10 @@ public class ClickShrinkEffect : MonoBehaviour
     private float timeSinceStarted = 0f;  // Track time since the animation started
     private Collider2D collider;
     private bool pressed = false;
+    public void UpdateScale(Vector3 newScale) {
+        originalScale = newScale;
+        targetScale = originalScale * scaleFactor;
+    }
     void Start()
     {
         originalScale = transform.localScale;  // Store the original scale

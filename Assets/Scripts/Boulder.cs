@@ -23,6 +23,7 @@ public class Boulder : MonoBehaviour
     private float drumLastPlayedTime = 0f;
     private float belowPrestigeSpeedTime = 0f;
     private bool onCooldown = false;
+    private ClickShrinkEffect cse;
 
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -37,6 +38,7 @@ public class Boulder : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        cse = GetComponent<ClickShrinkEffect>();
         glowStartSpeed = glowStartPercent * prestigeSpeed;
         belowPrestigeSpeedTime = Time.time;
     }
@@ -65,6 +67,9 @@ public class Boulder : MonoBehaviour
                     prestigeMusic.Play();
                     currPrestige += 1;
                     onCooldown = true;
+                    cse.UpdateScale(gameObject.transform.localScale * 1.2f);
+                    Vector3 newPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y * 1.2f, gameObject.transform.localPosition.z);
+                    gameObject.transform.localPosition = newPosition;
                     StartCoroutine(Cooldown(10f));
                 }
             } else if (!onCooldown && ((Time.time - drumLastPlayedTime) >= drumInterval) && (currDrumDelta >= drumInterval)) {
