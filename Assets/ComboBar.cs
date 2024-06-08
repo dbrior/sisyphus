@@ -47,10 +47,8 @@ public class ComboBar : MonoBehaviour
         SetMultiplier(progress);
 
         if (progress >= 0.1) {
-            Debug.Log("Out");
             transform.position = Vector3.MoveTowards(transform.position, outPosition.position, moveSpeed * Time.deltaTime);
         } else {
-            Debug.Log("In");
             transform.position = Vector3.MoveTowards(transform.position, inPosition.position, moveSpeed * Time.deltaTime);
         }
     }
