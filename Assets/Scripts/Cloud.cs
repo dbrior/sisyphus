@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Cloud : MonoBehaviour
 {
+    public bool enabled = true;
     public float height;
     public float spawnTimestamp;
     public float lifespan;
@@ -30,11 +31,13 @@ public class Cloud : MonoBehaviour
     }
 
     void Update () {
-        float newXPosition = (transform.localPosition.x - ((controller.delta + baseSpeed) * (((maxDecay - minDecay) * (1-(transform.localScale.x / controller.maxScale))) + minDecay)));
-        Vector2 newPosition = new Vector2(
-            newXPosition,
-            height + (amplitude * Mathf.Sin(frequency * Time.time + phase))
-        );
-        transform.localPosition = Vector2.Lerp(transform.localPosition, newPosition, Time.deltaTime);
+        if(enabled) {
+            float newXPosition = (transform.localPosition.x - ((controller.delta + baseSpeed) * (((maxDecay - minDecay) * (1-(transform.localScale.x / controller.maxScale))) + minDecay)));
+            Vector2 newPosition = new Vector2(
+                newXPosition,
+                height + (amplitude * Mathf.Sin(frequency * Time.time + phase))
+            );
+            transform.localPosition = Vector2.Lerp(transform.localPosition, newPosition, Time.deltaTime);
+        }
     }
 }

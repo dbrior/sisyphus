@@ -582,7 +582,7 @@ public class WorldController : Singleton<WorldController>
 
     void Update() 
     {
-        Debug.Log(critChance);
+        // Debug.Log(critChance);
         // CLick function
         // Calculate the number of clicks that should have occurred since the last frame
         accumulatedTime += Time.deltaTime;
@@ -684,10 +684,9 @@ public class WorldController : Singleton<WorldController>
         float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
 
         // DAY AND NIGHt
-        // float frequency = 0.001f;
-        // float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
-        // float lightLevel = (Mathf.Sin(currScore * frequency) + 0) / 2 * 0.75f;
-        // globalLight.intensity = lightLevel;
+        float frequency = 0.0001f;
+        float lightLevel = (Mathf.Sin((currScore+10000) * frequency) + 0) / 2 * 0.75f;
+        globalLight.intensity = lightLevel;
 
         // RotateLight(distanceDelta);
 
