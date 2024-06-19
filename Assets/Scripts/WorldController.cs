@@ -509,7 +509,7 @@ public class WorldController : Singleton<WorldController>
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
         SetTerrainAngle(currScore);                     // Steepness changes accoding to scoregit
         for (float i=-5.0f; i<5.0f; i+=1.0f) {
-            SpawnCloud(i);
+            // SpawnCloud(i);
         }
 
         devilSpawnDistance = 500.0f + Random.Range(0.0f, 10.0f);
@@ -685,7 +685,8 @@ public class WorldController : Singleton<WorldController>
 
         // DAY AND NIGHt
         float frequency = 0.0001f;
-        float lightLevel = (Mathf.Sin((currScore+10000) * frequency) + 0) / 2 * 0.75f;
+        float lightLevel = (Mathf.Cos(currScore * frequency) + 1) / 2;
+        // float lightLevel = (Mathf.Sin((currScore+10000) * frequency) + 0) / 2 * 0.75f;
         globalLight.intensity = lightLevel;
 
         // RotateLight(distanceDelta);
@@ -711,7 +712,7 @@ public class WorldController : Singleton<WorldController>
 
         // TODO: These functions have todo's
         if(ShouldSpawnCloud()) {
-            SpawnCloud();
+            // SpawnCloud();
         }
         // if(ShouldSpawnBird()) {
         //     SpawnBird();
