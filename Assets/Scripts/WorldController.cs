@@ -459,13 +459,21 @@ public class WorldController : Singleton<WorldController>
     }
 
     void UpdateScore(float distanceDelta) {
+        // Score is really distance
+        // This converts units to reasonable distance values
         currScore += distanceDelta / deltaScoreRatio;
-        currAccumulatedDelta += distanceDelta / deltaScoreRatio;
+
+        float pointsPerMeter = 10f * (boulder_rb.mass / initialMass);
+        float multiplier = Mathf.Max((boulder_b.currPrestige * prestigePointsMultiplier), 1f);
+
+        pointsPerMeter *= multiplier;
+
+        // currAccumulatedDelta += distanceDelta / deltaScoreRatio;
         // scoreText.text = Mathf.Floor(currScore).ToString();
         if (currScore > maxScore) {
             PlayerPrefs.SetFloat("Max Score", currScore);
             PlayerPrefs.Save();
-            points += ((currScore - maxScore) * (boulder_rb.mass / initialMass)) * Mathf.Max((boulder_b.currPrestige * prestigePointsMultiplier), 1f);
+            points += (currScore - maxScore) * pointsPerMeter;
             maxScore = currScore;
         }
         // maxScoreText.text = Mathf.Floor(maxScore).ToString();
@@ -509,10 +517,10 @@ public class WorldController : Singleton<WorldController>
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
         SetTerrainAngle(currScore);                     // Steepness changes accoding to scoregit
         for (float i=-5.0f; i<5.0f; i+=1.0f) {
-            SpawnCloud(i);
+            // SpawnCloud(i);
         }
 
-        devilSpawnDistance = 500.0f + Random.Range(0.0f, 10.0f);
+        devilSpawnDistance = 10000.0f + Random.Range(0.0f, 10.0f);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
@@ -664,7 +672,7 @@ public class WorldController : Singleton<WorldController>
         float angularAcceleration = (boulder_rb.angularVelocity - previousAngularVelocity) / Time.fixedDeltaTime;
         previousAngularVelocity = boulder_rb.angularVelocity;
 
-        float cameraOffset = angularAcceleration / -1000f;
+        float cameraOffset = angularAcceleration / 1000f;
 
         Vector2 cameraOffsetPosition = new Vector2(cameraOriginalPosition.x + cameraOffset, camera.transform.position.y);
         
@@ -685,7 +693,8 @@ public class WorldController : Singleton<WorldController>
 
         // DAY AND NIGHt
         float frequency = 0.0001f;
-        float lightLevel = (Mathf.Sin((currScore+10000) * frequency) + 0) / 2 * 0.75f;
+        float lightLevel = (Mathf.Cos(currScore * frequency) + 1) / 2;
+        // float lightLevel = (Mathf.Sin((currScore+10000) * frequency) + 0) / 2 * 0.75f;
         globalLight.intensity = lightLevel;
 
         // RotateLight(distanceDelta);
@@ -711,7 +720,7 @@ public class WorldController : Singleton<WorldController>
 
         // TODO: These functions have todo's
         if(ShouldSpawnCloud()) {
-            SpawnCloud();
+            // SpawnCloud();
         }
         // if(ShouldSpawnBird()) {
         //     SpawnBird();
