@@ -24,7 +24,7 @@ public class Boulder : MonoBehaviour
     private ClickShrinkEffect cse;
 
     public void Jump() {
-        rb.AddForce(Vector3.up * 60000f);
+        rb.AddForce(Vector3.up * 60000f * 5f);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

@@ -145,6 +145,7 @@ public class WorldController : Singleton<WorldController>
     private float initialMass;
     public int prestigePointsMultiplier = 3;
     public float manualClickMultiplier = 1f;
+    private int lastSparkleSpawnScore;
     public void InceaseClickPower(float amount) {
         manualClickMultiplier *= (1+amount);
     }
@@ -524,6 +525,8 @@ public class WorldController : Singleton<WorldController>
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
+
+        lastSparkleSpawnScore = 0;
     }
     private float CalculateAverageAngularVelocity()
     {
@@ -581,7 +584,7 @@ public class WorldController : Singleton<WorldController>
             AddPointTextSpawn(clickLocation, pointString, new Color(1f, 1f, 1f, 1f), 1f, 0.75f);
             PlayClickSound();
         }
-        SpawnSparkle(SprocketSpawn.position);
+        // SpawnSparkle(SprocketSpawn.position); spawn every 1m instead @ Update()
     }
     void AutoClick(int num_clicks)
     {
@@ -605,7 +608,6 @@ public class WorldController : Singleton<WorldController>
         // Perform the click action however many times is necessary
         AutoClick(clicksThisFrame);
 
-
         rawClickRate = CalculateClickRate();
         rawExtendedClickRate = CalculateExtendedClickRate();
 
@@ -614,6 +616,18 @@ public class WorldController : Singleton<WorldController>
         clickRate = rawClickRate + baseClickRate;     // clickRate determines the speed of the game
         // Debug.Log(clickRate);
         // maxClickRateText.text = Mathf.Floor(clickRate).ToString();
+
+        // Spawn sparkle every 1m
+        // if (currScore >= lastSparkleSpawnScore + 1f) {
+        //     int roundedScore = (int) Mathf.Floor(currScore);
+        //     int sparkelsToSpawn = roundedScore - lastSparkleSpawnScore;
+
+        //     for (int i=0; i<sparkelsToSpawn; i++) {
+        //         SpawnSparkle(SprocketSpawn.position);
+        //     }
+
+        //     lastSparkleSpawnScore = roundedScore;
+        // }
 
         // Remove the oldest data if the total time exceeds 10 seconds
         while (timeSum > TimeWindow)
