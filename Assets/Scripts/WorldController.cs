@@ -20,7 +20,7 @@ public class WorldController : Singleton<WorldController>
     [Header("Animation Speeds:")]
     public float maxAnimationSpeed = 2f;
     public float minAnimationSpeed = 0.25f;
-    public float maxClickRateTarget = 30.0f;
+    public float maxClickRateTarget = 75.0f;
     [Header("UI:")]
     public TextMeshProUGUI shopButtonText;
     public TextMeshProUGUI scoreText;
@@ -368,11 +368,11 @@ public class WorldController : Singleton<WorldController>
     }
 
     // Setting animation speeds
-    private float GetAnimationSpeed(float clickRate) {
-        if (clickRate > maxClickRateTarget) {
+    private float GetAnimationSpeed(float speed) {
+        if (speed > maxClickRateTarget) {
             return maxAnimationSpeed;
         } else {
-            return ((clickRate/maxClickRateTarget)*(maxAnimationSpeed - minAnimationSpeed)) + minAnimationSpeed;
+            return ((speed/maxClickRateTarget)*(maxAnimationSpeed - minAnimationSpeed)) + minAnimationSpeed;
         }
     }
     private void SetSpriteAnimationSpeed(float clickRate) {
@@ -715,7 +715,7 @@ public class WorldController : Singleton<WorldController>
 
         isMoving = clickRate > 0.0f;
 
-        animationSpeed = GetAnimationSpeed(clickRate);
+        animationSpeed = GetAnimationSpeed(speed);
 
         if (baseClickRate != 0 && (Time.time - sprocketTimestamp >= (1 / baseClickRate))) {
             GameObject sparkle = Instantiate(sparklePrefab, SprocketSpawn.position, Quaternion.identity);

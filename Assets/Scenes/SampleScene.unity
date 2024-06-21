@@ -15280,7 +15280,7 @@ MonoBehaviour:
   boulderAnimator: {fileID: 937977151}
   maxAnimationSpeed: 2
   minAnimationSpeed: 0.25
-  maxClickRateTarget: 30
+  maxClickRateTarget: 40
   shopButtonText: {fileID: 0}
   scoreText: {fileID: 0}
   maxScoreText: {fileID: 0}
