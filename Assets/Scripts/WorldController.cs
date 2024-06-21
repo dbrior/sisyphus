@@ -662,6 +662,11 @@ public class WorldController : Singleton<WorldController>
         } else {
             accumulatedGemDelta += Time.deltaTime;
         }
+
+        // Check for kick
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            sisyphus.Kick();
+        }
     }
 
     void FixedUpdate()
