@@ -20,7 +20,7 @@ public class WorldController : Singleton<WorldController>
     [Header("Animation Speeds:")]
     public float maxAnimationSpeed = 2f;
     public float minAnimationSpeed = 0.25f;
-    public float maxClickRateTarget = 30.0f;
+    public float maxClickRateTarget = 75.0f;
     [Header("UI:")]
     public TextMeshProUGUI shopButtonText;
     public TextMeshProUGUI scoreText;
@@ -145,6 +145,7 @@ public class WorldController : Singleton<WorldController>
     private float initialMass;
     public int prestigePointsMultiplier = 3;
     public float manualClickMultiplier = 1f;
+    private int lastSparkleSpawnScore;
     public void InceaseClickPower(float amount) {
         manualClickMultiplier *= (1+amount);
     }
@@ -367,11 +368,11 @@ public class WorldController : Singleton<WorldController>
     }
 
     // Setting animation speeds
-    private float GetAnimationSpeed(float clickRate) {
-        if (clickRate > maxClickRateTarget) {
+    private float GetAnimationSpeed(float speed) {
+        if (speed > maxClickRateTarget) {
             return maxAnimationSpeed;
         } else {
-            return ((clickRate/maxClickRateTarget)*(maxAnimationSpeed - minAnimationSpeed)) + minAnimationSpeed;
+            return ((speed/maxClickRateTarget)*(maxAnimationSpeed - minAnimationSpeed)) + minAnimationSpeed;
         }
     }
     private void SetSpriteAnimationSpeed(float clickRate) {
@@ -524,6 +525,8 @@ public class WorldController : Singleton<WorldController>
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
+
+        lastSparkleSpawnScore = 0;
     }
     private float CalculateAverageAngularVelocity()
     {
@@ -581,7 +584,7 @@ public class WorldController : Singleton<WorldController>
             AddPointTextSpawn(clickLocation, pointString, new Color(1f, 1f, 1f, 1f), 1f, 0.75f);
             PlayClickSound();
         }
-        SpawnSparkle(SprocketSpawn.position);
+        // SpawnSparkle(SprocketSpawn.position); spawn every 1m instead @ Update()
     }
     void AutoClick(int num_clicks)
     {
@@ -605,7 +608,6 @@ public class WorldController : Singleton<WorldController>
         // Perform the click action however many times is necessary
         AutoClick(clicksThisFrame);
 
-
         rawClickRate = CalculateClickRate();
         rawExtendedClickRate = CalculateExtendedClickRate();
 
@@ -614,6 +616,18 @@ public class WorldController : Singleton<WorldController>
         clickRate = rawClickRate + baseClickRate;     // clickRate determines the speed of the game
         // Debug.Log(clickRate);
         // maxClickRateText.text = Mathf.Floor(clickRate).ToString();
+
+        // Spawn sparkle every 1m
+        // if (currScore >= lastSparkleSpawnScore + 1f) {
+        //     int roundedScore = (int) Mathf.Floor(currScore);
+        //     int sparkelsToSpawn = roundedScore - lastSparkleSpawnScore;
+
+        //     for (int i=0; i<sparkelsToSpawn; i++) {
+        //         SpawnSparkle(SprocketSpawn.position);
+        //     }
+
+        //     lastSparkleSpawnScore = roundedScore;
+        // }
 
         // Remove the oldest data if the total time exceeds 10 seconds
         while (timeSum > TimeWindow)
@@ -701,7 +715,7 @@ public class WorldController : Singleton<WorldController>
 
         isMoving = clickRate > 0.0f;
 
-        animationSpeed = GetAnimationSpeed(clickRate);
+        animationSpeed = GetAnimationSpeed(speed);
 
         if (baseClickRate != 0 && (Time.time - sprocketTimestamp >= (1 / baseClickRate))) {
             GameObject sparkle = Instantiate(sparklePrefab, SprocketSpawn.position, Quaternion.identity);
