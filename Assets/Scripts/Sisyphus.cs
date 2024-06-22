@@ -55,7 +55,7 @@ public class Sisyphus : MonoBehaviour
     }
     public void SetPushingState()
     {
-        glovesController.gameObject.SetActive(true);
+        // glovesController.gameObject.SetActive(true);
         if (bootsMode) {
             animator.runtimeAnimatorController = pushingBootsController;
         } else {

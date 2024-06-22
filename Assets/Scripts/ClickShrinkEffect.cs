@@ -26,7 +26,9 @@ public class ClickShrinkEffect : MonoBehaviour
     {
         if(Input.anyKeyDown)
         {
-            Touched(new Vector3(0, 0, 0));
+            float offset = 0.2f;
+            float yShift = 0.2f;
+            Touched(transform.position + new Vector3(Random.Range(-offset,offset), Random.Range(-offset+yShift,offset+yShift), 0));
         }
         if (Input.touchCount > 0)
         {
