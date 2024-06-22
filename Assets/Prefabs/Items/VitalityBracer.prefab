@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: -634131515174526615}
   - component: {fileID: -982556083954826858}
   m_Layer: 0
-  m_Name: LuckyStone
+  m_Name: VitalityBracer
   m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: b6d17d7902500499b9242c9ce03c789b, type: 3}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a003e4afe9f854e9c841268c6f2fc8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: CritChance
-  value: 2.5
-  sprite: {fileID: 21300000, guid: 084c77da242ee49c091c7986f368024f, type: 3}
+  type: ClickPower
+  value: 0.2
+  sprite: {fileID: 21300000, guid: 62641f5554637493783b034787cb3f4f, type: 3}
 --- !u!212 &-982556083954826858
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 084c77da242ee49c091c7986f368024f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62641f5554637493783b034787cb3f4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

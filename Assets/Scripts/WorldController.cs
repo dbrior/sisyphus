@@ -87,7 +87,6 @@ public class WorldController : Singleton<WorldController>
     public TextMeshProUGUI autoClickUpgradeText;
     public float points = 0.0f;
     private float sisMaxTerrainAngle = 8.0f;
-    private float baseClickRate = 0.0f;
     public AudioSource purchaseSound;
     public SpriteAnimatorUI autoClickAnim;
     public SpriteAnimatorUI angleAnim;
@@ -129,8 +128,6 @@ public class WorldController : Singleton<WorldController>
     public float speed;
     public float smoothedSpeed;
     public GameObject pointAdditionPrefab;
-    public float critChance = 5f;
-    public float critMultiplier = 2f;
     public AudioSource rockHit;
     public float gemSpawnDelta;
     private float accumulatedGemDelta = 0f;
@@ -144,7 +141,7 @@ public class WorldController : Singleton<WorldController>
     public Transform cerberusSpawn;
     private float initialMass;
     public int prestigePointsMultiplier = 3;
-    public float manualClickMultiplier = 1f;
+    
     private int lastSparkleSpawnScore;
     public GameObject harpyPrefab;
     public float harpySpawnInterval;
@@ -152,6 +149,18 @@ public class WorldController : Singleton<WorldController>
 
 
     // ------------ Ability improvement functions ---------------------
+    private float baseClickRate = 0.0f;
+    private float originalClickRate;
+
+    public float manualClickMultiplier = 1f;
+    private float originalClickMultiplier;
+
+    public float critChance = 5f;
+    private float originalCritChance;
+
+    public float critMultiplier = 2f;
+    private float originalCritMultiplier;
+
     public void increaseBaseClickRate(float amount) {   // Auto Click
         baseClickRate += amount;
         accumulatedTime = 0f;
@@ -164,6 +173,20 @@ public class WorldController : Singleton<WorldController>
     }
     public void IncreaseCritPower(float amount) {       // Crit Power
         critMultiplier += amount;
+    }
+
+    public void resetBuffs() {
+        baseClickRate = originalClickRate;
+        manualClickMultiplier = originalClickMultiplier;
+        critChance = originalCritChance;
+        critMultiplier = originalCritMultiplier;
+    }
+
+    private void storeBuffs() {
+        originalClickRate = baseClickRate;
+        originalClickMultiplier = manualClickMultiplier;
+        originalCritChance = critChance;
+        originalCritMultiplier = critMultiplier;
     }
 
     public void InstantiateImprovementActions() {
@@ -191,10 +214,6 @@ public class WorldController : Singleton<WorldController>
         {"CritChance", new Color(0.9f, 0.9f, 0.35f, 1f)}, // Darker Pastel Yellow
         {"CritPower", new Color(0.7f, 0.6f, 0.8f, 1f)}    // Darker Pastel Purple
     };
-    // autoClickText.color = 
-    //     clickPowerText.color = 
-    //     critChanceText.color = 
-    //     critPowerText.color = 
 
     // -----------------------------------------------------------------
 
@@ -526,6 +545,8 @@ public class WorldController : Singleton<WorldController>
     void Start()
     {
         InstantiateImprovementActions();
+        storeBuffs();
+
         cameraOriginalPosition = camera.transform.position;
         // Set Font
         var tmpTexts = FindObjectsOfType<TMP_Text>();
