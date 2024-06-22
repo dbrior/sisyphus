@@ -148,17 +148,55 @@ public class WorldController : Singleton<WorldController>
     private int lastSparkleSpawnScore;
     public GameObject harpyPrefab;
     public float harpySpawnInterval;
-    public void InceaseClickPower(float amount) {
+    public Dictionary<string, System.Action<float>> abilityImprovementActions = new Dictionary<string, System.Action<float>>();
+
+
+    // ------------ Ability improvement functions ---------------------
+    public void increaseBaseClickRate(float amount) {   // Auto Click
+        baseClickRate += amount;
+        accumulatedTime = 0f;
+    }
+    public void InceaseClickPower(float amount) {       // Click Power
         manualClickMultiplier *= (1+amount);
     }
-
-    public void IncreaseCritChance(float amount) {
+    public void IncreaseCritChance(float amount) {      // Crit Chance
         critChance += amount;
     }
-
-    public void IncreaseCritPower(float amount) {
+    public void IncreaseCritPower(float amount) {       // Crit Power
         critMultiplier += amount;
     }
+
+    public void InstantiateImprovementActions() {
+        System.Action<float> improveAutoClick = increaseBaseClickRate;
+        System.Action<float> improveClickPower = InceaseClickPower;
+        System.Action<float> improveCritChance = IncreaseCritChance;
+        System.Action<float> improveCritPower = IncreaseCritPower;
+
+        abilityImprovementActions.Add("AutoClick", improveAutoClick);
+        abilityImprovementActions.Add("ClickPower", improveClickPower);
+        abilityImprovementActions.Add("CritChance", improveCritChance);
+        abilityImprovementActions.Add("CritPower", improveCritPower);
+    }
+
+    public Dictionary<string,string> AbilityNameMappings = new Dictionary<string,string>{
+        {"AutoClick", "AUTO    CLICK"},
+        {"ClickPower", "CLICK    POWER"},
+        {"CritChance", "CRIT    CHANCE"},
+        {"CritPower", "CRIT    POWER"}
+    };
+
+    public Dictionary<string,Color> AbilityColorMappings = new Dictionary<string,Color>{
+        {"AutoClick", new Color(0.4f, 0.8f, 0.4f, 1f)},   // Darker Pastel Green
+        {"ClickPower", new Color(1f, 0.36f, 0.34f, 1f)},  // Darker Pastel Red
+        {"CritChance", new Color(0.9f, 0.9f, 0.35f, 1f)}, // Darker Pastel Yellow
+        {"CritPower", new Color(0.7f, 0.6f, 0.8f, 1f)}    // Darker Pastel Purple
+    };
+    // autoClickText.color = 
+    //     clickPowerText.color = 
+    //     critChanceText.color = 
+    //     critPowerText.color = 
+
+    // -----------------------------------------------------------------
 
     public void Freeze()
     {
@@ -209,10 +247,6 @@ public class WorldController : Singleton<WorldController>
         if (angleUpgradeCount > 0) {
             angleUpgradeContainer.SetActive(true);
         }
-    }
-    public void increaseBaseClickRate(float amount) {
-        baseClickRate += amount;
-        accumulatedTime = 0f;
     }
 
     // UI Toggle
@@ -491,6 +525,7 @@ public class WorldController : Singleton<WorldController>
     
     void Start()
     {
+        InstantiateImprovementActions();
         cameraOriginalPosition = camera.transform.position;
         // Set Font
         var tmpTexts = FindObjectsOfType<TMP_Text>();
@@ -556,15 +591,8 @@ public class WorldController : Singleton<WorldController>
         blipAudio.Play();
     }
     public void UseItem(Item item) {
-        if (item.type == 0) {
-            increaseBaseClickRate(item.value);
-        } else if (item.type == 1) {
-            InceaseClickPower(item.value);
-        } else if (item.type == 2) {
-            IncreaseCritChance(item.value);
-        } else if (item.type == 3) {
-            IncreaseCritPower(item.value);
-        }
+        System.Action<float> action = abilityImprovementActions[item.type];
+        action(item.value);
     }
     public void AddPointTextSpawn(Vector3 clickLocation, string amount, Color color, float fontSize, float fadeDuration)
     {
@@ -603,7 +631,7 @@ public class WorldController : Singleton<WorldController>
     }
     void AutoClick(int num_clicks)
     {
-        boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier);
+        boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier * manualClickMultiplier);
     }
 
     IEnumerator SpawnHarpy()

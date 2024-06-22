@@ -29973,24 +29973,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d63c6d9281c40c4a5d76e6044830dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: b6d17d7902500499b9242c9ce03c789b, type: 3}
-  - {fileID: 21300000, guid: 3e27179320f5845bcaa114133e83ecd5, type: 3}
-  - {fileID: 21300000, guid: 084c77da242ee49c091c7986f368024f, type: 3}
-  - {fileID: 21300000, guid: 094a7e956e02c4912954031cc2e59a88, type: 3}
-  - {fileID: 21300000, guid: 817f6997d64654ba8a0fa558caa3ba73, type: 3}
-  - {fileID: 21300000, guid: c5366e29c40f64129bdcdc30c24ecc32, type: 3}
-  - {fileID: 21300000, guid: 68a26ceb4b02a4f14b4b9e1a8d7ecdd4, type: 3}
-  values:
-  - 5
-  - 2
-  - 5
-  - 0.5
-  - 250
-  - 100
-  - 100
-  types: 02000000010000000200000003000000000000000000000000000000
-  lootItems: []
+  lootItems:
+  - {fileID: -634131515174526615, guid: f0aee240cf03f4813935fcb99bf3c879, type: 3}
+  - {fileID: -634131515174526615, guid: 8e289797ee9b343a18bfb880d84087ba, type: 3}
+  - {fileID: -634131515174526615, guid: 1d076d49b81d84318a46569a10d6e15d, type: 3}
+  - {fileID: -634131515174526615, guid: 1f4f2e19963954128b5ec95b20e5594c, type: 3}
+  - {fileID: -634131515174526615, guid: 3ca6dc19753aa487abbec422a30c47b5, type: 3}
+  - {fileID: -634131515174526615, guid: a0c46baf9f2594e3db4665f4b827ed27, type: 3}
 --- !u!4 &1542164288
 Transform:
   m_ObjectHideFlags: 0
@@ -29999,7 +29988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542164286}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38976,6 +38965,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 1542164288}
   - {fileID: 619394802}
   - {fileID: 116964169}
   - {fileID: 1064204559}
@@ -39000,4 +38990,3 @@ SceneRoots:
   - {fileID: 1822847338}
   - {fileID: 2043158151}
   - {fileID: 1355305025}
-  - {fileID: 1542164288}

@@ -13,6 +13,7 @@ public class LootBox : MonoBehaviour
     public GameObject sparklePrefab;
     public AudioSource selectSound;
     public AudioSource blipSound;
+    public TextMesh textMesh;
     private float cycleIntervalSeconds;
     private float elapsedTime = 0f;
     private bool cycling = true;
@@ -31,8 +32,8 @@ public class LootBox : MonoBehaviour
     void CycleSprite() {
         blipSound.Play();
 
-        currIdx = Random.Range(0, LootManager.Instance.sprites.Count-1);
-        sr.sprite = LootManager.Instance.sprites[currIdx];
+        currIdx = Random.Range(0, LootManager.Instance.lootItems.Count);
+        sr.sprite = LootManager.Instance.lootItems[currIdx].sprite;
     }
 
     IEnumerator Grow(float duration) {
@@ -68,13 +69,30 @@ public class LootBox : MonoBehaviour
 
     void SelectItem() {
         selectSound.Play();
+
+        // Add sparkle effect
         for (int i=0; i<15; i++) {
             GameObject sparkle = Instantiate(sparklePrefab);
             sparkle.transform.position = transform.position;
             Destroy(sparkle, 2f);
         }
+
         StartCoroutine(GrowAndShrink(0.5f));
+
         Item newItem = LootManager.Instance.GetItem(currIdx);
+
+        // Get item text and color
+        string buffText = WorldController.Instance.AbilityNameMappings[newItem.type];
+        Color buffColor = WorldController.Instance.AbilityColorMappings[newItem.type];
+
+        Debug.Log("NEW COLOR: ");
+        Debug.Log(buffColor);
+
+        textMesh.text = "+    " + buffText;
+        textMesh.color = buffColor;
+        textMesh.gameObject.SetActive(true);
+
+        // Add stat bumps
         WorldController.Instance.UseItem(newItem);
     }
 

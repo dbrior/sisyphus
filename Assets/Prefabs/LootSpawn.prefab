@@ -35,6 +35,7 @@ Transform:
   - {fileID: 4727801376458561190}
   - {fileID: 2677772971067926250}
   - {fileID: 4706895194595128971}
+  - {fileID: 8476070059858391328}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8264997623161742861
@@ -101,14 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e934480da544ee69d4cf8906b8b380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: b6d17d7902500499b9242c9ce03c789b, type: 3}
-  - {fileID: 21300000, guid: 3e27179320f5845bcaa114133e83ecd5, type: 3}
-  - {fileID: 21300000, guid: 084c77da242ee49c091c7986f368024f, type: 3}
-  - {fileID: 21300000, guid: 68a26ceb4b02a4f14b4b9e1a8d7ecdd4, type: 3}
-  - {fileID: 21300000, guid: 817f6997d64654ba8a0fa558caa3ba73, type: 3}
-  - {fileID: 21300000, guid: c5366e29c40f64129bdcdc30c24ecc32, type: 3}
-  - {fileID: 21300000, guid: 68a26ceb4b02a4f14b4b9e1a8d7ecdd4, type: 3}
   lifetimeSeconds: 6
   cycleDurationSeconds: 4
   minCycleIntervalSeconds: 0.01
@@ -118,6 +111,7 @@ MonoBehaviour:
   sparklePrefab: {fileID: 7834042367965131081, guid: af676c9a2b3fe44e6907ed41d04f9ac7, type: 3}
   selectSound: {fileID: 1153731856972266299}
   blipSound: {fileID: 5420433200806496601}
+  textMesh: {fileID: 1589145698838265450}
 --- !u!1 &2327094287566833479
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +324,103 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5360554363887993075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8476070059858391328}
+  - component: {fileID: 4888478821717847032}
+  - component: {fileID: 1589145698838265450}
+  m_Layer: 0
+  m_Name: BuffText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8476070059858391328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360554363887993075}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.439, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5152666094000012787}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &4888478821717847032
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360554363887993075}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: dd0adae11cc7842ab962eb370da5ed61, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!102 &1589145698838265450
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360554363887993075}
+  m_Text: CRIT    CHANCE
+  m_OffsetZ: 0
+  m_CharacterSize: 0.03
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 40
+  m_FontStyle: 0
+  m_RichText: 0
+  m_Font: {fileID: 12800000, guid: dd0adae11cc7842ab962eb370da5ed61, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4281414143
 --- !u!1 &6745103409934125123
 GameObject:
   m_ObjectHideFlags: 0
