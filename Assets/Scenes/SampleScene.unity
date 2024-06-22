@@ -15899,7 +15899,7 @@ MonoBehaviour:
   prestigePointsMultiplier: 10
   manualClickMultiplier: 1
   harpyPrefab: {fileID: 2615908876065943355, guid: 5a8038b98ad544344853204314ba43c5, type: 3}
-  harpySpawnInterval: 30
+  harpySpawnInterval: 20
 --- !u!1 &1111910739
 GameObject:
   m_ObjectHideFlags: 0

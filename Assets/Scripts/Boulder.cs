@@ -22,6 +22,7 @@ public class Boulder : MonoBehaviour
     private float belowPrestigeSpeedTime = 0f;
     private bool onCooldown = false;
     private ClickShrinkEffect cse;
+    private float originalMass;
 
     public void Jump() {
         Debug.Log("Jumpin");
@@ -47,6 +48,7 @@ public class Boulder : MonoBehaviour
         cse = GetComponent<ClickShrinkEffect>();
         glowStartSpeed = glowStartPercent * prestigeSpeed;
         belowPrestigeSpeedTime = Time.time;
+        originalMass = rb.mass;
     }
 
     IEnumerator Cooldown(float waitTime)
@@ -69,9 +71,9 @@ public class Boulder : MonoBehaviour
                 drumLastPlayedTime = Time.time;
                 currDrumDelta = 0f;
                 if (Time.time - belowPrestigeSpeedTime > 5f) {
-                    rb.mass *= 10;
-                    prestigeMusic.Play();
                     currPrestige += 1;
+                    rb.mass = originalMass * 10f * currPrestige;
+                    prestigeMusic.Play();
                     onCooldown = true;
                     cse.UpdateScale(gameObject.transform.localScale * 1.2f);
                     Vector3 newPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y * 1.2f, gameObject.transform.localPosition.z);
