@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LootBox : MonoBehaviour
 {
-    public List<Sprite> sprites;
     public float lifetimeSeconds;
     public float cycleDurationSeconds;
     public float minCycleIntervalSeconds;
@@ -18,8 +17,8 @@ public class LootBox : MonoBehaviour
     private float elapsedTime = 0f;
     private bool cycling = true;
     private Vector3 originalScale;
-
     private SpriteRenderer sr;
+    private int currIdx = 0;
     void Start () {
         cycleIntervalSeconds = minCycleIntervalSeconds;
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -32,7 +31,8 @@ public class LootBox : MonoBehaviour
     void CycleSprite() {
         blipSound.Play();
 
-        sr.sprite = sprites[Random.Range(0, sprites.Count-1)];
+        currIdx = Random.Range(0, LootManager.Instance.sprites.Count-1);
+        sr.sprite = LootManager.Instance.sprites[currIdx];
     }
 
     IEnumerator Grow(float duration) {
@@ -74,6 +74,8 @@ public class LootBox : MonoBehaviour
             Destroy(sparkle, 2f);
         }
         StartCoroutine(GrowAndShrink(0.5f));
+        Item newItem = LootManager.Instance.GetItem(currIdx);
+        WorldController.Instance.UseItem(newItem);
     }
 
     void Update() {
