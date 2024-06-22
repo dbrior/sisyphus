@@ -575,7 +575,7 @@ public class WorldController : Singleton<WorldController>
         inputTimestampsExtended.Add(Time.time);
         boulder_rb.AddTorque(-clickForce);
         
-        string pointString = ((Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f) * (boulder_rb.mass / initialMass) * Mathf.Max((boulder_b.currPrestige * prestigePointsMultiplier), 1f)).ToString("F1");
+        string pointString = ((Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f) * (boulder_rb.mass / initialMass) * Mathf.Max((boulder_b.currPrestige * prestigePointsMultiplier), 1f) * 10f).ToString("F0");
         if (critical)
         {
             AddPointTextSpawn(clickLocation, pointString, new Color(255f/255, 110f/255, 0f/255, 1f), 1.5f, 1.5f);

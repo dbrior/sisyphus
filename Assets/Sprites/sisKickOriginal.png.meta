@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 259cb4318cfbc4af98329dec70246a62
+guid: cf8d9d0eb6131441ab6514f0eb73963f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sisKickNew_0
+      name: sisKick_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a945a4ac62380481badf51636ad33c84
-      internalID: -1365311835
+      spriteID: 397359c0d272a4f07b8c9fee94e70093
+      internalID: -838091608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisKickNew_1
+      name: sisKick_1
       rect:
         serializedVersion: 2
         x: 32
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97440ed20c8bc4eccae64b6cca2a055d
-      internalID: 586320773
+      spriteID: 1f35d628d0a584f8da0101e65aca3ec3
+      internalID: 76659356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisKickNew_2
+      name: sisKick_2
       rect:
         serializedVersion: 2
         x: 64
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc63829c13318468a9377c3892a72fa8
-      internalID: 2022700766
+      spriteID: 9bef8d8479ae64b889ec67ec8e2199f2
+      internalID: -933628478
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisKickNew_3
+      name: sisKick_3
       rect:
         serializedVersion: 2
         x: 96
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d45ae08b5fbef4ab5bebd06d25a3ff07
-      internalID: 1106080343
+      spriteID: 8cfe24629447b4ac891e38bb2a419d48
+      internalID: 113227091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisKickNew_4
+      name: sisKick_4
       rect:
         serializedVersion: 2
         x: 128
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25bd882c1c83741c3b9dd8b21e4429b2
-      internalID: -765970227
+      spriteID: d0302fd0d192b4aadad3fdb4d2dab23e
+      internalID: -315177512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisKickNew_5
+      name: sisKick_5
       rect:
         serializedVersion: 2
         x: 160
@@ -242,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27848a84380bc4fb0bf75f95fba60b1c
-      internalID: 1537357566
+      spriteID: b80f5304e19ab4adbae8125dd115e3e7
+      internalID: -1263804445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisKickNew_6
+      name: sisKick_6
       rect:
         serializedVersion: 2
         x: 192
@@ -263,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5bedc95eebe34765aa758b86aca7485
-      internalID: -179577387
+      spriteID: 50b829f74d1db4e9086d15b62fc332fc
+      internalID: -398483537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sisKickNew_7
+      name: sisKick_7
       rect:
         serializedVersion: 2
         x: 224
@@ -284,8 +284,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6b7f689233b34eb88ed5a4183bc3cdb
-      internalID: 2122411369
+      spriteID: 2e43ec59a83224ce493c7e872b77d92f
+      internalID: 1680379878
       vertices: []
       indices: 
       edges: []
@@ -301,14 +301,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sisKickNew_0: -1365311835
-      sisKickNew_1: 586320773
-      sisKickNew_2: 2022700766
-      sisKickNew_3: 1106080343
-      sisKickNew_4: -765970227
-      sisKickNew_5: 1537357566
-      sisKickNew_6: -179577387
-      sisKickNew_7: 2122411369
+      sisKick_0: -838091608
+      sisKick_1: 76659356
+      sisKick_2: -933628478
+      sisKick_3: 113227091
+      sisKick_4: -315177512
+      sisKick_5: -1263804445
+      sisKick_6: -398483537
+      sisKick_7: 1680379878
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
