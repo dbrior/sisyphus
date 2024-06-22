@@ -26,7 +26,7 @@ public class Cloud : MonoBehaviour
     }
 
     void Start () {
-        controller = transform.parent.gameObject.GetComponent<WorldController>();
+        controller = WorldController.Instance;
         phase = Random.Range(0.0f, 2.0f * Mathf.PI);
     }
 

@@ -9,7 +9,9 @@ public class Harpy : MonoBehaviour
     public Animator harpyAnimator;
     private Cloud cloudScript;
     public Rigidbody2D harpySpriteRb;
+    public LootBox lootboxPrefab;
     Collider2D collider2D;
+    private bool triggered = false;
     public static Vector2 GetRandomForce(float minForce, float maxForce)
     {
         float angle = Random.Range(60f, 130f);
@@ -32,11 +34,15 @@ public class Harpy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        harpyAnimator.enabled = false;
-        harpyRenderer.sprite = hitHarpy;
-        harpySpriteRb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        harpySpriteRb.AddForce(GetRandomForce(100f, 200f));
-        cloudScript.enabled = false;
-        collider2D.enabled = false;
+        if (!triggered) {
+            LootBox lootbox = Instantiate(lootboxPrefab);
+            lootbox.transform.position = transform.position;
+            harpyAnimator.enabled = false;
+            harpyRenderer.sprite = hitHarpy;
+            harpySpriteRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            harpySpriteRb.AddForce(GetRandomForce(100f, 200f));
+            cloudScript.enabled = false;
+            collider2D.enabled = false;
+        }
     }
 }

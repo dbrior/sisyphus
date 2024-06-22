@@ -9,12 +9,14 @@ public class Gem : MonoBehaviour
     private bool hasFrozen = false;
     private float currLifetime = 0f;
     public TappingTutorial tappingTutorial;
+    public AudioSource spawnSound;
     private bool didGemTutorial = false;
 
     void Start()
     {
         rb  = GetComponent<Rigidbody2D>();
         didGemTutorial = WorldController.Instance.didGemTutorial;
+        spawnSound.Play();
     }
 
     void Update()

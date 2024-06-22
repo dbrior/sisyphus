@@ -146,6 +146,8 @@ public class WorldController : Singleton<WorldController>
     public int prestigePointsMultiplier = 3;
     public float manualClickMultiplier = 1f;
     private int lastSparkleSpawnScore;
+    public GameObject harpyPrefab;
+    public float harpySpawnInterval;
     public void InceaseClickPower(float amount) {
         manualClickMultiplier *= (1+amount);
     }
@@ -527,6 +529,8 @@ public class WorldController : Singleton<WorldController>
         // UpdateClickUpgrade(10);
 
         lastSparkleSpawnScore = 0;
+
+        StartCoroutine(SpawnHarpy());
     }
     private float CalculateAverageAngularVelocity()
     {
@@ -589,6 +593,15 @@ public class WorldController : Singleton<WorldController>
     void AutoClick(int num_clicks)
     {
         boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier);
+    }
+
+    IEnumerator SpawnHarpy()
+    {
+        while (true) {
+            GameObject harpy = Instantiate(harpyPrefab);
+            Destroy(harpy, 10f);
+            yield return new WaitForSeconds(harpySpawnInterval);
+        }
     }
 
     void Update() 
