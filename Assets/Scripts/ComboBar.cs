@@ -11,6 +11,7 @@ public class ComboBar : MonoBehaviour
     public Transform outPosition;
     public Transform inPosition;
     private bool hitStreak = false;
+
     void SetMultiplier(float progress)
     {
         if (progress >= 1) {
@@ -20,6 +21,7 @@ public class ComboBar : MonoBehaviour
                 fireStreak.gameObject.SetActive(true);
                 fireStreak.enabled = true;
                 hitStreak = true;
+                WorldController.Instance.harpySpawnInterval = 10f;
             }
         } else if (progress >= 0.5) {
             if (hitStreak) {
@@ -28,8 +30,10 @@ public class ComboBar : MonoBehaviour
                 fireStreak.enabled = false;
             }
             WorldController.Instance.scoreMultiplier = 2f;
+            WorldController.Instance.harpySpawnInterval = 15f;
         } else {
             WorldController.Instance.scoreMultiplier = 1f;
+            WorldController.Instance.harpySpawnInterval = 30f;
         }
     }
 
