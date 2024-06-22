@@ -81,6 +81,7 @@ public class LootBox : MonoBehaviour
             cycleIntervalSeconds = ((elapsedTime / cycleDurationSeconds) * (maxCycleIntervalSeconds - minCycleIntervalSeconds)) + minCycleIntervalSeconds;
         }
         elapsedTime += Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, WorldController.Instance.boulder.transform.position, 0.1f*Time.deltaTime);
     }
 
     IEnumerator ConinuousCyleSprite()
