@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: AutoClick
-  value: 10
+  value: 50
   sprite: {fileID: 21300000, guid: 817f6997d64654ba8a0fa558caa3ba73, type: 3}
 --- !u!212 &-982556083954826858
 SpriteRenderer:

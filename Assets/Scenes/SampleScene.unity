@@ -15884,8 +15884,6 @@ MonoBehaviour:
   speed: 0
   smoothedSpeed: 0
   pointAdditionPrefab: {fileID: 132523178749661067, guid: 12565b7bf173947dcb1d25ac65ac8db7, type: 3}
-  critChance: 5
-  critMultiplier: 5
   rockHit: {fileID: 1676133142}
   gemSpawnDelta: 20
   gemPrefab: {fileID: 3454644344833812354, guid: 6b5ed9a3c850b4b25a5e35db9949f1d3, type: 3}
@@ -15897,9 +15895,11 @@ MonoBehaviour:
   cerberusPrefab: {fileID: 310403509733854255, guid: bf83cc8ad0e66415cbbb1fba20551ea5, type: 3}
   cerberusSpawn: {fileID: 2104935505}
   prestigePointsMultiplier: 10
-  manualClickMultiplier: 1
   harpyPrefab: {fileID: 2615908876065943355, guid: 5a8038b98ad544344853204314ba43c5, type: 3}
   harpySpawnInterval: 20
+  manualClickMultiplier: 1
+  critChance: 5
+  critMultiplier: 5
 --- !u!1 &1111910739
 GameObject:
   m_ObjectHideFlags: 0
@@ -29976,10 +29976,14 @@ MonoBehaviour:
   lootItems:
   - {fileID: -634131515174526615, guid: f0aee240cf03f4813935fcb99bf3c879, type: 3}
   - {fileID: -634131515174526615, guid: 8e289797ee9b343a18bfb880d84087ba, type: 3}
+  - {fileID: -634131515174526615, guid: f190c9ec55c1141d99c1bd201489b17c, type: 3}
   - {fileID: -634131515174526615, guid: 1d076d49b81d84318a46569a10d6e15d, type: 3}
+  - {fileID: -634131515174526615, guid: 4ebcef77f610045a698f3abefb4bc54e, type: 3}
   - {fileID: -634131515174526615, guid: 1f4f2e19963954128b5ec95b20e5594c, type: 3}
   - {fileID: -634131515174526615, guid: 3ca6dc19753aa487abbec422a30c47b5, type: 3}
   - {fileID: -634131515174526615, guid: a0c46baf9f2594e3db4665f4b827ed27, type: 3}
+  - {fileID: -634131515174526615, guid: 0e67ae148e0a5431a89c552ab1d37598, type: 3}
+  - {fileID: -634131515174526615, guid: 8b1935844c3ea45469b49b038292db50, type: 3}
 --- !u!4 &1542164288
 Transform:
   m_ObjectHideFlags: 0
@@ -31915,10 +31919,10 @@ RectTransform:
   - {fileID: 424041657}
   m_Father: {fileID: 1473808710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 450, y: 100}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1601708786
 GameObject:
