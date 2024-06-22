@@ -555,6 +555,17 @@ public class WorldController : Singleton<WorldController>
         blipAudio.pitch = 1 + pitchModifier;
         blipAudio.Play();
     }
+    public void UseItem(Item item) {
+        if (item.type == 0) {
+            increaseBaseClickRate(item.value);
+        } else if (item.type == 1) {
+            InceaseClickPower(item.value);
+        } else if (item.type == 2) {
+            IncreaseCritChance(item.value);
+        } else if (item.type == 3) {
+            IncreaseCritPower(item.value);
+        }
+    }
     public void AddPointTextSpawn(Vector3 clickLocation, string amount, Color color, float fontSize, float fadeDuration)
     {
         PointAddition addition = Instantiate(pointAdditionPrefab).GetComponent<PointAddition>();
