@@ -195,6 +195,7 @@ MonoBehaviour:
   harpyRenderer: {fileID: 6473918397888983746}
   harpyAnimator: {fileID: 3347751055504267513}
   harpySpriteRb: {fileID: 4855434175296878895}
+  lootboxPrefab: {fileID: 3376879090029009897, guid: c8eb7b0908f3f4626a916e734a64001c, type: 3}
 --- !u!70 &2556410988708478121
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
