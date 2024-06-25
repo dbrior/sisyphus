@@ -585,8 +585,6 @@ public class WorldController : Singleton<WorldController>
         // UpdateClickUpgrade(10);
 
         lastSparkleSpawnScore = 0;
-
-        StartCoroutine(SpawnHarpy());
     }
     private float CalculateAverageAngularVelocity()
     {
@@ -653,6 +651,10 @@ public class WorldController : Singleton<WorldController>
     void AutoClick(int num_clicks)
     {
         boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier * manualClickMultiplier);
+    }
+
+    public void StartHarpySpawns() {
+        StartCoroutine(SpawnHarpy());
     }
 
     IEnumerator SpawnHarpy()
@@ -795,14 +797,15 @@ public class WorldController : Singleton<WorldController>
 
         animationSpeed = GetAnimationSpeed(speed);
 
-        if (baseClickRate != 0 && (Time.time - sprocketTimestamp >= (1 / baseClickRate))) {
-            GameObject sparkle = Instantiate(sparklePrefab, SprocketSpawn.position, Quaternion.identity);
-            Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
-            sprocketTimestamp = Time.time;
-            // float pitchModifier = Random.Range(-0.75f, -0.2f);
-            // blipAudio.pitch = 1 + pitchModifier;
-            // blipAudio.Play();
-        }
+        // Spawn sparkles for auto click
+        // if (baseClickRate != 0 && (Time.time - sprocketTimestamp >= (1 / baseClickRate))) {
+        //     GameObject sparkle = Instantiate(sparklePrefab, SprocketSpawn.position, Quaternion.identity);
+        //     Destroy(sparkle, 0.925f);  // Auto destroy the sparkle after 1.5 seconds
+        //     sprocketTimestamp = Time.time;
+        //     // float pitchModifier = Random.Range(-0.75f, -0.2f);
+        //     // blipAudio.pitch = 1 + pitchModifier;
+        //     // blipAudio.Play();
+        // }
 
         // boulder.transform.eulerAngles = new Vector3(boulder.transform.eulerAngles.x, boulder.transform.eulerAngles.y, boulder.transform.eulerAngles.z - (clickRate/ 10.0f));
 

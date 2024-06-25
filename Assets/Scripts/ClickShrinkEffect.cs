@@ -24,12 +24,12 @@ public class ClickShrinkEffect : MonoBehaviour
 
     void Update()
     {
-        if(Input.anyKeyDown)
-        {
-            float offset = 0.2f;
-            float yShift = 0.2f;
-            Touched(transform.position + new Vector3(Random.Range(-offset,offset), Random.Range(-offset+yShift,offset+yShift), 0));
-        }
+        // if(Input.anyKeyDown)
+        // {
+        //     float offset = 0.2f;
+        //     float yShift = 0.2f;
+        //     Touched(transform.position + new Vector3(Random.Range(-offset,offset), Random.Range(-offset+yShift,offset+yShift), 0));
+        // }
         if (Input.touchCount > 0)
         {
             foreach (Touch touch in Input.touches)
