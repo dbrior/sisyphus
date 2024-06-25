@@ -6,7 +6,7 @@ public class SwipeDetection : MonoBehaviour
 {
     public UnityEvent OnSwipe;
     private Dictionary<int, Vector2> touchStartPositions = new Dictionary<int, Vector2>();
-    public float swipeThreshold;
+    public float swipeThreshold, swipeAngleMin, swipeAngleMax;
     private Collider2D collider;
     private Sisyphus sisyphus;
 
@@ -50,11 +50,21 @@ public class SwipeDetection : MonoBehaviour
         }
     }
 
+    float ToAngle(Vector2 vector)
+    {
+        float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+        return angle;
+    }
+
+
     bool IsSwipeUp(Vector2 startTouchPosition, Vector2 endTouchPosition)
     {
         Vector2 swipeDirection = endTouchPosition - startTouchPosition;
-        Debug.Log("Swipe: " + swipeDirection.ToString());
-        return swipeDirection.y > swipeThreshold && Mathf.Abs(swipeDirection.x) < swipeThreshold / 2;
+        float swipeAngle = ToAngle(swipeDirection);
+
+        Debug.Log("Swipe: " + swipeDirection.ToString() + " | " + swipeAngle.ToString());
+
+        return swipeDirection.y > swipeThreshold && swipeAngle >= swipeAngleMin && swipeAngle <= swipeAngleMax;
     }
 
     bool IsTouchOnObject(Touch touch)

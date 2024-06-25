@@ -31,12 +31,17 @@ public class Gem : MonoBehaviour
     }
     void OnMouseDown()
     {
-        if (WorldController.Instance.frozen) {
+        if (WorldController.Instance.frozen && !didGemTutorial) {
             Time.timeScale = 1f;
             tappingTutorial.gameObject.SetActive(false);
             WorldController.Instance.frozen = false;
             WorldController.Instance.didGemTutorial = true;
+            WorldController.Instance.boulder_b.swipeDetection.enabled = true;
+            WorldController.Instance.StartHarpySpawns();
+        } else if (!didGemTutorial && !WorldController.Instance.frozen) {
+            return;
         }
+
         WorldController.Instance.gemCollectSound.Play();
         WorldController.Instance.points += pointValue;
         WorldController.Instance.AddPointTextSpawn(transform.position, pointValue.ToString(), new Color(43f/255, 1f, 0f), 1.75f, 2f);

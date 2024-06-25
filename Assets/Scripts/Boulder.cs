@@ -23,6 +23,7 @@ public class Boulder : MonoBehaviour
     private bool onCooldown = false;
     private ClickShrinkEffect cse;
     private float originalMass;
+    public SwipeDetection swipeDetection;
 
     public void Jump() {
         Debug.Log("Jumpin");
@@ -46,6 +47,8 @@ public class Boulder : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         cse = GetComponent<ClickShrinkEffect>();
+        swipeDetection = GetComponent<SwipeDetection>();
+
         glowStartSpeed = glowStartPercent * prestigeSpeed;
         belowPrestigeSpeedTime = Time.time;
         originalMass = rb.mass;
