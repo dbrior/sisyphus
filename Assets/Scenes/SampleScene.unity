@@ -16544,6 +16544,7 @@ MonoBehaviour:
   devilPrefab: {fileID: 615601072952259109, guid: 0f4b7f00f93764daca4ca8c460a66a59, type: 3}
   startedFirstStage: 0
   didGemTutorial: 0
+  didJumpTutorial: 0
   animationSpeed: 0
   isMoving: 0
   rawClickRate: 0

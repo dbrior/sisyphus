@@ -100,6 +100,7 @@ public class WorldController : Singleton<WorldController>
     public GameObject devilPrefab;
     public bool startedFirstStage = false;
     public bool didGemTutorial = false;
+    public bool didJumpTutorial = false;
     private float devilSpawnDistance;
     public float animationSpeed;
     public bool isMoving;

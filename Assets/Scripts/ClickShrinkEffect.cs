@@ -30,7 +30,7 @@ public class ClickShrinkEffect : MonoBehaviour
         //     float yShift = 0.2f;
         //     Touched(transform.position + new Vector3(Random.Range(-offset,offset), Random.Range(-offset+yShift,offset+yShift), 0));
         // }
-        if (Input.touchCount > 0)
+        if (!WorldController.Instance.frozen && Input.touchCount > 0)
         {
             foreach (Touch touch in Input.touches)
             {

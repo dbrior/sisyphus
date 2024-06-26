@@ -24,6 +24,11 @@ public class Sisyphus : MonoBehaviour
         WorldController.Instance.boulder_b.Jump();
     }
     public void Kick() {
+        if (WorldController.Instance.frozen && !WorldController.Instance.didJumpTutorial) {
+            Time.timeScale = 1f;
+            WorldController.Instance.frozen = false;
+            WorldController.Instance.didJumpTutorial = true;
+        }
         kicking = true;
         animator.speed = 1f;
         animator.runtimeAnimatorController = kickingController;
