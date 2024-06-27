@@ -625,17 +625,20 @@ public class WorldController : Singleton<WorldController>
         addition.transform.position = clickLocation;
         Destroy(addition, 0.5f);
     }
-    public void ManualClick(Vector3 clickLocation)
+    public void ManualClick(Vector3 clickLocation, bool wasAuto, int multiplicity)
     {
         bool critical = Random.Range(0, 100) <= critChance;
-        float clickForce = 1000.0f * scoreMultiplier * manualClickMultiplier;
+        float clickForce = 1000.0f * scoreMultiplier * manualClickMultiplier * multiplicity;
         if (critical)
         {
             clickForce *= critMultiplier;
         }
 
-        inputTimestamps.Add(Time.time);
-        inputTimestampsExtended.Add(Time.time);
+        if (!wasAuto) {
+            inputTimestamps.Add(Time.time);
+            inputTimestampsExtended.Add(Time.time);
+        }
+        
         boulder_rb.AddTorque(-clickForce);
         
         string pointString = ((Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f) * (boulder_rb.mass / initialMass) * Mathf.Max((boulder_b.currPrestige * prestigePointsMultiplier), 1f) * 10f).ToString("F0");
@@ -651,7 +654,10 @@ public class WorldController : Singleton<WorldController>
     }
     void AutoClick(int num_clicks)
     {
-        boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier * manualClickMultiplier);
+        float offset = 0.35f;
+        float yShift = 0.2f;
+        boulder_b.Touched(boulder.transform.position + new Vector3(Random.Range(-offset,offset), Random.Range(-offset+yShift,offset+yShift), 0), true, num_clicks);
+        // boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier * manualClickMultiplier);
     }
 
     public void StartHarpySpawns() {
@@ -679,10 +685,10 @@ public class WorldController : Singleton<WorldController>
         if (clicksThisFrame > 0)
         {
             accumulatedTime -= clicksThisFrame / baseClickRate;
+            
+            // Perform the click action however many times is necessary
+            AutoClick(clicksThisFrame);
         }
-
-        // Perform the click action however many times is necessary
-        AutoClick(clicksThisFrame);
 
         rawClickRate = CalculateClickRate();
         rawExtendedClickRate = CalculateExtendedClickRate();

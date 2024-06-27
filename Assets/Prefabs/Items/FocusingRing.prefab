@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: CritPower
-  value: 0.5
+  value: 1
   sprite: {fileID: 21300000, guid: 4209109abe1ec4c8588016e31ebf3c0e, type: 3}
 --- !u!212 &-982556083954826858
 SpriteRenderer:

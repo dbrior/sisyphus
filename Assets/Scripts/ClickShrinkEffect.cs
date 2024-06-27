@@ -26,9 +26,9 @@ public class ClickShrinkEffect : MonoBehaviour
     {
         // if(Input.anyKeyDown)
         // {
-        //     float offset = 0.2f;
-        //     float yShift = 0.2f;
-        //     Touched(transform.position + new Vector3(Random.Range(-offset,offset), Random.Range(-offset+yShift,offset+yShift), 0));
+            // float offset = 0.2f;
+            // float yShift = 0.2f;
+            // Touched(transform.position + new Vector3(Random.Range(-offset,offset), Random.Range(-offset+yShift,offset+yShift), 0));
         // }
         if (!WorldController.Instance.frozen && Input.touchCount > 0)
         {
@@ -71,9 +71,9 @@ public class ClickShrinkEffect : MonoBehaviour
         //     }
         // }
     }
-    private void Touched(Vector3 touchLocation)
+    public void Touched(Vector3 touchLocation, bool wasAuto = false, int multiplicity = 1)
     {
-        WorldController.Instance.ManualClick(touchLocation);
+        WorldController.Instance.ManualClick(touchLocation, wasAuto, multiplicity);
         transform.localScale = Vector3.Lerp(originalScale, targetScale, 1f);
     }
     private void OnMouseUp()
