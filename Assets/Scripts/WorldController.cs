@@ -788,7 +788,7 @@ public class WorldController : Singleton<WorldController>
 
         // DAY AND NIGHt
         float frequency = 0.0001f;
-        float lightLevel = (Mathf.Cos(currScore * frequency) + 1) / 2;
+        float lightLevel = (0.35f * Mathf.Cos(currScore * frequency)) + 0.65f; // Starting at 1, dips to 0.3
         // float lightLevel = (Mathf.Sin((currScore+10000) * frequency) + 0) / 2 * 0.75f;
         globalLight.intensity = lightLevel;
 
