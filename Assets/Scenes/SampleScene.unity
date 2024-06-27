@@ -16544,6 +16544,7 @@ MonoBehaviour:
   devilPrefab: {fileID: 615601072952259109, guid: 0f4b7f00f93764daca4ca8c460a66a59, type: 3}
   startedFirstStage: 0
   didGemTutorial: 0
+  didJumpTutorial: 0
   animationSpeed: 0
   isMoving: 0
   rawClickRate: 0
@@ -30960,7 +30961,7 @@ Transform:
   m_GameObject: {fileID: 1543748116}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.04, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -38781,7 +38782,7 @@ Transform:
   m_GameObject: {fileID: 2092049526}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.83, y: -0, z: 0}
+  m_LocalPosition: {x: 14.79, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

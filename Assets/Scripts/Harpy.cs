@@ -10,6 +10,7 @@ public class Harpy : MonoBehaviour
     private Cloud cloudScript;
     public Rigidbody2D harpySpriteRb;
     public LootBox lootboxPrefab;
+    public TappingTutorial swipeTutorial;
     Collider2D collider2D;
     private bool triggered = false;
     public static Vector2 GetRandomForce(float minForce, float maxForce)
@@ -30,6 +31,16 @@ public class Harpy : MonoBehaviour
     {
         cloudScript = GetComponent<Cloud>();
         collider2D = GetComponent<Collider2D>();
+    }
+
+    void Update() {
+        if (!WorldController.Instance.didJumpTutorial && transform.position.x < 0.2) {
+            swipeTutorial.gameObject.SetActive(true);
+            swipeTutorial.transform.position = WorldController.Instance.boulder.transform.position;
+            swipeTutorial.Activate();
+        } else if (WorldController.Instance.didJumpTutorial && swipeTutorial.gameObject.activeSelf) {
+            swipeTutorial.gameObject.SetActive(false);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
