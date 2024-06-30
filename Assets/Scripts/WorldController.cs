@@ -162,6 +162,7 @@ public class WorldController : Singleton<WorldController>
     public float critMultiplier = 2f;
     private float originalCritMultiplier;
     public int gemCount = 0;
+    public float maxAutoClickInterval;
 
     public void increaseBaseClickRate(float amount) {   // Auto Click
         baseClickRate += amount;
@@ -587,6 +588,8 @@ public class WorldController : Singleton<WorldController>
         // UpdateClickUpgrade(10);
 
         lastSparkleSpawnScore = 0;
+
+        StartCoroutine(TriggerAutoClicks());
     }
     private float CalculateAverageAngularVelocity()
     {
@@ -674,22 +677,25 @@ public class WorldController : Singleton<WorldController>
         }
     }
 
+    IEnumerator TriggerAutoClicks()
+    {
+        while (true) {
+            int clicksThisFrame = (int) Mathf.Floor(baseClickRate * accumulatedTime);
+            if (clicksThisFrame > 0)
+            {
+                accumulatedTime -= clicksThisFrame / baseClickRate;
+                AutoClick(clicksThisFrame);
+            }
+            yield return new WaitForSeconds(maxAutoClickInterval);
+        }
+    }
+
     void Update() 
     {
         // Debug.Log(critChance);
         // CLick function
         // Calculate the number of clicks that should have occurred since the last frame
         accumulatedTime += Time.deltaTime;
-        int clicksThisFrame = (int)(baseClickRate * accumulatedTime);
-
-        // Reset the accumulated time
-        if (clicksThisFrame > 0)
-        {
-            accumulatedTime -= clicksThisFrame / baseClickRate;
-            
-            // Perform the click action however many times is necessary
-            AutoClick(clicksThisFrame);
-        }
 
         rawClickRate = CalculateClickRate();
         rawExtendedClickRate = CalculateExtendedClickRate();

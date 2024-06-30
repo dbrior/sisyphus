@@ -16860,6 +16860,7 @@ MonoBehaviour:
   critChance: 5
   critMultiplier: 5
   gemCount: 0
+  maxAutoClickInterval: 0.0625
 --- !u!1 &1111910739
 GameObject:
   m_ObjectHideFlags: 0
