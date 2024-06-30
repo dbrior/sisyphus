@@ -161,6 +161,7 @@ public class WorldController : Singleton<WorldController>
 
     public float critMultiplier = 2f;
     private float originalCritMultiplier;
+    public int gemCount = 0;
 
     public void increaseBaseClickRate(float amount) {   // Auto Click
         baseClickRate += amount;

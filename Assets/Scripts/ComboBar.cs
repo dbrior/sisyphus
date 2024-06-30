@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ComboBar : MonoBehaviour
 {
+    public float maxClickRate;
     public Image bar;
     public float moveSpeed = 100f;
     public Animator fireStreak;
@@ -45,7 +46,7 @@ public class ComboBar : MonoBehaviour
 
     void Update()
     {
-        float progress = WorldController.Instance.rawExtendedClickRate / (1000f / 60f);
+        float progress = WorldController.Instance.rawExtendedClickRate / maxClickRate;
         bar.fillAmount = progress;
 
         SetMultiplier(progress);
