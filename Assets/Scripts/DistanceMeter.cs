@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DistanceMeter : MonoBehaviour
+public class DistanceMeter : Singleton<DistanceMeter>
 {
     public Image meter;
     public Image icon;
@@ -28,5 +28,12 @@ public class DistanceMeter : MonoBehaviour
     }
     public void UpdateMeter() {
         meter.fillAmount = WorldController.Instance.currScore / currGoalDistance;
+    }
+    public void UpdateGoalDistance(DistanceGoal.Type targetGoalType, float newDistance) {
+        for (int i = 0; i < goals.Count; i++) {
+            if (goals[i].type == targetGoalType) {
+                goals[i].distance = newDistance;
+            }
+        }
     }
 }

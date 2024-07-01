@@ -582,7 +582,7 @@ public class WorldController : Singleton<WorldController>
             // SpawnCloud(i);
         }
 
-        devilSpawnDistance = 10000.0f + Random.Range(0.0f, 10.0f);
+        devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
@@ -590,6 +590,8 @@ public class WorldController : Singleton<WorldController>
         lastSparkleSpawnScore = 0;
 
         StartCoroutine(TriggerAutoClicks());
+
+        DistanceMeter.Instance.UpdateGoalDistance(DistanceGoal.Type.BossBattle, devilSpawnDistance);
     }
     private float CalculateAverageAngularVelocity()
     {
@@ -645,7 +647,7 @@ public class WorldController : Singleton<WorldController>
         
         boulder_rb.AddTorque(-clickForce);
         
-        string pointString = ((Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f) * (boulder_rb.mass / initialMass) * Mathf.Max((boulder_b.currPrestige * prestigePointsMultiplier), 1f) * 10f).ToString("F0");
+        string pointString = ((Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f) * (boulder_rb.mass / initialMass) * Mathf.Max((float) (boulder_b.currPrestige * prestigePointsMultiplier), 1f) * 10f).ToString("F0");
         if (critical)
         {
             AddPointTextSpawn(clickLocation, pointString, new Color(255f/255, 110f/255, 0f/255, 1f), 1.5f, 1.5f);
