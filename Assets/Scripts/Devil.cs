@@ -58,7 +58,7 @@ public class Devil : MonoBehaviour
 
         movementSpeed = baseMovementSpeed * level;
 
-        meteorSpawnInterval = baseMeteorSpawnInterval * level;
+        meteorSpawnInterval = baseMeteorSpawnInterval * (1f / level);
 
         // Voice line
         Debug.Log("Voice: " + BossIntro.Instance.GetRandomIntroLine());
@@ -133,6 +133,7 @@ public class Devil : MonoBehaviour
     }
 
     void Death() {
+        level += 1;
         ending = true;
         animator.runtimeAnimatorController = deathAnimation;
         // deathSound.Play();
