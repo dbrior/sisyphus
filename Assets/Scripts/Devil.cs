@@ -21,7 +21,7 @@ public class Devil : MonoBehaviour
     private bool spawnFireballs = false;
     private bool cycleComplete = false;
     private Vector3 exitLocation;
-    public float maxHealth = 400f;
+    public float maxHealth = 100f;
     private float currHealth;
     public float invincibleTime = 1f;
     private float timeTillVulnerable = 0;
@@ -130,6 +130,9 @@ public class Devil : MonoBehaviour
     void Exiting()
     {
         Debug.Log("exiting");
+        WorldController.Instance.devilSpawnDistance = WorldController.Instance.currScore + 10000f + Random.Range(0f, 1000f);
+        WorldController.Instance.startedFirstStage = false;
+        WorldController.Instance.distanceMeter.UpdateBothGoalDistances(DistanceGoal.Type.BossBattle, WorldController.Instance.currScore, WorldController.Instance.devilSpawnDistance);
         // bossMusic.Stop();
         Destroy(gameObject);
     }

@@ -10,4 +10,5 @@ public class DistanceGoal : ScriptableObject {
     public Type type;
     public Sprite icon;
     public float distance;
+    public float startDistance;
 }

@@ -16884,6 +16884,7 @@ MonoBehaviour:
   startedFirstStage: 0
   didGemTutorial: 0
   didJumpTutorial: 0
+  devilSpawnDistance: 0
   animationSpeed: 0
   isMoving: 0
   rawClickRate: 0
@@ -16919,6 +16920,7 @@ MonoBehaviour:
   critMultiplier: 5
   gemCount: 0
   maxAutoClickInterval: 0.0625
+  distanceMeter: {fileID: 689695701}
 --- !u!1 &1111910739
 GameObject:
   m_ObjectHideFlags: 0
@@ -30990,7 +30992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1473808710
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31010,7 +31012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: 0, y: -225}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1481299089
@@ -31142,7 +31144,7 @@ MonoBehaviour:
   - {fileID: 414773911}
   - {fileID: 689695699}
   objectsToDisable:
-  - {fileID: 166847829}
+  - {fileID: 2014086570}
   - {fileID: 374958853}
 --- !u!1 &1496435600
 GameObject:

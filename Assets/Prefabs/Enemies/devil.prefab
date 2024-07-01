@@ -134,7 +134,7 @@ MonoBehaviour:
   spawnInterval: 1
   randomFactor: 0.5
   duration: 150
-  maxHealth: 350
+  maxHealth: 100
   invincibleTime: 1
   hitAnimation: {fileID: 9100000, guid: 1415b0b02367c4455b3d0846b428453a, type: 2}
   flyingAnimation: {fileID: 9100000, guid: 1a4f50df65dec4a0993172724c4ab2e2, type: 2}

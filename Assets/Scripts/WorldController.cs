@@ -101,7 +101,7 @@ public class WorldController : Singleton<WorldController>
     public bool startedFirstStage = false;
     public bool didGemTutorial = false;
     public bool didJumpTutorial = false;
-    private float devilSpawnDistance;
+    public float devilSpawnDistance;
     public float animationSpeed;
     public bool isMoving;
     public float rawClickRate;
@@ -163,6 +163,7 @@ public class WorldController : Singleton<WorldController>
     private float originalCritMultiplier;
     public int gemCount = 0;
     public float maxAutoClickInterval;
+    public DistanceMeter distanceMeter;
 
     public void increaseBaseClickRate(float amount) {   // Auto Click
         baseClickRate += amount;
@@ -591,7 +592,7 @@ public class WorldController : Singleton<WorldController>
 
         StartCoroutine(TriggerAutoClicks());
 
-        DistanceMeter.Instance.UpdateGoalDistance(DistanceGoal.Type.BossBattle, devilSpawnDistance);
+        distanceMeter.UpdateGoalEndDistance(DistanceGoal.Type.BossBattle, devilSpawnDistance);
     }
     private float CalculateAverageAngularVelocity()
     {
