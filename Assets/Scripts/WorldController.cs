@@ -164,6 +164,7 @@ public class WorldController : Singleton<WorldController>
     public int gemCount = 0;
     public float maxAutoClickInterval;
     public DistanceMeter distanceMeter;
+    public GameObject gameOverScreen;
 
     public void increaseBaseClickRate(float amount) {   // Auto Click
         baseClickRate += amount;
@@ -225,6 +226,12 @@ public class WorldController : Singleton<WorldController>
     {
         frozen = true;
         Time.timeScale = 0;
+    }
+
+    public void UnFreeze()
+    {
+        frozen = false;
+        Time.timeScale = 1;
     }
 
     public void SpawnLostPoints(int amount)
@@ -583,8 +590,8 @@ public class WorldController : Singleton<WorldController>
             // SpawnCloud(i);
         }
 
-        // devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
-        devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
+        devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
+        // devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
@@ -666,6 +673,11 @@ public class WorldController : Singleton<WorldController>
         float yShift = 0.2f;
         boulder_b.Touched(boulder.transform.position + new Vector3(Random.Range(-offset,offset), Random.Range(-offset+yShift,offset+yShift), 0), true, num_clicks);
         // boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier * manualClickMultiplier);
+    }
+
+    public void GameOver() {
+        gameOverScreen.SetActive(true);
+        Freeze();
     }
 
     public void StartHarpySpawns() {

@@ -78,6 +78,9 @@ public class Devil : MonoBehaviour
         spawnFireballs = true;
         StartCoroutine(SpawnPrefabsAtInterval());
         // StartCoroutine(SelectRandomPositions());
+
+        // Start fight
+        WorldController.Instance.sisyphus.StartFight();
     }
 
     void StartHit() {
@@ -133,6 +136,7 @@ public class Devil : MonoBehaviour
     }
 
     void Death() {
+        WorldController.Instance.sisyphus.EndFight();
         level += 1;
         ending = true;
         animator.runtimeAnimatorController = deathAnimation;

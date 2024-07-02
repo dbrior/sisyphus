@@ -5,6 +5,9 @@ using UnityEngine.Rendering.Universal;
 
 public class Sisyphus : MonoBehaviour
 {
+    // Health
+    private float maxHealth = 250f;
+    private float currHealth;
     // Animations
     public RuntimeAnimatorController idleController;
     public RuntimeAnimatorController pushingController;
@@ -20,6 +23,25 @@ public class Sisyphus : MonoBehaviour
     private bool bootsMode;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+
+    public void Damage(float damage) {
+        currHealth -= damage;
+        HealthBarManager.Instance.UpdateHealthBar(gameObject, currHealth / maxHealth);
+
+        if (currHealth <= 0) {
+            WorldController.Instance.GameOver();
+        }
+    }
+
+    public void StartFight() {
+        currHealth = maxHealth;
+        HealthBarManager.Instance.CreateHealthBar(gameObject);
+    }
+
+    public void EndFight() {
+        HealthBarManager.Instance.DestroyHealthBar(gameObject);
+    }
+
     public void Jump() {
         WorldController.Instance.boulder_b.Jump();
     }
@@ -71,6 +93,8 @@ public class Sisyphus : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        currHealth = maxHealth;
     }
 }

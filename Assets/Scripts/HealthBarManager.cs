@@ -15,6 +15,10 @@ public class HealthBarManager : Singleton<HealthBarManager>
         healthBars[character] = healthBar;
     }
 
+    public void DestroyHealthBar(GameObject character) {
+        healthBars.Remove(character);
+    }
+
     public void UpdateHealthBar(GameObject character, float healthPercentage)
     {
         if (healthBars.ContainsKey(character))
