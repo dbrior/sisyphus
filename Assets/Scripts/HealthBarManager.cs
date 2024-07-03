@@ -16,6 +16,7 @@ public class HealthBarManager : Singleton<HealthBarManager>
     }
 
     public void DestroyHealthBar(GameObject character) {
+        Destroy(healthBars[character].gameObject);
         healthBars.Remove(character);
     }
 
