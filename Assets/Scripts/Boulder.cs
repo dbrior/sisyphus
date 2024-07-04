@@ -21,9 +21,9 @@ public class Boulder : MonoBehaviour
     private float drumLastPlayedTime = 0f;
     private float belowPrestigeSpeedTime = 0f;
     private bool onCooldown = false;
-    private ClickShrinkEffect cse;
     private float originalMass;
     public SwipeDetection swipeDetection;
+    private ClickShrinkEffect cse;
 
     public void Jump() {
         Debug.Log("Jumpin");
@@ -32,6 +32,10 @@ public class Boulder : MonoBehaviour
         } else {
             rb.AddForce(Vector3.up * 60000f * 5f);
         }
+    }
+
+    public void Touched(Vector3 touchLocation, bool wasAuto = false, int multiplicity= 1) {
+        cse.Touched(touchLocation, wasAuto, multiplicity);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

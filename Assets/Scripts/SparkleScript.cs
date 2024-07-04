@@ -52,8 +52,9 @@ public class SparkleScript : MonoBehaviour
             SwitchToSecondaryAnimation();
             transform.position = new Vector3(transform.position.x, transform.position.y-0.5f, transform.position.z);
             collisionSound.Play();
-            WorldController.Instance.SpawnLostPoints(100);
-            WorldController.Instance.points -= 100.0f;
+            // WorldController.Instance.SpawnLostPoints(100);
+            // WorldController.Instance.points -= 100.0f;
+            WorldController.Instance.sisyphus.Damage(25f);
         }
     }
 

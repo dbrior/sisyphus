@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: ClickPower
-  value: 0.2
+  value: 1
   sprite: {fileID: 21300000, guid: 62641f5554637493783b034787cb3f4f, type: 3}
 --- !u!212 &-982556083954826858
 SpriteRenderer:

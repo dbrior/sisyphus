@@ -43,8 +43,9 @@ public class Gem : MonoBehaviour
         }
 
         WorldController.Instance.gemCollectSound.Play();
-        WorldController.Instance.points += pointValue;
-        WorldController.Instance.AddPointTextSpawn(transform.position, pointValue.ToString(), new Color(43f/255, 1f, 0f), 1.75f, 2f);
+        // WorldController.Instance.points += pointValue;
+        WorldController.Instance.gemCount += 1;
+        WorldController.Instance.AddPointTextSpawn(transform.position, 1.ToString(), new Color(43f/255, 1f, 0f), 1.75f, 2f);
         Destroy(gameObject);
     }
 }

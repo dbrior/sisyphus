@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
+
 
 public class WorldController : Singleton<WorldController>
 {
@@ -97,11 +99,11 @@ public class WorldController : Singleton<WorldController>
     private float sprocketTimestamp = 0.0f;
     public AudioSource blipAudio;
     public Transform SprocketSpawn;
-    public GameObject devilPrefab;
+    public Devil devilPrefab;
     public bool startedFirstStage = false;
     public bool didGemTutorial = false;
     public bool didJumpTutorial = false;
-    private float devilSpawnDistance;
+    public float devilSpawnDistance;
     public float animationSpeed;
     public bool isMoving;
     public float rawClickRate;
@@ -161,6 +163,12 @@ public class WorldController : Singleton<WorldController>
 
     public float critMultiplier = 2f;
     private float originalCritMultiplier;
+    public int gemCount = 0;
+    public float maxAutoClickInterval;
+    public DistanceMeter distanceMeter;
+    public GameOverScreen gameOverScreen;
+    public int bossKills = 0;
+    private Devil devilObject;
 
     public void increaseBaseClickRate(float amount) {   // Auto Click
         baseClickRate += amount;
@@ -222,6 +230,12 @@ public class WorldController : Singleton<WorldController>
     {
         frozen = true;
         Time.timeScale = 0;
+    }
+
+    public void UnFreeze()
+    {
+        frozen = false;
+        Time.timeScale = 1;
     }
 
     public void SpawnLostPoints(int amount)
@@ -542,6 +556,35 @@ public class WorldController : Singleton<WorldController>
         UpdateScore(distanceDelta);
         return distanceDelta;
     }
+
+    public void ResetGame() {
+        UnFreeze();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        // if (devilObject != null) {
+        //     Destroy(devilObject.gameObject);
+        // }
+        // UnFreeze();
+        // boulder_rb.mass = initialMass;
+        // resetBuffs();
+
+        // maxScore = 0.0f;
+        // currScore = 0.0f;
+        // points = 0f;
+        // gemCount = 0;
+        // bossKills = 0;
+
+        // SoundManager.Instance.PlayBackgroundMusic();
+        // camera.transform.position = cameraOriginalPosition;
+        // boulder_rb.mass = initialMass;
+
+        // // SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
+        // // SetTerrainAngle(currScore);                     // Steepness changes accoding to scoregit
+
+        // devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
+        // distanceMeter.UpdateBothGoalDistances(DistanceGoal.Type.BossBattle, 0f, devilSpawnDistance);
+        // gameOverScreen.gameObject.SetActive(false);
+    }
     
     void Start()
     {
@@ -549,12 +592,12 @@ public class WorldController : Singleton<WorldController>
         storeBuffs();
 
         cameraOriginalPosition = camera.transform.position;
-        // Set Font
-        var tmpTexts = FindObjectsOfType<TMP_Text>();
-        foreach (TMP_Text tmpText in tmpTexts)
-        {
-            tmpText.font = globalFont;
-        }
+        // // Set Font
+        // var tmpTexts = FindObjectsOfType<TMP_Text>();
+        // foreach (TMP_Text tmpText in tmpTexts)
+        // {
+        //     tmpText.font = globalFont;
+        // }
 
         boulder_rb = boulder.GetComponent<Rigidbody2D>();
         boulder_sr = boulder.GetComponent<SpriteRenderer>();
@@ -576,16 +619,21 @@ public class WorldController : Singleton<WorldController>
         // Initialization
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
         SetTerrainAngle(currScore);                     // Steepness changes accoding to scoregit
-        for (float i=-5.0f; i<5.0f; i+=1.0f) {
-            // SpawnCloud(i);
-        }
+        // for (float i=-5.0f; i<5.0f; i+=1.0f) {
+        //     // SpawnCloud(i);
+        // }
 
-        devilSpawnDistance = 10000.0f + Random.Range(0.0f, 10.0f);
+        // devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
+        devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
 
         lastSparkleSpawnScore = 0;
+
+        StartCoroutine(TriggerAutoClicks());
+
+        distanceMeter.UpdateBothGoalDistances(DistanceGoal.Type.BossBattle, 0f, devilSpawnDistance);
     }
     private float CalculateAverageAngularVelocity()
     {
@@ -625,20 +673,23 @@ public class WorldController : Singleton<WorldController>
         addition.transform.position = clickLocation;
         Destroy(addition, 0.5f);
     }
-    public void ManualClick(Vector3 clickLocation)
+    public void ManualClick(Vector3 clickLocation, bool wasAuto, int multiplicity)
     {
         bool critical = Random.Range(0, 100) <= critChance;
-        float clickForce = 1000.0f * scoreMultiplier * manualClickMultiplier;
+        float clickForce = 1000.0f * scoreMultiplier * manualClickMultiplier * multiplicity;
         if (critical)
         {
             clickForce *= critMultiplier;
         }
 
-        inputTimestamps.Add(Time.time);
-        inputTimestampsExtended.Add(Time.time);
+        if (!wasAuto) {
+            inputTimestamps.Add(Time.time);
+            inputTimestampsExtended.Add(Time.time);
+        }
+        
         boulder_rb.AddTorque(-clickForce);
         
-        string pointString = ((Mathf.Ceil((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * 10f) / 10f) * (boulder_rb.mass / initialMass) * Mathf.Max((boulder_b.currPrestige * prestigePointsMultiplier), 1f) * 10f).ToString("F0");
+        string pointString = ((clickForce / boulder_rb.mass) * Time.deltaTime * 3f * (boulder_rb.mass / initialMass) * Mathf.Max(boulder_b.currPrestige * prestigePointsMultiplier, 1f) * 10f).ToString("F0");
         if (critical)
         {
             AddPointTextSpawn(clickLocation, pointString, new Color(255f/255, 110f/255, 0f/255, 1f), 1.5f, 1.5f);
@@ -651,7 +702,16 @@ public class WorldController : Singleton<WorldController>
     }
     void AutoClick(int num_clicks)
     {
-        boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier * manualClickMultiplier);
+        float offset = 0.35f;
+        float yShift = 0.2f;
+        boulder_b.Touched(boulder.transform.position + new Vector3(Random.Range(-offset,offset), Random.Range(-offset+yShift,offset+yShift), 0), true, num_clicks);
+        // boulder_rb.AddTorque(-1000.0f * num_clicks * scoreMultiplier * manualClickMultiplier);
+    }
+
+    public void GameOver() {
+        gameOverScreen.gameObject.SetActive(true);
+        gameOverScreen.Activate();
+        Freeze();
     }
 
     public void StartHarpySpawns() {
@@ -667,22 +727,25 @@ public class WorldController : Singleton<WorldController>
         }
     }
 
+    IEnumerator TriggerAutoClicks()
+    {
+        while (true) {
+            int clicksThisFrame = (int) Mathf.Floor(baseClickRate * accumulatedTime);
+            if (clicksThisFrame > 0)
+            {
+                accumulatedTime -= clicksThisFrame / baseClickRate;
+                AutoClick(clicksThisFrame);
+            }
+            yield return new WaitForSeconds(maxAutoClickInterval);
+        }
+    }
+
     void Update() 
     {
         // Debug.Log(critChance);
         // CLick function
         // Calculate the number of clicks that should have occurred since the last frame
         accumulatedTime += Time.deltaTime;
-        int clicksThisFrame = (int)(baseClickRate * accumulatedTime);
-
-        // Reset the accumulated time
-        if (clicksThisFrame > 0)
-        {
-            accumulatedTime -= clicksThisFrame / baseClickRate;
-        }
-
-        // Perform the click action however many times is necessary
-        AutoClick(clicksThisFrame);
 
         rawClickRate = CalculateClickRate();
         rawExtendedClickRate = CalculateExtendedClickRate();
@@ -788,7 +851,7 @@ public class WorldController : Singleton<WorldController>
 
         // DAY AND NIGHt
         float frequency = 0.0001f;
-        float lightLevel = (Mathf.Cos(currScore * frequency) + 1) / 2;
+        float lightLevel = (0.35f * Mathf.Cos(currScore * frequency)) + 0.65f; // Starting at 1, dips to 0.3
         // float lightLevel = (Mathf.Sin((currScore+10000) * frequency) + 0) / 2 * 0.75f;
         globalLight.intensity = lightLevel;
 
@@ -824,7 +887,8 @@ public class WorldController : Singleton<WorldController>
 
         if (!startedFirstStage && currScore >= devilSpawnDistance)
         {
-            GameObject devilObject = Instantiate(devilPrefab);
+            devilObject = Instantiate(devilPrefab);
+            // devilObject.SetLevel(6);
             devilObject.transform.position = new Vector2(0.0f, -4.0f);
             startedFirstStage = true;
             if (dewieSpawned)
