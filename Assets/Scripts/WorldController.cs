@@ -623,8 +623,8 @@ public class WorldController : Singleton<WorldController>
         //     // SpawnCloud(i);
         // }
 
-        devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
-        // devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
+        // devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
+        devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
@@ -888,7 +888,7 @@ public class WorldController : Singleton<WorldController>
         if (!startedFirstStage && currScore >= devilSpawnDistance)
         {
             devilObject = Instantiate(devilPrefab);
-            devilObject.SetLevel(6);
+            // devilObject.SetLevel(6);
             devilObject.transform.position = new Vector2(0.0f, -4.0f);
             startedFirstStage = true;
             if (dewieSpawned)
