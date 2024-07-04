@@ -18,6 +18,13 @@ public class SoundManager : Singleton<SoundManager>
         StartCoroutine(DelaySoundCoroutine(audioSource, delay));
     }
 
+    public void PlayBackgroundMusic() {
+        bossMusic.Stop();
+        backgroundMusic.Stop();
+        backgroundMusic.Play();
+        backgroundMusic.volume = 0.5f;
+    }
+
     IEnumerator DelaySoundCoroutine(AudioSource audioSource, float delay)
     {
         Debug.Log("Triggered");

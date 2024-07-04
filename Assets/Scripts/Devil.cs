@@ -48,6 +48,10 @@ public class Devil : MonoBehaviour
     private float hitTime;
     private bool ending = false;
 
+    public void SetLevel(int newLevel) {
+        level = newLevel;
+    }
+
     void Start() {
         // Components
         animator = GetComponent<Animator>();
@@ -137,6 +141,7 @@ public class Devil : MonoBehaviour
 
     void Death() {
         WorldController.Instance.sisyphus.EndFight();
+        WorldController.Instance.bossKills += 1;
         level += 1;
         ending = true;
         animator.runtimeAnimatorController = deathAnimation;

@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
+
 
 public class WorldController : Singleton<WorldController>
 {
@@ -97,7 +99,7 @@ public class WorldController : Singleton<WorldController>
     private float sprocketTimestamp = 0.0f;
     public AudioSource blipAudio;
     public Transform SprocketSpawn;
-    public GameObject devilPrefab;
+    public Devil devilPrefab;
     public bool startedFirstStage = false;
     public bool didGemTutorial = false;
     public bool didJumpTutorial = false;
@@ -164,7 +166,9 @@ public class WorldController : Singleton<WorldController>
     public int gemCount = 0;
     public float maxAutoClickInterval;
     public DistanceMeter distanceMeter;
-    public GameObject gameOverScreen;
+    public GameOverScreen gameOverScreen;
+    public int bossKills = 0;
+    private Devil devilObject;
 
     public void increaseBaseClickRate(float amount) {   // Auto Click
         baseClickRate += amount;
@@ -552,6 +556,35 @@ public class WorldController : Singleton<WorldController>
         UpdateScore(distanceDelta);
         return distanceDelta;
     }
+
+    public void ResetGame() {
+        UnFreeze();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        // if (devilObject != null) {
+        //     Destroy(devilObject.gameObject);
+        // }
+        // UnFreeze();
+        // boulder_rb.mass = initialMass;
+        // resetBuffs();
+
+        // maxScore = 0.0f;
+        // currScore = 0.0f;
+        // points = 0f;
+        // gemCount = 0;
+        // bossKills = 0;
+
+        // SoundManager.Instance.PlayBackgroundMusic();
+        // camera.transform.position = cameraOriginalPosition;
+        // boulder_rb.mass = initialMass;
+
+        // // SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
+        // // SetTerrainAngle(currScore);                     // Steepness changes accoding to scoregit
+
+        // devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
+        // distanceMeter.UpdateBothGoalDistances(DistanceGoal.Type.BossBattle, 0f, devilSpawnDistance);
+        // gameOverScreen.gameObject.SetActive(false);
+    }
     
     void Start()
     {
@@ -559,12 +592,12 @@ public class WorldController : Singleton<WorldController>
         storeBuffs();
 
         cameraOriginalPosition = camera.transform.position;
-        // Set Font
-        var tmpTexts = FindObjectsOfType<TMP_Text>();
-        foreach (TMP_Text tmpText in tmpTexts)
-        {
-            tmpText.font = globalFont;
-        }
+        // // Set Font
+        // var tmpTexts = FindObjectsOfType<TMP_Text>();
+        // foreach (TMP_Text tmpText in tmpTexts)
+        // {
+        //     tmpText.font = globalFont;
+        // }
 
         boulder_rb = boulder.GetComponent<Rigidbody2D>();
         boulder_sr = boulder.GetComponent<SpriteRenderer>();
@@ -586,9 +619,9 @@ public class WorldController : Singleton<WorldController>
         // Initialization
         SetSpriteAnimationSpeed(clickRate);             // Some animations adapt to the speed of the game
         SetTerrainAngle(currScore);                     // Steepness changes accoding to scoregit
-        for (float i=-5.0f; i<5.0f; i+=1.0f) {
-            // SpawnCloud(i);
-        }
+        // for (float i=-5.0f; i<5.0f; i+=1.0f) {
+        //     // SpawnCloud(i);
+        // }
 
         devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
         // devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
@@ -676,7 +709,8 @@ public class WorldController : Singleton<WorldController>
     }
 
     public void GameOver() {
-        gameOverScreen.SetActive(true);
+        gameOverScreen.gameObject.SetActive(true);
+        gameOverScreen.Activate();
         Freeze();
     }
 
@@ -853,7 +887,8 @@ public class WorldController : Singleton<WorldController>
 
         if (!startedFirstStage && currScore >= devilSpawnDistance)
         {
-            GameObject devilObject = Instantiate(devilPrefab);
+            devilObject = Instantiate(devilPrefab);
+            devilObject.SetLevel(6);
             devilObject.transform.position = new Vector2(0.0f, -4.0f);
             startedFirstStage = true;
             if (dewieSpawned)
