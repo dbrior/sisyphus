@@ -30,6 +30,8 @@ public class GameOverScreen : Singleton<GameOverScreen>
         pointsText.text = points.ToString("F0");
         gemsText.text = gemCount.ToString("F0");
         killsText.text = bossKills.ToString("F0");
+        boulderPrestigeText.text = boulderPrestige.ToString("F0");
+
         prestigeText.text = prestigePoints.ToString("F0");
     }
 
