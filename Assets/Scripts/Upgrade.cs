@@ -44,7 +44,7 @@ public class Upgrade : MonoBehaviour
 
         upgradeCountUI.text = upgradeCount.ToString();
         if (!isStaticText) {
-            upgradeCostUI.text = "COST: " + cost.ToString();
+            upgradeCostUI.text = cost.ToString();
             upgradeValueUI.text = "CPS: " + value.ToString();
         }
 
@@ -84,7 +84,7 @@ public class Upgrade : MonoBehaviour
             cost = Mathf.Round(cost * 1.3f * 10f) / 10f;
 
             if (!isStaticText) {
-                upgradeCostUI.text = "COST: " + cost.ToString();
+                upgradeCostUI.text = cost.ToString();
             }
             upgradeCountUI.text = upgradeCount.ToString();
 
