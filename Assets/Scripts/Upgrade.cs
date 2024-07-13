@@ -45,7 +45,7 @@ public class Upgrade : MonoBehaviour
         upgradeCountUI.text = upgradeCount.ToString();
         if (!isStaticText) {
             upgradeCostUI.text = cost.ToString();
-            upgradeValueUI.text = "CPS: " + value.ToString();
+            // upgradeValueUI.text = "CPS: " + value.ToString();
         }
 
         if (onPurchase == null) onPurchase = new UnityEvent();
