@@ -20,13 +20,14 @@ public class GameOverScreen : Singleton<GameOverScreen>
 
         float prestigePoints = 0f;
         // prestigePoints += (points / 10000f);
-        prestigePoints += (gemCount / 10f);
-        if (bossKills > 0) {
-            prestigePoints += Mathf.Pow(2, bossKills-1);
-        }
-        if (boulderPrestige > 0) {
-            prestigePoints += Mathf.Pow(5, boulderPrestige);
-        }
+        // prestigePoints += (gemCount / 10f);
+        // if (bossKills > 0) {
+        //     prestigePoints += Mathf.Pow(2, bossKills-1);
+        // }
+        // if (boulderPrestige > 0) {
+        //     prestigePoints += Mathf.Pow(5, boulderPrestige);
+        // }
+        prestigePoints = gemCount + bossKills + boulderPrestige;
         prestigePoints = Mathf.Floor(prestigePoints);
 
         pointsText.text = points.ToString("F0");

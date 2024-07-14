@@ -9269,6 +9269,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Damage
       objectReference: {fileID: 0}
+    - target: {fileID: 8445990593513513179, guid: efddd479431d64e42be04a45cf93c284, type: 3}
+      propertyPath: m_text
+      value: DAMAGE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445990593513513179, guid: efddd479431d64e42be04a45cf93c284, type: 3}
+      propertyPath: m_fontSize
+      value: 39.65
+      objectReference: {fileID: 0}
     - target: {fileID: 9195311624220903719, guid: efddd479431d64e42be04a45cf93c284, type: 3}
       propertyPath: m_text
       value: DAMAGE
@@ -11957,6 +11965,14 @@ PrefabInstance:
     - target: {fileID: 6356564038302148303, guid: efddd479431d64e42be04a45cf93c284, type: 3}
       propertyPath: m_Name
       value: Cllick Strength
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445990593513513179, guid: efddd479431d64e42be04a45cf93c284, type: 3}
+      propertyPath: m_text
+      value: STRENGTH
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445990593513513179, guid: efddd479431d64e42be04a45cf93c284, type: 3}
+      propertyPath: m_fontSize
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 9195311624220903719, guid: efddd479431d64e42be04a45cf93c284, type: 3}
       propertyPath: m_text
@@ -37146,6 +37162,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health
       objectReference: {fileID: 0}
+    - target: {fileID: 8445990593513513179, guid: efddd479431d64e42be04a45cf93c284, type: 3}
+      propertyPath: m_text
+      value: HEALTH
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445990593513513179, guid: efddd479431d64e42be04a45cf93c284, type: 3}
+      propertyPath: m_fontSize
+      value: 37.85
+      objectReference: {fileID: 0}
     - target: {fileID: 9195311624220903719, guid: efddd479431d64e42be04a45cf93c284, type: 3}
       propertyPath: m_text
       value: HEALTH
@@ -37991,6 +38015,14 @@ PrefabInstance:
     - target: {fileID: 6356564038302148303, guid: efddd479431d64e42be04a45cf93c284, type: 3}
       propertyPath: m_Name
       value: Key Items
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445990593513513179, guid: efddd479431d64e42be04a45cf93c284, type: 3}
+      propertyPath: m_text
+      value: KEY
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445990593513513179, guid: efddd479431d64e42be04a45cf93c284, type: 3}
+      propertyPath: m_fontSize
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 9195311624220903719, guid: efddd479431d64e42be04a45cf93c284, type: 3}
       propertyPath: m_text
@@ -45495,7 +45527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3e37f478f774f24a14f0dbd0cc2b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTextColor: {r: 0, g: 0, b: 0, a: 1}
+  activeTextColor: {r: 1, g: 1, b: 1, a: 1}
   disabledTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   disabledBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
