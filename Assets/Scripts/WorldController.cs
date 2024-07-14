@@ -180,6 +180,16 @@ public class WorldController : Singleton<WorldController>
     public int bossKills = 0;
     private Devil devilObject;
 
+    // PRESTIGE POINTS ------------------------------
+    private float prestigePoints;
+    public float GetPrestigePoints() {
+        return prestigePoints;
+    }
+    public void SubtractPrestigePoints(float amount) {
+        prestigePoints -= amount;
+    }
+    // ------------------------------ END
+
 
     // NEW SKILL SYSTEM ------------------------------
     private delegate void UpgradeFunction(float amount);
@@ -220,7 +230,6 @@ public class WorldController : Singleton<WorldController>
     public void IncreaseCritPower(float amount) {       // Crit Power
         critMultiplier += amount;
     }
-
     // ------------------------------ END
 
     public void resetBuffs() {
@@ -627,6 +636,7 @@ public class WorldController : Singleton<WorldController>
     
     void Start()
     {
+        prestigePoints = PlayerPrefs.GetFloat("Prestige Points", 0.0f);
         InstantiateImprovementActions();
         storeBuffs();
 

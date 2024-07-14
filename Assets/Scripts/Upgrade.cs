@@ -23,6 +23,7 @@ public class Upgrade : MonoBehaviour
     public float value;
     [SerializeField] private float costScaleFactor = 1.3f;
     [SerializeField] private SkillType skillType;
+    [SerializeField] private bool isPrestigeUpgrade = false;
 
     public GameObject upgradeCountObject;
     public TextMeshProUGUI upgradeCountUI;
@@ -37,15 +38,12 @@ public class Upgrade : MonoBehaviour
     
 
     private int upgradeCount;
-    private WorldController controller;
     private bool hidden = true;
 
     [SerializeField] private bool useNewSkillSystem = false;
 
     void Start()
     {
-        controller = GameObject.Find("Main Grid").GetComponent<WorldController>();
-
         upgradeCountUI.text = upgradeCount.ToString();
         if (!isStaticText) {
             upgradeCostUI.text = cost.ToString();
@@ -59,14 +57,31 @@ public class Upgrade : MonoBehaviour
 
     void Update()
     {
-        if (hidden && controller.points >= cost) {
+        float points = GetPoints();
+        if (hidden && points >= cost) {
             iconImage.material = null;
             grayscaleCover.SetActive(false);
             hidden = false;
-        } else if (!hidden && controller.points < cost) {
+        } else if (!hidden && points < cost) {
             iconImage.material = grayscaleMaterial;
             grayscaleCover.SetActive(true);
             hidden = true;
+        }
+    }
+
+    private float GetPoints() {
+        if (isPrestigeUpgrade) {
+            return WorldController.Instance.GetPrestigePoints();
+        } else {
+            return WorldController.Instance.points;
+        }
+    }
+
+    private void SubtractPoints(float amount) {
+        if (isPrestigeUpgrade) {
+            WorldController.Instance.SubtractPrestigePoints(amount);
+        } else {
+            WorldController.Instance.points -= amount;
         }
     }
 
@@ -77,18 +92,20 @@ public class Upgrade : MonoBehaviour
     public void Pressed()
     {
         Debug.Log("Upgrade Pressed");
-        if (controller.points >= cost)
+        if (GetPoints() >= cost)
         {
-            controller.points -= cost;
-            if (useNewSkillSystem) {
+            SubtractPoints(cost);
+            if (isPrestigeUpgrade) {
+
+            } else if  (useNewSkillSystem) {
                 WorldController.Instance.UpgradeSkill(skillType, value);
                 IncreaseCost();
             } else {
-                controller.increaseBaseClickRate(value);
+                WorldController.Instance.increaseBaseClickRate(value);
                 cost = Mathf.Round(cost * 1.3f * 10f) / 10f;
             }
             upgradeCount++;
-            controller.purchaseSound.Play();
+            WorldController.Instance.purchaseSound.Play();
 
             if (!isStaticText) {
                 upgradeCostUI.text = cost.ToString();
