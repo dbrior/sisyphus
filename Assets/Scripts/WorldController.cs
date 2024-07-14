@@ -669,6 +669,7 @@ public class WorldController : Singleton<WorldController>
 
         // devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
         devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
+        Devil.SetLevel(1);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
@@ -720,11 +721,10 @@ public class WorldController : Singleton<WorldController>
     public void ManualClick(Vector3 clickLocation, bool wasAuto, int multiplicity)
     {
         bool critical = Random.Range(0, 100) <= critChance;
-        float clickForce = 1000.0f * scoreMultiplier * manualClickMultiplier * multiplicity;
-        if (critical)
-        {
-            clickForce *= critMultiplier;
-        }
+        float clickForce = 1000.0f * scoreMultiplier * multiplicity;
+
+        if(!wasAuto) clickForce *= manualClickMultiplier;
+        if (critical) clickForce *= critMultiplier;
 
         if (!wasAuto) {
             inputTimestamps.Add(Time.time);

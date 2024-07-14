@@ -48,7 +48,7 @@ public class Devil : MonoBehaviour
     private float hitTime;
     private bool ending = false;
 
-    public void SetLevel(int newLevel) {
+    public static void SetLevel(int newLevel) {
         level = newLevel;
     }
 
@@ -132,7 +132,7 @@ public class Devil : MonoBehaviour
 
     void Exit() {
         // Set new spawn
-        WorldController.Instance.devilSpawnDistance = WorldController.Instance.currScore + 2000f + Random.Range(0f, 500f);
+        WorldController.Instance.devilSpawnDistance = WorldController.Instance.currScore + 1000f + Random.Range(0, 2000);
         WorldController.Instance.startedFirstStage = false;
         WorldController.Instance.distanceMeter.UpdateBothGoalDistances(DistanceGoal.Type.BossBattle, WorldController.Instance.currScore, WorldController.Instance.devilSpawnDistance);
 

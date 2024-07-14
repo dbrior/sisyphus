@@ -56427,7 +56427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2395272504997302132, guid: 4ab95539f323c4c36aed9fbd3992d69d, type: 3}
       propertyPath: value
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2395272504997302132, guid: 4ab95539f323c4c36aed9fbd3992d69d, type: 3}
       propertyPath: costScaleFactor
@@ -56864,7 +56864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148432206603685590, guid: fec64ee40a5424067a46ce06b14369ad, type: 3}
       propertyPath: value
-      value: 0.3
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8148432206603685590, guid: fec64ee40a5424067a46ce06b14369ad, type: 3}
       propertyPath: costScaleFactor
@@ -57093,7 +57093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4013476852972652509, guid: b6b5b3e3f55e54f0387079c930da46bb, type: 3}
       propertyPath: value
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4013476852972652509, guid: b6b5b3e3f55e54f0387079c930da46bb, type: 3}
       propertyPath: costScaleFactor
@@ -57635,7 +57635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6408046660693069663, guid: 25852ddf0996a40bd88af16d6721fcc1, type: 3}
       propertyPath: value
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6408046660693069663, guid: 25852ddf0996a40bd88af16d6721fcc1, type: 3}
       propertyPath: costScaleFactor
