@@ -18,7 +18,9 @@ public class GameOverScreen : Singleton<GameOverScreen>
         int boulderPrestige = WorldController.Instance.boulder_b.currPrestige;
 
 
-        float prestigePoints = (points / 10000f) + (gemCount / 10f);
+        float prestigePoints = 0f;
+        // prestigePoints += (points / 10000f);
+        prestigePoints += (gemCount / 10f);
         if (bossKills > 0) {
             prestigePoints += Mathf.Pow(2, bossKills-1);
         }

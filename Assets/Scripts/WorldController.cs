@@ -6,6 +6,16 @@ using UnityEngine.UIElements;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
+public enum SkillType {
+    AutoclickRate,
+    ClickStrength,
+    CritChance,
+    CritStrength,
+    MaxHealth,
+    Damage,
+    Recovery
+}
+
 
 public class WorldController : Singleton<WorldController>
 {
@@ -170,6 +180,33 @@ public class WorldController : Singleton<WorldController>
     public int bossKills = 0;
     private Devil devilObject;
 
+
+    // NEW SKILL SYSTEM ------------------------------
+    private delegate void UpgradeFunction(float amount);
+
+    private Dictionary<SkillType, UpgradeFunction> skillUpgradeFuncs;
+    private void InstantiateUpgradeFuncs() {
+        skillUpgradeFuncs = new Dictionary<SkillType, UpgradeFunction>{
+            {SkillType.AutoclickRate, increaseBaseClickRate},   // Adds num clicks / s
+            {SkillType.ClickStrength, IncreaseClickStrength},        // Does compounding increase by amount on current multiplier
+            {SkillType.MaxHealth, WorldController.Instance.sisyphus.IncreaseMaxHealth},
+            {SkillType.Damage, WorldController.Instance.sisyphus.IncreaseDamage},
+        };
+    }
+
+    public void UpgradeSkill(SkillType skillType, float amount) {
+        skillUpgradeFuncs[skillType](amount);
+    }
+
+    // V2
+    private void IncreaseMaxHealth(float amount)  {
+        sisyphus.IncreaseMaxHealth(amount);
+    }
+    private void IncreaseClickStrength(float amount) {
+        // manualClickMultiplier = How many clicks a single click is worth
+        manualClickMultiplier += amount;
+    } 
+    // Legacy
     public void increaseBaseClickRate(float amount) {   // Auto Click
         baseClickRate += amount;
         accumulatedTime = 0f;
@@ -183,6 +220,8 @@ public class WorldController : Singleton<WorldController>
     public void IncreaseCritPower(float amount) {       // Crit Power
         critMultiplier += amount;
     }
+
+    // ------------------------------ END
 
     public void resetBuffs() {
         baseClickRate = originalClickRate;
@@ -590,6 +629,11 @@ public class WorldController : Singleton<WorldController>
     {
         InstantiateImprovementActions();
         storeBuffs();
+
+        // New skill system
+        InstantiateUpgradeFuncs();
+
+
 
         cameraOriginalPosition = camera.transform.position;
         // // Set Font

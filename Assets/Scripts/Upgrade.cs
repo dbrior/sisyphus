@@ -21,6 +21,8 @@ public class Upgrade : MonoBehaviour
 {
     public float cost;
     public float value;
+    [SerializeField] private float costScaleFactor = 1.3f;
+    [SerializeField] private SkillType skillType;
 
     public GameObject upgradeCountObject;
     public TextMeshProUGUI upgradeCountUI;
@@ -37,6 +39,8 @@ public class Upgrade : MonoBehaviour
     private int upgradeCount;
     private WorldController controller;
     private bool hidden = true;
+
+    [SerializeField] private bool useNewSkillSystem = false;
 
     void Start()
     {
@@ -66,22 +70,25 @@ public class Upgrade : MonoBehaviour
         }
     }
 
+    private void IncreaseCost() {
+        cost *= costScaleFactor;
+    }
+
     public void Pressed()
     {
         Debug.Log("Upgrade Pressed");
         if (controller.points >= cost)
         {
             controller.points -= cost;
-            controller.increaseBaseClickRate(value);
+            if (useNewSkillSystem) {
+                WorldController.Instance.UpgradeSkill(skillType, value);
+                IncreaseCost();
+            } else {
+                controller.increaseBaseClickRate(value);
+                cost = Mathf.Round(cost * 1.3f * 10f) / 10f;
+            }
             upgradeCount++;
-            Debug.Log("Base Click Rate Increase!");
             controller.purchaseSound.Play();
-
-            // Spawn devil
-            // GameObject devil = Instantiate(devilPrefab);
-            // devil.transform.position = new Vector2(0, -10);
-
-            cost = Mathf.Round(cost * 1.3f * 10f) / 10f;
 
             if (!isStaticText) {
                 upgradeCostUI.text = cost.ToString();
@@ -98,10 +105,5 @@ public class Upgrade : MonoBehaviour
                 onFirstPurchase.Invoke();
             }
         }
-    }
-
-    public void increaseBaseClickRate(float amount, float cost)
-    {
-        
     }
 }

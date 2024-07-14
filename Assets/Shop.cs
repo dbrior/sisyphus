@@ -4,7 +4,9 @@ using UnityEngine;
 public enum ShopType {
     AutoClick,
     ManualClick,
-    KeyItems
+    KeyItems,
+    Health,
+    Damage
 }
 [System.Serializable] 
 public class ShopInventoryEntry {
