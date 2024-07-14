@@ -132,7 +132,7 @@ public class Devil : MonoBehaviour
 
     void Exit() {
         // Set new spawn
-        WorldController.Instance.devilSpawnDistance = WorldController.Instance.currScore + 10000f + Random.Range(0f, 1000f);
+        WorldController.Instance.devilSpawnDistance = WorldController.Instance.currScore + 1000f + Random.Range(0f, 500f);
         WorldController.Instance.startedFirstStage = false;
         WorldController.Instance.distanceMeter.UpdateBothGoalDistances(DistanceGoal.Type.BossBattle, WorldController.Instance.currScore, WorldController.Instance.devilSpawnDistance);
 
