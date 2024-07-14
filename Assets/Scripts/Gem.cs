@@ -37,7 +37,7 @@ public class Gem : MonoBehaviour
             WorldController.Instance.frozen = false;
             WorldController.Instance.didGemTutorial = true;
             WorldController.Instance.boulder_b.swipeDetection.enabled = true;
-            WorldController.Instance.StartHarpySpawns();
+            // WorldController.Instance.StartHarpySpawns(); ENABLE HARPY SPAWN
         } else if (!didGemTutorial && !WorldController.Instance.frozen) {
             return;
         }

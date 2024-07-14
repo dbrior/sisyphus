@@ -6,6 +6,16 @@ using UnityEngine.UIElements;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
+public enum SkillType {
+    AutoclickRate,
+    ClickStrength,
+    CritChance,
+    CritStrength,
+    MaxHealth,
+    Damage,
+    Recovery
+}
+
 
 public class WorldController : Singleton<WorldController>
 {
@@ -170,6 +180,43 @@ public class WorldController : Singleton<WorldController>
     public int bossKills = 0;
     private Devil devilObject;
 
+    // PRESTIGE POINTS ------------------------------
+    private float prestigePoints;
+    public float GetPrestigePoints() {
+        return prestigePoints;
+    }
+    public void SubtractPrestigePoints(float amount) {
+        prestigePoints -= amount;
+    }
+    // ------------------------------ END
+
+
+    // NEW SKILL SYSTEM ------------------------------
+    private delegate void UpgradeFunction(float amount);
+
+    private Dictionary<SkillType, UpgradeFunction> skillUpgradeFuncs;
+    private void InstantiateUpgradeFuncs() {
+        skillUpgradeFuncs = new Dictionary<SkillType, UpgradeFunction>{
+            {SkillType.AutoclickRate, increaseBaseClickRate},   // Adds num clicks / s
+            {SkillType.ClickStrength, IncreaseClickStrength},        // Does compounding increase by amount on current multiplier
+            {SkillType.MaxHealth, WorldController.Instance.sisyphus.IncreaseMaxHealth},
+            {SkillType.Damage, WorldController.Instance.sisyphus.IncreaseDamage},
+        };
+    }
+
+    public void UpgradeSkill(SkillType skillType, float amount) {
+        skillUpgradeFuncs[skillType](amount);
+    }
+
+    // V2
+    private void IncreaseMaxHealth(float amount)  {
+        sisyphus.IncreaseMaxHealth(amount);
+    }
+    private void IncreaseClickStrength(float amount) {
+        // manualClickMultiplier = How many clicks a single click is worth
+        manualClickMultiplier += amount;
+    } 
+    // Legacy
     public void increaseBaseClickRate(float amount) {   // Auto Click
         baseClickRate += amount;
         accumulatedTime = 0f;
@@ -183,6 +230,7 @@ public class WorldController : Singleton<WorldController>
     public void IncreaseCritPower(float amount) {       // Crit Power
         critMultiplier += amount;
     }
+    // ------------------------------ END
 
     public void resetBuffs() {
         baseClickRate = originalClickRate;
@@ -588,8 +636,14 @@ public class WorldController : Singleton<WorldController>
     
     void Start()
     {
+        prestigePoints = PlayerPrefs.GetFloat("Prestige Points", 0.0f);
         InstantiateImprovementActions();
         storeBuffs();
+
+        // New skill system
+        InstantiateUpgradeFuncs();
+
+
 
         cameraOriginalPosition = camera.transform.position;
         // // Set Font
@@ -625,6 +679,7 @@ public class WorldController : Singleton<WorldController>
 
         // devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
         devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
+        Devil.SetLevel(1);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
         // UpdateClickUpgrade(10);
@@ -676,11 +731,10 @@ public class WorldController : Singleton<WorldController>
     public void ManualClick(Vector3 clickLocation, bool wasAuto, int multiplicity)
     {
         bool critical = Random.Range(0, 100) <= critChance;
-        float clickForce = 1000.0f * scoreMultiplier * manualClickMultiplier * multiplicity;
-        if (critical)
-        {
-            clickForce *= critMultiplier;
-        }
+        float clickForce = 1000.0f * scoreMultiplier * multiplicity;
+
+        if(!wasAuto) clickForce *= manualClickMultiplier;
+        if (critical) clickForce *= critMultiplier;
 
         if (!wasAuto) {
             inputTimestamps.Add(Time.time);

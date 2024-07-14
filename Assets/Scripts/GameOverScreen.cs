@@ -18,19 +18,34 @@ public class GameOverScreen : Singleton<GameOverScreen>
         int boulderPrestige = WorldController.Instance.boulder_b.currPrestige;
 
 
-        float prestigePoints = (points / 10000f) + (gemCount / 10f);
+        float prestigePoints = 0f;
+
+        // High-yield 
+        // prestigePoints += (points / 10000f);
+        prestigePoints += (gemCount * 5000);
         if (bossKills > 0) {
             prestigePoints += Mathf.Pow(2, bossKills-1);
         }
         if (boulderPrestige > 0) {
             prestigePoints += Mathf.Pow(5, boulderPrestige);
         }
+
+        // Low-yield
+        // prestigePoints = gemCount + bossKills + boulderPrestige;
+
+
         prestigePoints = Mathf.Floor(prestigePoints);
+        Debug.Log("Prestige Points Gained: " + prestigePoints.ToString());
 
         pointsText.text = points.ToString("F0");
         gemsText.text = gemCount.ToString("F0");
         killsText.text = bossKills.ToString("F0");
+        boulderPrestigeText.text = boulderPrestige.ToString("F0");
+
         prestigeText.text = prestigePoints.ToString("F0");
+
+        PlayerPrefs.SetFloat("Prestige Points", prestigePoints + WorldController.Instance.GetPrestigePoints());
+        PlayerPrefs.Save();
     }
 
 }

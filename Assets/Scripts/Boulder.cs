@@ -85,7 +85,7 @@ public class Boulder : MonoBehaviour
                     cse.UpdateScale(gameObject.transform.localScale * 1.2f);
                     Vector3 newPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y * 1.2f, gameObject.transform.localPosition.z);
                     gameObject.transform.localPosition = newPosition;
-                    WorldController.Instance.resetBuffs();
+                    // WorldController.Instance.resetBuffs();
                     StartCoroutine(Cooldown(10f));
                 }
             } else if (!onCooldown && ((Time.time - drumLastPlayedTime) >= drumInterval) && (currDrumDelta >= drumInterval)) {

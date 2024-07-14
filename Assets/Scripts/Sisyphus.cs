@@ -8,6 +8,8 @@ public class Sisyphus : MonoBehaviour
     // Health
     private float maxHealth = 250f;
     private float currHealth;
+    // Damage
+    private float damage = 10f;
     // Animations
     public RuntimeAnimatorController idleController;
     public RuntimeAnimatorController pushingController;
@@ -24,8 +26,8 @@ public class Sisyphus : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
-    public void Damage(float damage) {
-        currHealth -= damage;
+    public void Damage(float incomingDamage) {
+        currHealth -= incomingDamage;
         HealthBarManager.Instance.UpdateHealthBar(gameObject, currHealth / maxHealth);
 
         if (currHealth <= 0) {
@@ -59,6 +61,10 @@ public class Sisyphus : MonoBehaviour
         kicking = false;
     }
 
+    public float GetDamage() {
+        return damage;
+    }
+
     public void SetAnimationSpeed(float newAnimationSpeed)
     {
         animationSpeed = newAnimationSpeed;
@@ -88,6 +94,14 @@ public class Sisyphus : MonoBehaviour
         } else {
             animator.runtimeAnimatorController = pushingController;
         }
+    }
+
+    public void IncreaseMaxHealth(float amount) {
+        maxHealth += amount;
+    }
+
+    public void IncreaseDamage(float amount) {
+        damage += amount;
     }
 
     void Start()

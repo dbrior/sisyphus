@@ -48,7 +48,7 @@ public class Devil : MonoBehaviour
     private float hitTime;
     private bool ending = false;
 
-    public void SetLevel(int newLevel) {
+    public static void SetLevel(int newLevel) {
         level = newLevel;
     }
 
@@ -91,7 +91,7 @@ public class Devil : MonoBehaviour
         isHit = true;
         hitSound.Play();
         animator.runtimeAnimatorController = hitAnimation;
-        currHealth -= 10f;
+        currHealth -= WorldController.Instance.sisyphus.GetDamage();
         HealthBarManager.Instance.UpdateHealthBar(gameObject, currHealth/maxHealth);
         timeTillVulnerable = invincibleTime;
     }
@@ -132,7 +132,7 @@ public class Devil : MonoBehaviour
 
     void Exit() {
         // Set new spawn
-        WorldController.Instance.devilSpawnDistance = WorldController.Instance.currScore + 10000f + Random.Range(0f, 1000f);
+        WorldController.Instance.devilSpawnDistance = WorldController.Instance.currScore + 1000f + Random.Range(0, 2000);
         WorldController.Instance.startedFirstStage = false;
         WorldController.Instance.distanceMeter.UpdateBothGoalDistances(DistanceGoal.Type.BossBattle, WorldController.Instance.currScore, WorldController.Instance.devilSpawnDistance);
 
