@@ -6,7 +6,7 @@ public class BossIntro : Singleton<BossIntro>
 {
     private string[] introLines;
 
-    void Start()
+    void Awake()
     {
         LoadIntroLines();
     }
@@ -35,5 +35,10 @@ public class BossIntro : Singleton<BossIntro>
         {
             return "No intro lines available.";
         }
+    }
+
+    public void SayLine() {
+        string voiceLine = GetRandomIntroLine();
+        DialogueManager.Instance.SayString(voiceLine);
     }
 }

@@ -678,7 +678,7 @@ public class WorldController : Singleton<WorldController>
         // }
 
         // devilSpawnDistance = 10.0f + Random.Range(0.0f, 10.0f);
-        devilSpawnDistance = 1000.0f + Random.Range(0.0f, 500.0f);
+        devilSpawnDistance = 5000.0f + Random.Range(0.0f, 500.0f);
         Devil.SetLevel(1);
         Debug.Log(devilSpawnDistance.ToString());
         // UpdateStrengthUpgrade(10);
@@ -904,7 +904,7 @@ public class WorldController : Singleton<WorldController>
         float distanceDelta = UpdateDistanceAndScore(clickRate);    // current distance from start yields score (1:1)
 
         // DAY AND NIGHt
-        float frequency = 0.0001f;
+        float frequency = 0.001f;
         float lightLevel = (0.35f * Mathf.Cos(currScore * frequency)) + 0.65f; // Starting at 1, dips to 0.3
         // float lightLevel = (Mathf.Sin((currScore+10000) * frequency) + 0) / 2 * 0.75f;
         globalLight.intensity = lightLevel;

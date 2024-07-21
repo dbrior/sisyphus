@@ -65,7 +65,7 @@ public class Devil : MonoBehaviour
         meteorSpawnInterval = baseMeteorSpawnInterval * (1f / level);
 
         // Voice line
-        Debug.Log("Voice: " + BossIntro.Instance.GetRandomIntroLine());
+        BossIntro.Instance.SayLine();
         
         // Sounds
         SoundManager.Instance.scoreBlipSound.mute = true;
@@ -132,7 +132,7 @@ public class Devil : MonoBehaviour
 
     void Exit() {
         // Set new spawn
-        WorldController.Instance.devilSpawnDistance = WorldController.Instance.currScore + 1000f + Random.Range(0, 2000);
+        WorldController.Instance.devilSpawnDistance = WorldController.Instance.currScore + 5000f + Random.Range(0, 2000);
         WorldController.Instance.startedFirstStage = false;
         WorldController.Instance.distanceMeter.UpdateBothGoalDistances(DistanceGoal.Type.BossBattle, WorldController.Instance.currScore, WorldController.Instance.devilSpawnDistance);
 
